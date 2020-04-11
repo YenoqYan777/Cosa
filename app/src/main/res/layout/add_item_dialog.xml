@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/mainBckg"
+        android:elevation="5dp"
+        app:cardCornerRadius="15dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewThingUploaded"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="155dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgUploadedPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_take_photo" />
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:textColorHint="@color/lightGray"
+                app:boxStrokeColor="@color/lightGray"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:errorEnabled="true"
+                app:helperTextTextColor="@color/textColor"
+                app:hintTextColor="@color/lightGray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewThingUploaded">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/thing"
+                    android:inputType="text"
+                    android:textColor="@color/lightGray"
+                    android:textColorHint="@color/lightGray"
+                    android:textCursorDrawable="@null"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/placeInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="64dp"
+                android:textColorHint="@color/lightGray"
+                app:boxStrokeColor="@color/textColor"
+                app:counterEnabled="true"
+                app:counterMaxLength="50"
+                app:errorEnabled="true"
+                app:helperTextTextColor="@color/textColor"
+                app:hintTextColor="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/placeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/place"
+                    android:inputType="text"
+                    android:textColor="@color/lightGray"
+                    android:textColorHint="@color/lightGray"
+                    android:textCursorDrawable="@null"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnAddNote"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/round_button_dark"
+                android:fontFamily="@font/montserrat"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/add_item"
+                android:textColor="@color/textColor"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/placeInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/placeInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/placeInputLayout" />
+
+            <ImageView
+                android:id="@+id/btnCloseAddItemDialog"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cancel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

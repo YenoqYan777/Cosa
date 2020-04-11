@@ -1,0 +1,33 @@
+package com.example.cosa.repository.db.dao
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import com.example.cosa.models.ThingAdded
+
+@Dao
+interface ThingAddedDao {
+    @Query("SELECT * FROM thing_added")
+    fun getAll(): LiveData<MutableList<ThingAdded>>
+
+    @Query("UPDATE thing_added SET thing = :name WHERE id = :id")
+    fun updateThingName(id: Long, name: String?): Int
+
+    @Query("UPDATE thing_added SET place = :place WHERE id = :id")
+    fun updateThingPlace(id: Long, place: String?): Int
+
+    @Query("UPDATE thing_added SET cacheUri = :cacheUri WHERE id = :id")
+    fun updateThingImage(id: Long, cacheUri: String?): Int
+
+    @Insert
+    fun insertAll(vararg thingAdded: ThingAdded)
+
+    @Insert
+    fun insert(thingAdded: ThingAdded)
+
+    @Delete
+    fun deleteItem(thingAdded: ThingAdded)
+
+}

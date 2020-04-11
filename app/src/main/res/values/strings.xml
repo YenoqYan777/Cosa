@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Cosa</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="thing">Thing</string>
+    <string name="place">Place</string>
+    <string name="add_item">Add Item</string>
+    <string name="cancel">Cancel</string>
+    <string name="place_required_error">Item\'s place can not be empty!</string>
+    <string name="name_required_error">Item\'s name can not be empty!</string>
+    <string name="no_things_added">No things added</string>
+    <string name="search">Search</string>
+    <string name="save_changes">Save changes</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="take_a_photo">Take a photo of item !</string>
+    <string name="no_notes_added">No notes added</string>
+    <string name="your_notes_here">Your notes here!</string>
+    <string name="confirm">Confirm</string>
+</resources>

@@ -1,0 +1,42 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/darkerItemBckg</item>
+        <item name="colorPrimaryDark">@color/mainBckg</item>
+        <item name="colorAccent">@color/textColor</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/darkerItemBckg</item>
+        <item name="colorPrimaryDark">@color/mainBckg</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="android:itemTextAppearance">@style/itemTextStyle.AppTheme</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="colorControlActivated">@color/textColor</item>
+        <item name="colorControlHighlight">@color/lightGray</item>
+        <item name="android:editTextColor">@color/textColor</item>
+        <item name="android:textColorHint">@color/textColor</item>
+    </style>
+
+    <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">@drawable/round_popup_menu</item>
+    </style>
+
+    <style name="itemTextStyle.AppTheme" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+
+    <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/mainBckg</item>
+        <item name="android:textSize">20sp</item>
+        <item name="colorControlActivated">@color/mainBckg</item>
+    </style>
+
+    <style name="BottomNavView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="colorOnPrimary">@color/darkerItemBckg</item>
+        <item name="colorOnSurface">@color/textColor</item>
+    </style>
+
+</resources>
