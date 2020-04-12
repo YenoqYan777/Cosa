@@ -12,8 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosa.R
-import com.example.cosa.arch.AddNoteFragment
-import com.example.cosa.arch.MainActivity
 import com.example.cosa.arch.helpers.OnItemClickListener
 import com.example.cosa.arch.helpers.SwipeHandler
 import com.example.cosa.arch.notes.adapters.NotesAdapter
@@ -25,7 +23,8 @@ class NotesFragment : Fragment(), SwipeHandler {
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NotesViewModel
     private lateinit var adapter: NotesAdapter
-    private val addNotesFragment: AddNoteFragment = AddNoteFragment()
+    private val addNotesFragment: AddNoteFragment =
+        AddNoteFragment()
 
 
     override fun onCreateView(

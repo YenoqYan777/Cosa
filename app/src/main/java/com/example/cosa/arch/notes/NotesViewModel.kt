@@ -17,7 +17,9 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getNotes(): LiveData<MutableList<Notes>> = notesDao.getAll()
 
-    fun insertThingAdded(notes: Notes) {
+
+
+    fun insertNote(notes: Notes) {
         Single.just(notes)
             .backgroundWork()
             .doOnSuccess {
