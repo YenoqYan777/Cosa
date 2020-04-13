@@ -24,7 +24,6 @@ class AddNoteFragment : Fragment() {
         )
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         initToolbar()
-        binding.etNoteContent.setText(viewModel.getEditTextMessage())
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -37,7 +36,8 @@ class AddNoteFragment : Fragment() {
     private fun initToolbar() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar!!.title = getString(R.string.create_new_note);
+        (activity as AppCompatActivity).supportActionBar!!.title =
+            getString(R.string.create_new_note);
         binding.toolbar.setNavigationIcon(R.drawable.ic_back)
         binding.toolbar.setNavigationOnClickListener {
             (activity as AppCompatActivity).onBackPressed()
@@ -57,7 +57,6 @@ class AddNoteFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
     private fun onAcceptBtnClicked() {
         if (!binding.etNoteContent.text.isNullOrEmpty()) {
