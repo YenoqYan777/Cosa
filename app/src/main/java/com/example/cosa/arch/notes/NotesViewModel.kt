@@ -12,8 +12,15 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
+
+    companion object{
+        private var editTextMessage: String = ""
+        private var itemId: Long = 0
+    }
+
     private val compositeDisposable = CompositeDisposable()
     private val notesDao: NotesDao = CosaApplication.dataBase.notesDao()
+
 
     fun getNotes(): LiveData<MutableList<Notes>> = notesDao.getAll()
 
@@ -28,6 +35,29 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
+    fun setItemId(id: Long) {
+        itemId = id
+    }
+
+    fun getItemId(): Long = itemId
+
+    fun setEditTextMessage(text: String) {
+        editTextMessage = text
+    }
+
+    fun getEditTextMessage(): String = editTextMessage
+
+
+    fun updateNoteInfo(text: String, id: Long) {
+        Single.just(text)
+            .backgroundWork()
+            .doOnSuccess {
+                notesDao.updateNote(id, text)
+            }
+            .subscribe()
+            .addTo(compositeDisposable)
+    }
+
     fun insertNote(notes: Notes) {
         Single.just(notes)
             .backgroundWork()
@@ -37,6 +67,7 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
             .subscribe()
             .addTo(compositeDisposable)
     }
+
     override fun onCleared() {
         compositeDisposable.dispose()
         super.onCleared()

@@ -12,6 +12,9 @@ interface NotesDao {
     @Query("SELECT * FROM notes")
     fun getAll(): LiveData<MutableList<Notes>>
 
+    @Query("UPDATE notes SET text = :text WHERE id = :id")
+    fun updateNote(id: Long, text: String?): Int
+
     @Insert
     fun insertAll(vararg notes: Notes)
 

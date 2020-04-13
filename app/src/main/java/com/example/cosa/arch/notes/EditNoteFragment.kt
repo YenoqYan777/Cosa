@@ -7,12 +7,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.cosa.R
-import com.example.cosa.databinding.FragmentAddNoteBinding
-import com.example.cosa.models.Notes
+import com.example.cosa.databinding.FragmentEditNoteBinding
 
-
-class AddNoteFragment : Fragment() {
-    private lateinit var binding: FragmentAddNoteBinding
+class EditNoteFragment : Fragment() {
+    private lateinit var binding: FragmentEditNoteBinding
     private lateinit var viewModel: NotesViewModel
 
     override fun onCreateView(
@@ -20,26 +18,31 @@ class AddNoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_add_note, container, false
+            inflater, R.layout.fragment_edit_note, container, false
         )
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarEditNote)
         initToolbar()
-        binding.etNoteContent.setText(viewModel.getEditTextMessage())
+        initViewModel()
+        binding.etEditNoteContent.setText(viewModel.getEditTextMessage())
         setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
     }
 
     private fun initToolbar() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar!!.title = getString(R.string.create_new_note);
-        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
-        binding.toolbar.setNavigationOnClickListener {
+        (activity as AppCompatActivity).supportActionBar!!.title =
+            getString(R.string.edit_your_note);
+        binding.toolbarEditNote.setNavigationIcon(R.drawable.ic_back)
+        binding.toolbarEditNote.setNavigationOnClickListener {
             (activity as AppCompatActivity).onBackPressed()
         }
     }
@@ -60,9 +63,11 @@ class AddNoteFragment : Fragment() {
 
 
     private fun onAcceptBtnClicked() {
-        if (!binding.etNoteContent.text.isNullOrEmpty()) {
-            viewModel.insertNote(Notes(text = binding.etNoteContent.text.toString()))
-            val transaction = fragmentManager
+        if (!binding.etEditNoteContent.text.isNullOrEmpty()) {
+            viewModel.updateNoteInfo(
+                binding.etEditNoteContent.text.toString(),
+                viewModel.getItemId()
+            )
             fragmentManager!!.beginTransaction()
                 .replace(R.id.fragment, NotesFragment())
                 .commit()

@@ -14,10 +14,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosa.R
 import com.example.cosa.arch.helpers.OnItemClickListener
 import com.example.cosa.arch.helpers.SwipeHandler
+import com.example.cosa.arch.helpers.WrapContentLinearLayoutManager
 import com.example.cosa.arch.notes.adapters.NotesAdapter
 import com.example.cosa.arch.notes.adapters.NotesDiffCallback
 import com.example.cosa.databinding.FragmentNotesBinding
@@ -94,7 +94,7 @@ class NotesFragment : Fragment(), SwipeHandler {
     }
 
     private fun initRecyclerView() {
-        val mLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        val mLayoutManager = WrapContentLinearLayoutManager(context!!)
         notesAdapter = NotesAdapter(NotesDiffCallback(), context!!)
         rvNoteList.apply {
             adapter = notesAdapter
@@ -128,7 +128,12 @@ class NotesFragment : Fragment(), SwipeHandler {
     }
 
     private fun onEditBtnClick(position: Int) {
-
+        viewModel.setEditTextMessage(notesAdapter.getData()[position].text)
+        viewModel.setItemId(notesAdapter.getData()[position].id)
+        val transaction = activity!!.supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment, EditNoteFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun itemDelete(position: Int) {
@@ -150,7 +155,6 @@ class NotesFragment : Fragment(), SwipeHandler {
             .setNegativeButton("No", dialogClickListener)
             .show()
     }
-
 
 
     override fun onItemSwipedRight(position: Int) {

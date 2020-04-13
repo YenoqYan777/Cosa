@@ -21,4 +21,6 @@
     <string name="confirm">Confirm</string>
     <string name="things">Things</string>
     <string name="notes">Notes</string>
+    <string name="edit_your_note">Edit your note</string>
+    <string name="create_new_note">Create new note</string>
 </resources>
