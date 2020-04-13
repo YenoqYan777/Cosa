@@ -19,4 +19,6 @@
     <string name="no_notes_added">No notes added</string>
     <string name="your_notes_here">Your notes here!</string>
     <string name="confirm">Confirm</string>
+    <string name="things">Things</string>
+    <string name="notes">Notes</string>
 </resources>

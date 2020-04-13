@@ -2,6 +2,7 @@ package com.example.cosa.repository.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.cosa.models.Notes
@@ -17,5 +18,6 @@ interface NotesDao {
     @Insert
     fun insert(notes: Notes)
 
-
+    @Delete
+    fun deleteItem(notes: Notes)
 }

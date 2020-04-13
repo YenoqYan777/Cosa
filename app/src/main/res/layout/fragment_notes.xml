@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchViewNotes"
+            app:layout_constraintTop_toBottomOf="@+id/txtIntroductionNotes"
             app:layout_constraintVertical_bias="0.0"
             bind:bgColorSwipeLeft="@{@color/app_red}"
             bind:bgColorSwipeRight="@{@color/app_red}"
@@ -99,6 +99,21 @@
             app:layout_constraintEnd_toEndOf="@+id/imgNoNotes"
             app:layout_constraintStart_toStartOf="@+id/imgNoNotes"
             app:layout_constraintTop_toBottomOf="@+id/imgNoNotes" />
+
+        <TextView
+            android:id="@+id/txtIntroductionNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/notes"
+            android:textColor="@color/lightGray"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewNotes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,16 +1,20 @@
 package com.example.cosa.arch.thingAdded.adapters
 
 import android.content.Context
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.*
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cosa.R
 import com.example.cosa.arch.helpers.OnItemClickListener
-import com.example.cosa.arch.thingAdded.ThingAddedFragment
 import com.example.cosa.models.ThingAdded
 import com.example.cosa.repository.CacheStore
 import kotlinx.android.synthetic.main.item_thingadded.view.*
@@ -40,11 +44,12 @@ class ThingAddedAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is ThingAddedViewHolder -> {
-                holder.bind(filteredItems[position], clickListener )
+                holder.bind(filteredItems[position], clickListener)
                 setAnimation(holder.itemView, position)
             }
         }
     }
+
     override fun getItemCount(): Int = filteredItems.size
 
 
@@ -58,7 +63,13 @@ class ThingAddedAdapter(
                     val filteredPattern = constraint.toString().toLowerCase(Locale.getDefault())
                         .trim()
                     originalItems.forEach {
-                        if (it.thing.toLowerCase(Locale.getDefault()).startsWith(filteredPattern)) {
+                        if (it.thing.toLowerCase(Locale.getDefault())
+                                .startsWith(filteredPattern)
+                        ) {
+                            list.add(it)
+                        } else if (it.place.toLowerCase(Locale.getDefault())
+                                .startsWith(filteredPattern)
+                        ) {
                             list.add(it)
                         }
                     }

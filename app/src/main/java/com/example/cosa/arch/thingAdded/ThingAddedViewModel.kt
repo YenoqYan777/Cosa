@@ -13,7 +13,7 @@ import io.reactivex.rxkotlin.addTo
 
 class ThingAddedViewModel(application: Application) : AndroidViewModel(application) {
     private val compositeDisposable = CompositeDisposable()
-    private val thingAddedDao: ThingAddedDao = CosaApplication.thingAddedDB.thingAddedDao()
+    private val thingAddedDao: ThingAddedDao = CosaApplication.dataBase.thingAddedDao()
 
     fun getThingAdded(): LiveData<MutableList<ThingAdded>> = thingAddedDao.getAll()
 

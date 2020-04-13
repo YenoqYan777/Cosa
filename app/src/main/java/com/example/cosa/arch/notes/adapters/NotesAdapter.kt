@@ -105,6 +105,9 @@ class NotesAdapter(
             listener: OnItemClickListener
         ) {
             noteText.text = notes.text
+            noteText.setOnClickListener {
+                listener.onItemClick(adapterPosition, it)
+            }
         }
     }
 

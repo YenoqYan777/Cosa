@@ -11,5 +11,4 @@ import com.example.cosa.repository.db.dao.ThingAddedDao
 abstract class DB : RoomDatabase() {
     abstract fun thingAddedDao(): ThingAddedDao
     abstract fun notesDao():NotesDao
-
 }

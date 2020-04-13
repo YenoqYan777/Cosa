@@ -1,6 +1,5 @@
 package com.example.cosa.arch.notes
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -13,13 +12,8 @@ import com.example.cosa.models.Notes
 
 
 class AddNoteFragment : Fragment() {
-    private val GETBOOLEAN = "CONSTANT"
     private lateinit var binding: FragmentAddNoteBinding
     private lateinit var viewModel: NotesViewModel
-
-    companion object {
-        lateinit var mctx: Context
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

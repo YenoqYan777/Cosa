@@ -13,11 +13,20 @@ import io.reactivex.rxkotlin.addTo
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
     private val compositeDisposable = CompositeDisposable()
-    private val notesDao: NotesDao = CosaApplication.thingAddedDB.notesDao()
+    private val notesDao: NotesDao = CosaApplication.dataBase.notesDao()
 
     fun getNotes(): LiveData<MutableList<Notes>> = notesDao.getAll()
 
+    fun deleteItem(notes: Notes) {
+        Single.just(notes)
+            .backgroundWork()
+            .doOnSuccess {
+                notesDao.deleteItem(notes)
+            }
+            .subscribe()
+            .addTo(compositeDisposable)
 
+    }
 
     fun insertNote(notes: Notes) {
         Single.just(notes)
@@ -28,6 +37,9 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
             .subscribe()
             .addTo(compositeDisposable)
     }
-
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
+    }
 
 }

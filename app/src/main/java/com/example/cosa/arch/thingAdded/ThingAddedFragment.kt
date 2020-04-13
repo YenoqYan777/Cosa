@@ -84,9 +84,11 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
             if (it.isEmpty()) {
                 noItemYetText.visibility = VISIBLE
                 imgNoThings.visibility = VISIBLE
+                txtIntroductionThingAdded.visibility = GONE
             } else {
                 noItemYetText.visibility = GONE
                 imgNoThings.visibility = GONE
+                txtIntroductionThingAdded.visibility = VISIBLE
             }
         })
     }
