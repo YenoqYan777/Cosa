@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mainBckg"
-        tools:context=".arch.notes.EditNoteFragment">
+        tools:context=".arch.notes.EditNoteFragment"
+        android:focusable="true"
+        android:clickable="true">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarEditNote"
@@ -25,30 +27,48 @@
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextColor="@color/textColor" />
 
-        <EditText
-            android:id="@+id/etEditNoteContent"
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:autofillHints=""
-            android:background="@android:color/transparent"
-            android:ems="10"
-            android:fontFamily="sans-serif"
-            android:gravity="top|left"
-            android:hint="@string/your_notes_here"
-            android:inputType="textMultiLine|textCapSentences"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/lightGray"
-            android:textSize="20sp"
-            android:textStyle="normal"
+            android:background="@color/lightGray"
+            android:elevation="4dp"
+            app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarEditNote"
-            tools:ignore="RtlHardcoded" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarEditNote">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/etEditNoteContent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints=""
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top|left"
+                    android:hint="@string/your_notes_here"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:textColor="@color/darkerBckg"
+                    android:textColorHint="@color/mainBckg"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:textCursorDrawable="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlHardcoded" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

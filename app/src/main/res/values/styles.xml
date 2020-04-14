@@ -11,6 +11,7 @@
         <item name="colorPrimaryDark">@color/mainBckg</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">#c5c5c5</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
         <item name="android:itemTextAppearance">@style/itemTextStyle.AppTheme</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="colorControlActivated">@color/textColor</item>
@@ -31,7 +32,15 @@
     <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">@color/mainBckg</item>
         <item name="android:textSize">20sp</item>
+        <item name="backgroundTint">@color/darkerBckg</item>
         <item name="colorControlActivated">@color/mainBckg</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
     </style>
 
     <style name="BottomNavView" parent="Widget.MaterialComponents.BottomNavigationView">

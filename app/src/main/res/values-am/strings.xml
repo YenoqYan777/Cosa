@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Cosa</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="take_photo">Լուսանկարել</string>
+    <string name="thing">Իրի անվանումը</string>
+    <string name="place">Վայրի անվանումը</string>
+    <string name="add_item">Ավելացնել իր</string>
+    <string name="cancel">Չեղարկել</string>
+    <string name="place_required_error">Վայրի անվանումը չի կարող դատարկ լինել!</string>
+    <string name="name_required_error">Իրի անվանումը չի կարող դատարկ լինել!</string>
+    <string name="no_things_added">Ավելացված իրեր չկան</string>
+    <string name="search">Փնտրել</string>
+    <string name="save_changes">Պահպանել փոփոխությունները</string>
+    <string name="edit">Փոփոխել</string>
+    <string name="delete">Ջնջել</string>
+    <string name="take_a_photo">Լուսանկարեք ձեր իրը!</string>
+    <string name="no_notes_added">Նշումներ չկան</string>
+    <string name="your_notes_here">Ձեր նշումները այստեղ</string>
+    <string name="confirm">Հաստատել</string>
+    <string name="things">Իրեր</string>
+    <string name="notes">Նշումներ</string>
+    <string name="edit_your_note">Փոփոխեք ձեր նշումները</string>
+    <string name="create_new_note">Ստեղծեք նոր նշում</string>
+    <string name="are_you_sure">Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս իրը</string>
+    <string name="yes">Այո</string>
+    <string name="no">Ոչ</string>
+    <string name="search_for_item">Փնտրեք ձեր իրը</string>
+    <string name="search_for_note">Փնտրեք ձեր գրառումը</string>
+    <string name="language">Լեզու</string>
+    <string name="restart_to_save_changes">Փոփոխությունները պահպանելու համար խնդրում ենք վերագործարկել ձեր ծրագիրը</string>
+
+
+    <string-array name="languages">
+        <item>Հայերեն</item>
+        <item>Ռուսերեն</item>
+        <item>Անգլերեն</item>
+    </string-array>
+</resources>

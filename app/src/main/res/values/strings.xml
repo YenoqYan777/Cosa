@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Cosa</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="take_photo">Take Photo</string>
     <string name="thing">Thing</string>
@@ -23,4 +22,17 @@
     <string name="notes">Notes</string>
     <string name="edit_your_note">Edit your note</string>
     <string name="create_new_note">Create new note</string>
+    <string name="are_you_sure">Are you sure you want to delete this item?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="search_for_item">Search for item</string>
+    <string name="search_for_note">Search for note</string>
+    <string name="language">Language</string>
+    <string name="restart_to_save_changes">Please restart your app to save changes</string>
+
+    <string-array name="languages">
+        <item>Armenian</item>
+        <item>Russian</item>
+        <item>English</item>
+    </string-array>
 </resources>

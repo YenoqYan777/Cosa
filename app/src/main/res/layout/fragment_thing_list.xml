@@ -92,7 +92,7 @@
             android:iconifiedByDefault="false"
             android:inputType="text"
             android:queryBackground="@android:color/transparent"
-            android:queryHint="Search for item"
+            android:queryHint="@string/search_for_item"
             android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Cosa</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="take_photo">Снять фото</string>
+    <string name="thing">Название вещи</string>
+    <string name="place">Укажите место</string>
+    <string name="add_item">Добавить вещь</string>
+    <string name="cancel">Отмена</string>
+    <string name="place_required_error">Место не может быть пустым!</string>
+    <string name="name_required_error">Название не может быть пустым!</string>
+    <string name="no_things_added">Нет добавленных вещей</string>
+    <string name="search">Поиск</string>
+    <string name="save_changes">Сохранить изменения</string>
+    <string name="edit">Изменить</string>
+    <string name="delete">Удалить</string>
+    <string name="take_a_photo">Сделайте фото вещи!</string>
+    <string name="no_notes_added">Заметок нету</string>
+    <string name="your_notes_here">Ваши заметки здесь!</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="things">Вещи</string>
+    <string name="notes">Заметки</string>
+    <string name="edit_your_note">Изменить заметки</string>
+    <string name="create_new_note">Создать заметку</string>
+    <string name="are_you_sure">Вы уверены, что хотите удалить этот элемент?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="search_for_item">Поиск вещей</string>
+    <string name="search_for_note">Поиск заметок</string>
+    <string name="language">Язык</string>
+    <string name="restart_to_save_changes">Пожалуйста, перезапустите приложение, чтобы сохранить изменения</string>
+
+    <string-array name="languages">
+        <item>Армянский</item>
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
+</resources>

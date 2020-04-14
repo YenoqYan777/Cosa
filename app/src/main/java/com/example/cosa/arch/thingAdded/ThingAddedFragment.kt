@@ -331,12 +331,12 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
             }
 
         val builder = AlertDialog.Builder(context)
-        builder.setMessage("Are you sure you want to delete this item?")
+        builder.setMessage(getString(R.string.are_you_sure))
             .setOnDismissListener {
                 thingAddedAdapter.notifyItemChanged(position)
             }
-            .setPositiveButton("Yes", dialogClickListener)
-            .setNegativeButton("No", dialogClickListener)
+            .setPositiveButton(getString(R.string.yes), dialogClickListener)
+            .setNegativeButton(getString(R.string.no), dialogClickListener)
             .show()
     }
 

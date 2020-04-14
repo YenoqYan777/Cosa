@@ -15,7 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mainBckg"
-        tools:context=".arch.notes.NotesFragment">
+        tools:context=".arch.notes.NotesFragment"
+        android:focusable="true"
+        android:clickable="true">
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -63,7 +65,7 @@
             android:iconifiedByDefault="false"
             android:inputType="text"
             android:queryBackground="@android:color/transparent"
-            android:queryHint="Search for note"
+            android:queryHint="@string/search_for_note"
             android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

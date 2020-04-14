@@ -147,12 +147,12 @@ class NotesFragment : Fragment(), SwipeHandler {
             }
 
         val builder = AlertDialog.Builder(activity)
-        builder.setMessage("Are you sure you want to delete this item?")
+        builder.setMessage(getString(R.string.are_you_sure))
             .setOnDismissListener {
                 notesAdapter.notifyItemChanged(position)
             }
-            .setPositiveButton("Yes", dialogClickListener)
-            .setNegativeButton("No", dialogClickListener)
+            .setPositiveButton(getString(R.string.yes), dialogClickListener)
+            .setNegativeButton(getString(R.string.no), dialogClickListener)
             .show()
     }
 

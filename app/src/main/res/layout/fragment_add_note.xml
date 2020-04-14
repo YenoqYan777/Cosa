@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mainBckg"
-        tools:context=".arch.notes.AddNoteFragment">
+        tools:context=".arch.notes.AddNoteFragment"
+        android:focusable="true"
+        android:clickable="true">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
