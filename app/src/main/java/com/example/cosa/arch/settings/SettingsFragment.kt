@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.cosa.R
@@ -64,29 +63,21 @@ class SettingsFragment : Fragment() {
                     0 -> {
                         editor.putString(LANGUAGE, "am")
                         editor.apply()
-                        Toast.makeText(
-                            activity, getString(
-                                R.string.restart_to_save_changes
-                            ), Toast.LENGTH_LONG
-                        ).show()
+
                     }
                     1 -> {
+//                            Toast.makeText(
+//                                activity, getString(
+//                                    R.string.restart_to_save_changes
+//                                ), Toast.LENGTH_LONG
+//                            ).show()
+
                         editor.putString(LANGUAGE, "ru")
                         editor.apply()
-                        Toast.makeText(
-                            activity,
-                            getString(R.string.restart_to_save_changes),
-                            Toast.LENGTH_LONG
-                        ).show()
                     }
                     2 -> {
                         editor.putString(LANGUAGE, "en")
                         editor.apply()
-                        Toast.makeText(
-                            activity,
-                            getString(R.string.restart_to_save_changes),
-                            Toast.LENGTH_LONG
-                        ).show()
                     }
                 }
             }

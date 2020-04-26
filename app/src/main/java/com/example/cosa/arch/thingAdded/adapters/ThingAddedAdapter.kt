@@ -130,6 +130,9 @@ class ThingAddedAdapter(
                 .error(R.drawable.ic_launcher_background)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(thingImage)
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition, it)
+            }
             editIcon.setOnClickListener {
                 listener.onItemClick(adapterPosition, it)
             }

@@ -26,8 +26,8 @@
     <string name="are_you_sure">Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս իրը</string>
     <string name="yes">Այո</string>
     <string name="no">Ոչ</string>
-    <string name="search_for_item">Փնտրեք ձեր իրը</string>
-    <string name="search_for_note">Փնտրեք ձեր գրառումը</string>
+    <string name="search_for_item">Որոնել իր</string>
+    <string name="search_for_note">Որենել նշում</string>
     <string name="language">Լեզու</string>
     <string name="restart_to_save_changes">Փոփոխությունները պահպանելու համար խնդրում ենք վերագործարկել ձեր ծրագիրը</string>
 

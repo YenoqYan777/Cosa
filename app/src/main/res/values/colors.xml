@@ -5,6 +5,7 @@
     <color name="darkItemBckg">#3F6973</color>
     <color name="gray">#f59524</color>
     <color name="lightGray">#efede1</color>
+    <color name="hintcolor">#4a4a4a</color>
     <color name="darkerItemBckg">#3b5c63</color>
     <color name="textColor">#f3f6fc</color>
     <color name="colorPrimary">#6200EE</color>
