@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val pref: SharedPreferences = getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-        setLocale(pref.getString(LANGUAGE, "ru")!!)
+        setLocale(pref.getString(LANGUAGE, "en")!!)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         loadFragment(thingAddedFragment)
         onBottomNavClickListener()

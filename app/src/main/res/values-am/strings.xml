@@ -30,11 +30,8 @@
     <string name="search_for_note">Որենել նշում</string>
     <string name="language">Լեզու</string>
     <string name="restart_to_save_changes">Փոփոխությունները պահպանելու համար խնդրում ենք վերագործարկել ձեր ծրագիրը</string>
+    <string name="am">Հայերեն</string>
+    <string name="ru">Ռուսերեն</string>
+    <string name="en">Անգլերեն</string>
 
-
-    <string-array name="languages">
-        <item>Հայերեն</item>
-        <item>Ռուսերեն</item>
-        <item>Անգլերեն</item>
-    </string-array>
 </resources>

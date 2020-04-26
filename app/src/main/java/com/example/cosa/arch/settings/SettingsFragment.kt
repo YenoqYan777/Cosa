@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.cosa.R
@@ -32,53 +32,48 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setSpinner()
+        setList()
     }
 
-    private fun setSpinner() {
+    private fun setList() {
         val sharedPref = activity?.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPref!!.edit()
-        adapter = ArrayAdapter.createFromResource(
-            activity!!.baseContext,
-            R.array.languages,
-            R.layout.spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinner.adapter = adapter
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        val langList =
+            listOf(getString(R.string.am), getString(R.string.ru), getString(R.string.en))
+        val adapter: ArrayAdapter<String> =
+            ArrayAdapter(activity!!, R.layout.simple_list_item_single_choice_1, langList)
 
+        binding.langListSettings.adapter = adapter
+        binding.langListSettings.choiceMode = ListView.CHOICE_MODE_SINGLE
+        when (sharedPref.getString(LANGUAGE, "en")) {
+            "am" -> {
+                binding.langListSettings.setItemChecked(0, true)
             }
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                when (position) {
-                    0 -> {
-                        editor.putString(LANGUAGE, "am")
-                        editor.apply()
-
-                    }
-                    1 -> {
-//                            Toast.makeText(
-//                                activity, getString(
-//                                    R.string.restart_to_save_changes
-//                                ), Toast.LENGTH_LONG
-//                            ).show()
-
-                        editor.putString(LANGUAGE, "ru")
-                        editor.apply()
-                    }
-                    2 -> {
-                        editor.putString(LANGUAGE, "en")
-                        editor.apply()
-                    }
+            "ru" -> {
+                binding.langListSettings.setItemChecked(1, true)
+            }
+            "en" -> {
+                binding.langListSettings.setItemChecked(2, true)
+            }
+        }
+        binding.langListSettings.setOnItemClickListener { parent, view, position, id ->
+            when (position) {
+                0 -> {
+                    editor.putString(LANGUAGE, "am")
+                    editor.apply()
+                    refreshActivity()
+                }
+                1 -> {
+                    editor.putString(LANGUAGE, "ru")
+                    editor.apply()
+                    refreshActivity()
+                }
+                2 -> {
+                    editor.putString(LANGUAGE, "en")
+                    editor.apply()
+                    refreshActivity()
                 }
             }
         }

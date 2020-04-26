@@ -29,10 +29,8 @@
     <string name="search_for_note">Поиск заметок</string>
     <string name="language">Язык</string>
     <string name="restart_to_save_changes">Пожалуйста, перезапустите приложение, чтобы сохранить изменения</string>
+    <string name="am">Армянский</string>
+    <string name="ru">Русский</string>
+    <string name="en">Английский</string>
 
-    <string-array name="languages">
-        <item>Армянский</item>
-        <item>Русский</item>
-        <item>Английский</item>
-    </string-array>
 </resources>
