@@ -107,6 +107,10 @@ class NotesFragment : Fragment(), SwipeHandler {
             override fun onItemClick(position: Int, view: View) {
                 createMenuForRecyclerView(position, view)
             }
+
+            override fun onWholeItemClick(position: Int, view: View) {
+
+            }
         })
     }
 

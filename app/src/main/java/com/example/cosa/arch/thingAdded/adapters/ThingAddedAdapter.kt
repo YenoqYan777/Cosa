@@ -131,7 +131,11 @@ class ThingAddedAdapter(
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(thingImage)
             itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition, it)
+                listener.onWholeItemClick(adapterPosition, it)
+            }
+            itemView.setOnLongClickListener {
+                listener.onItemClick(adapterPosition,it)
+                return@setOnLongClickListener true
             }
             editIcon.setOnClickListener {
                 listener.onItemClick(adapterPosition, it)

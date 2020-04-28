@@ -23,6 +23,7 @@ class AddNoteFragment : Fragment() {
             inflater, R.layout.fragment_add_note, container, false
         )
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        binding.etNoteContent.setText("")
         initToolbar()
         setHasOptionsMenu(true)
         return binding.root
@@ -61,7 +62,6 @@ class AddNoteFragment : Fragment() {
     private fun onAcceptBtnClicked() {
         if (!binding.etNoteContent.text.isNullOrEmpty()) {
             viewModel.insertNote(Notes(text = binding.etNoteContent.text.toString()))
-            val transaction = fragmentManager
             fragmentManager!!.beginTransaction()
                 .replace(R.id.fragment, NotesFragment())
                 .commit()

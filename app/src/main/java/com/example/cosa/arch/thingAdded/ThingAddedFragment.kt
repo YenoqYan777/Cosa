@@ -105,6 +105,13 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
             override fun onItemClick(position: Int, view: View) {
                 createMenuForRecyclerView(position, view)
             }
+
+            override fun onWholeItemClick(position: Int, view: View) {
+                viewModel.setThingForThingAdded(thingAddedAdapter.getData()[position])
+                context!!.startActivity(Intent(context, ThingDetailsActivity::class.java))
+            }
+
+
         })
     }
 

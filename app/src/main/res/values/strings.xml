@@ -3,8 +3,8 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="take_photo">Take Photo</string>
-    <string name="thing">Thing</string>
-    <string name="place">Place</string>
+    <string name="thing">Thing name</string>
+    <string name="place">Place description</string>
     <string name="add_item">Add Item</string>
     <string name="cancel">Cancel</string>
     <string name="place_required_error">Item\'s place can not be empty!</string>
