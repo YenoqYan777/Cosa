@@ -3,7 +3,7 @@
     <item
         android:id="@+id/edit"
         android:iconTint="@color/textColor"
-        android:title="@string/edit" />
+        android:title="@string/edit_or_view" />
     <item
         android:id="@+id/delete"
         android:iconTint="@color/textColor"

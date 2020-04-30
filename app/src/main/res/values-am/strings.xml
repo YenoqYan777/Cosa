@@ -29,6 +29,7 @@
     <string name="search_for_item">Որոնել իր</string>
     <string name="search_for_note">Որենել նշում</string>
     <string name="language">Լեզու</string>
+    <string name="edit_or_view">Դիտել կամ փոփոխել</string>
     <string name="restart_to_save_changes">Փոփոխությունները պահպանելու համար խնդրում ենք վերագործարկել ձեր ծրագիրը</string>
     <string name="am">Հայերեն</string>
     <string name="ru">Ռուսերեն</string>

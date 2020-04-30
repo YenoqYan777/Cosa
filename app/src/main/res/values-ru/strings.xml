@@ -28,6 +28,7 @@
     <string name="search_for_item">Поиск вещей</string>
     <string name="search_for_note">Поиск заметок</string>
     <string name="language">Язык</string>
+    <string name="edit_or_view">Посмотреть или изменить</string>
     <string name="restart_to_save_changes">Пожалуйста, перезапустите приложение, чтобы сохранить изменения</string>
     <string name="am">Армянский</string>
     <string name="ru">Русский</string>

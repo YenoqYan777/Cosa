@@ -13,6 +13,7 @@
     <string name="search">Search</string>
     <string name="save_changes">Save changes</string>
     <string name="edit">Edit</string>
+    <string name="edit_or_view">View or edit</string>
     <string name="delete">Delete</string>
     <string name="take_a_photo">Take a photo of item !</string>
     <string name="no_notes_added">No notes added</string>

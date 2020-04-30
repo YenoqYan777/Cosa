@@ -116,7 +116,7 @@ class NotesFragment : Fragment(), SwipeHandler {
 
     private fun createMenuForRecyclerView(position: Int, view: View) {
         val popup = PopupMenu(activity, view)
-        popup.inflate(R.menu.itme_edit_menu)
+        popup.inflate(R.menu.itme_edit_view_menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.edit -> {
