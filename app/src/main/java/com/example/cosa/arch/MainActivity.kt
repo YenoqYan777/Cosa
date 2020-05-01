@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.cosa.R
+import com.example.cosa.arch.deletedItems.DeletedItemsFragment
 import com.example.cosa.arch.notes.NotesFragment
 import com.example.cosa.arch.settings.SettingsFragment
 import com.example.cosa.arch.thingAdded.ThingAddedFragment
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
 
     private val notesFragment: Fragment =
         NotesFragment()
+
+    private val deletedItemsFragment: Fragment =
+        DeletedItemsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +80,17 @@ class MainActivity : AppCompatActivity() {
                     )
                     true
                 }
+                R.id.recycle_bin -> {
+                    binding.bottomNavigationView.menu.getItem(2).isChecked = true
+                    selectedFragment = deletedItemsFragment
+                    ActivityUtils().pushFragment(
+                        selectedFragment!!,
+                        this.supportFragmentManager,
+                        R.id.fragment,
+                        true
+                    )
+                    true
+                }
                 R.id.settings -> {
                     binding.bottomNavigationView.menu.getItem(2).isChecked = true
                     selectedFragment = settingsFragment
@@ -101,8 +116,11 @@ class MainActivity : AppCompatActivity() {
             is NotesFragment -> {
                 binding.bottomNavigationView.menu.getItem(1).isChecked = true
             }
-            is SettingsFragment -> {
+            is DeletedItemsFragment -> {
                 binding.bottomNavigationView.menu.getItem(2).isChecked = true
+            }
+            is SettingsFragment -> {
+                binding.bottomNavigationView.menu.getItem(3).isChecked = true
             }
             else -> {
                 binding.bottomNavigationView.menu.getItem(0).isChecked = true

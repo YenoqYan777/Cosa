@@ -13,9 +13,10 @@ import io.reactivex.rxkotlin.addTo
 
 class ThingAddedViewModel(application: Application) : AndroidViewModel(application) {
 
-    companion object{
-        private val thingForDetailPage:ThingAdded = ThingAdded()
+    companion object {
+        private val thingForDetailPage: ThingAdded = ThingAdded()
     }
+
     private val compositeDisposable = CompositeDisposable()
     private val thingAddedDao: ThingAddedDao = CosaApplication.dataBase.thingAddedDao()
     fun getThingAdded(): LiveData<MutableList<ThingAdded>> = thingAddedDao.getAll()
@@ -41,11 +42,13 @@ class ThingAddedViewModel(application: Application) : AndroidViewModel(applicati
             .addTo(compositeDisposable)
 
     }
-fun setThingForThingAdded(thingAdded: ThingAdded){
-    thingForDetailPage.cacheUri = thingAdded.cacheUri
-    thingForDetailPage.place = thingAdded.place
-    thingForDetailPage.thing = thingAdded.thing
-}
+
+    fun setThingForThingAdded(thingAdded: ThingAdded) {
+        thingForDetailPage.cacheUri = thingAdded.cacheUri
+        thingForDetailPage.place = thingAdded.place
+        thingForDetailPage.thing = thingAdded.thing
+    }
+
     fun updateThingInfo(name: String, place: String, cacheUri: String, id: Long) {
         Single.just(name)
             .backgroundWork()
