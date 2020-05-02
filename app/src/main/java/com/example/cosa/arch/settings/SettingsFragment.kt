@@ -13,14 +13,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.cosa.R
 import com.example.cosa.databinding.FragmentSettingsBinding
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class SettingsFragment : Fragment() {
     private val SHARED: String = "sharedPref"
     private val LANGUAGE: String = "Language"
-    private lateinit var adapter: ArrayAdapter<CharSequence>
+    private val SAVETRASH:String = "SAVETRASH"
     private lateinit var binding: FragmentSettingsBinding
-
+    private lateinit var pref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,17 +31,25 @@ class SettingsFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_settings, container, false
         )
+        pref = activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+        editor= pref.edit()
+        binding.saveInTrash.isChecked= pref.getBoolean(SAVETRASH, true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setList()
+        setSwitcherListener()
+    }
+
+    private fun setSwitcherListener() {
+        binding.saveInTrash.setOnCheckedChangeListener { buttonView, isChecked ->
+            editor.putBoolean(SAVETRASH, isChecked)
+        }
     }
 
     private fun setList() {
-        val sharedPref = activity?.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = sharedPref!!.edit()
         val langList =
             listOf(getString(R.string.am), getString(R.string.ru), getString(R.string.en))
         val adapter: ArrayAdapter<String> =
@@ -47,7 +57,7 @@ class SettingsFragment : Fragment() {
 
         binding.langListSettings.adapter = adapter
         binding.langListSettings.choiceMode = ListView.CHOICE_MODE_SINGLE
-        when (sharedPref.getString(LANGUAGE, "en")) {
+        when (pref.getString(LANGUAGE, "en")) {
             "am" -> {
                 binding.langListSettings.setItemChecked(0, true)
             }
@@ -79,7 +89,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    fun refreshActivity() {
+    private fun refreshActivity() {
         val intent = activity!!.intent
         intent.addFlags(
             Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK

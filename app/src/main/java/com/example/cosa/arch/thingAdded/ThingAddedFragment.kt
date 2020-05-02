@@ -3,11 +3,14 @@ package com.example.cosa.arch.thingAdded
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.wifi.WifiConfiguration.AuthAlgorithm.SHARED
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -42,6 +45,9 @@ import java.util.*
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
 class ThingAddedFragment : Fragment(), SwipeHandler {
+    private val SAVETRASH:String = "SAVETRASH"
+    private val SHARED: String = "sharedPref"
+
     private lateinit var binding: FragmentThingListBinding
     private lateinit var viewModel: ThingAddedViewModel
     private lateinit var thingAddedAdapter: ThingAddedAdapter
@@ -332,7 +338,8 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
             DialogInterface.OnClickListener { dialog, which ->
                 when (which) {
                     DialogInterface.BUTTON_POSITIVE -> {
-                        viewModel.deleteItem(thingAddedAdapter.getData()[position])
+                        val pref: SharedPreferences = activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+                        viewModel.deleteItem(thingAddedAdapter.getData()[position],pref.getBoolean(SAVETRASH, true))
                     }
                 }
             }
