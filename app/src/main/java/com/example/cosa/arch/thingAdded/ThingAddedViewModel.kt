@@ -15,6 +15,7 @@ class ThingAddedViewModel(application: Application) : AndroidViewModel(applicati
 
     companion object {
         private val thingForDetailPage: ThingAdded = ThingAdded()
+
     }
 
     private val compositeDisposable = CompositeDisposable()

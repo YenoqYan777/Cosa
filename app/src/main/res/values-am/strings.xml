@@ -34,5 +34,8 @@
     <string name="am">Հայերեն</string>
     <string name="ru">Ռուսերեն</string>
     <string name="en">Անգլերեն</string>
+    <string name="trash_is_empty">Աղբարկղը դատարկ է</string>
+    <string name="search_for_deleted_item">Փնտրել ջնջված իր</string>
+    <string name="search_for_deleted_note">Փնտրել ջնջված նշում</string>
 
 </resources>
