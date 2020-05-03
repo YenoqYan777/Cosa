@@ -10,7 +10,6 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.wifi.WifiConfiguration.AuthAlgorithm.SHARED
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -42,10 +41,9 @@ import kotlinx.android.synthetic.main.item_edit_fragment_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
 class ThingAddedFragment : Fragment(), SwipeHandler {
-    private val SAVETRASH:String = "SAVETRASH"
+    private val SAVETRASH: String = "SAVETRASH"
     private val SHARED: String = "sharedPref"
 
     private lateinit var binding: FragmentThingListBinding
@@ -77,7 +75,7 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
         initViewModel()
         initRecyclerView()
         onAddBtnClick()
-        addSearchViewTextChanges()
+        performSearch()
         recyclerItemClickListener()
     }
 
@@ -138,7 +136,7 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
         popup.show()
     }
 
-    private fun addSearchViewTextChanges() {
+    private fun performSearch() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -338,8 +336,12 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
             DialogInterface.OnClickListener { dialog, which ->
                 when (which) {
                     DialogInterface.BUTTON_POSITIVE -> {
-                        val pref: SharedPreferences = activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-                        viewModel.deleteItem(thingAddedAdapter.getData()[position],pref.getBoolean(SAVETRASH, true))
+                        val pref: SharedPreferences =
+                            activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+                        viewModel.deleteItem(
+                            thingAddedAdapter.getData()[position],
+                            pref.getBoolean(SAVETRASH, true)
+                        )
                     }
                 }
             }

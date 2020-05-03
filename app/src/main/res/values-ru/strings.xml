@@ -33,9 +33,11 @@
     <string name="am">Армянский</string>
     <string name="ru">Русский</string>
     <string name="en">Английский</string>
-
     <string name="trash_is_empty">Корзина пустая</string>
     <string name="search_for_deleted_item">Поиск удаленных вещей</string>
     <string name="search_for_deleted_note">Поиск удаленных заметок</string>
+    <string name="save_deleted_items_in_trash">Отправить удаленные вещи в корзину</string>
+    <string name="delete_completely">Удалить окончательно</string>
+    <string name="recover_item">Восстановить</string>
 
 </resources>

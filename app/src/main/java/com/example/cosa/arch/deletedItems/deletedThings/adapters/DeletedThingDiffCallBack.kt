@@ -1,4 +1,4 @@
-package com.example.cosa.arch.deletedItems.adapters
+package com.example.cosa.arch.deletedItems.deletedThings.adapters
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.cosa.models.DeletedThingAdded

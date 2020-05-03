@@ -1,7 +1,9 @@
 package com.example.cosa.arch.notes
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,9 @@ import com.example.cosa.databinding.FragmentNotesBinding
 import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : Fragment(), SwipeHandler {
+    private val SAVETRASH: String = "SAVETRASH"
+    private val SHARED: String = "sharedPref"
+
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NotesViewModel
     private lateinit var notesAdapter: NotesAdapter
@@ -49,11 +54,11 @@ class NotesFragment : Fragment(), SwipeHandler {
         initRecyclerView()
         recyclerItemClickListener()
         onAddBtnClick()
-        addSearchViewTextChanges()
+        performSearch()
         recyclerItemClickListener()
     }
 
-    private fun addSearchViewTextChanges() {
+    private fun performSearch() {
         searchViewNotes.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -145,7 +150,9 @@ class NotesFragment : Fragment(), SwipeHandler {
             DialogInterface.OnClickListener { dialog, which ->
                 when (which) {
                     DialogInterface.BUTTON_POSITIVE -> {
-                        viewModel.deleteItem(notesAdapter.getData()[position])
+                        val pref: SharedPreferences =
+                            activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+                        viewModel.deleteItem(notesAdapter.getData()[position], pref.getBoolean(SAVETRASH, true))
                     }
                 }
             }

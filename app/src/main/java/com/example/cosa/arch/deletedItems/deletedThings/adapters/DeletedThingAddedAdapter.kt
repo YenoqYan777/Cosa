@@ -1,4 +1,4 @@
-package com.example.cosa.arch.deletedItems.adapters
+package com.example.cosa.arch.deletedItems.deletedThings.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

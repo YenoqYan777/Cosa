@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mainBckg"
-        tools:context=".arch.deletedItems.DeletedThingsFragment">
+        tools:context=".arch.deletedItems.deletedThings.DeletedThingsFragment">
         <SearchView
             android:id="@+id/svDeletedThings"
             android:layout_width="match_parent"

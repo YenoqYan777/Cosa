@@ -23,7 +23,7 @@ class ThingAddedViewModel(application: Application) : AndroidViewModel(applicati
     private val thingAddedDao: ThingAddedDao = CosaApplication.dataBase.thingAddedDao()
     private val deletedThingsDao: DeletedThingsDao = CosaApplication.dataBase.deletedThingAddedDao()
     fun getThingAdded(): LiveData<MutableList<ThingAdded>> = thingAddedDao.getAll()
-    fun getDeletedThingAdded():LiveData<MutableList<DeletedThingAdded>> = deletedThingsDao.getAll()
+    fun getDeletedThingAdded(): LiveData<MutableList<DeletedThingAdded>> = deletedThingsDao.getAll()
     fun getThingForDetail(): ThingAdded = thingForDetailPage
 
     fun insertThingAdded(thingAdded: ThingAdded) {
@@ -31,16 +31,6 @@ class ThingAddedViewModel(application: Application) : AndroidViewModel(applicati
             .backgroundWork()
             .doOnSuccess {
                 thingAddedDao.insert(it)
-            }
-            .subscribe()
-            .addTo(compositeDisposable)
-    }
-
-    fun  completelyDeleteThing(thingAdded: DeletedThingAdded){
-        Single.just(thingAdded)
-            .backgroundWork()
-            .doOnSuccess {
-                deletedThingsDao.deleteItem(thingAdded)
             }
             .subscribe()
             .addTo(compositeDisposable)

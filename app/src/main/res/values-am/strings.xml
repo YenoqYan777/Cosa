@@ -37,5 +37,9 @@
     <string name="trash_is_empty">Աղբարկղը դատարկ է</string>
     <string name="search_for_deleted_item">Փնտրել ջնջված իր</string>
     <string name="search_for_deleted_note">Փնտրել ջնջված նշում</string>
+    <string name="save_deleted_items_in_trash">Ջնջված իրերը ավելացնել ազբարկղում</string>
+    <string name="delete_completely">Ջնջել վերջնականապես</string>
+    <string name="recover_item">Վերականգնել</string>
+
 
 </resources>

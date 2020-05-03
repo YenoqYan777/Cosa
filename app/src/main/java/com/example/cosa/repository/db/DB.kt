@@ -2,19 +2,21 @@ package com.example.cosa.repository.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.cosa.models.DeletedThingAdded
-import com.example.cosa.models.Notes
-import com.example.cosa.models.Settings
-import com.example.cosa.models.ThingAdded
-import com.example.cosa.repository.db.dao.DeletedThingsDao
-import com.example.cosa.repository.db.dao.NotesDao
-import com.example.cosa.repository.db.dao.SettingsDao
-import com.example.cosa.repository.db.dao.ThingAddedDao
+import com.example.cosa.models.*
+import com.example.cosa.repository.db.dao.*
 
-@Database(entities = [(ThingAdded::class), (Notes::class), (Settings::class), (DeletedThingAdded::class)], version = 4)
+@Database(
+    entities = [(ThingAdded::class),
+        (Notes::class),
+        (Settings::class),
+        (DeletedThingAdded::class),
+        (DeletedNotes::class)],
+    version = 6
+)
 abstract class DB : RoomDatabase() {
     abstract fun thingAddedDao(): ThingAddedDao
-    abstract fun notesDao():NotesDao
+    abstract fun notesDao(): NotesDao
     abstract fun settingsDao(): SettingsDao
     abstract fun deletedThingAddedDao(): DeletedThingsDao
+    abstract fun deletedNotes(): DeletedNotesDao
 }
