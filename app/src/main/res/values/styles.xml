@@ -6,7 +6,7 @@
         <item name="colorAccent">@color/textColor</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="colorPrimary">@color/darkerItemBckg</item>
         <item name="colorPrimaryDark">@color/mainBckg</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -27,7 +27,6 @@
     <style name="itemTextStyle.AppTheme" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
         <item name="android:textColor">@color/textColor</item>
     </style>
-
 
     <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">@color/mainBckg</item>

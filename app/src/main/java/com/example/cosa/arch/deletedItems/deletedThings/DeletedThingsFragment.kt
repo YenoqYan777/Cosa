@@ -15,13 +15,11 @@ import com.example.cosa.R
 import com.example.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingAddedAdapter
 import com.example.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingDiffCallBack
 import com.example.cosa.arch.helpers.OnItemClickListener
-import com.example.cosa.arch.helpers.SwipeHandler
 import com.example.cosa.databinding.FragmentDeletedThingsBinding
 import com.example.cosa.models.ThingAdded
 import kotlinx.android.synthetic.main.fragment_deleted_things.*
-import kotlinx.android.synthetic.main.fragment_thing_list.*
 
-class DeletedThingsFragment : Fragment(), SwipeHandler {
+class DeletedThingsFragment : Fragment() {
     private lateinit var binding: FragmentDeletedThingsBinding
     private lateinit var viewModel: DeletedThingsViewModel
     private lateinit var adapter: DeletedThingAddedAdapter
@@ -73,6 +71,7 @@ class DeletedThingsFragment : Fragment(), SwipeHandler {
         rvDeletedThings.layoutManager = mLayoutManager
         rvDeletedThings.adapter = adapter
     }
+
     private fun recyclerItemClickListener() {
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int, view: View) {
@@ -85,6 +84,7 @@ class DeletedThingsFragment : Fragment(), SwipeHandler {
 
         })
     }
+
     private fun createMenuForRecyclerView(position: Int, view: View) {
         val delThing = ThingAdded()
         delThing.id = adapter.getData()[position].id
@@ -108,6 +108,7 @@ class DeletedThingsFragment : Fragment(), SwipeHandler {
         }
         popup.show()
     }
+
     private fun addSearchViewTextChanges() {
         binding.svDeletedThings.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -119,13 +120,6 @@ class DeletedThingsFragment : Fragment(), SwipeHandler {
                 return false
             }
         })
-    }
-    override fun onItemSwipedRight(position: Int) {
-        viewModel.completelyDeleteThing(adapter.getData()[position])
-    }
-
-    override fun onItemSwipedLeft(position: Int) {
-        adapter.notifyItemChanged(position)
     }
 
 

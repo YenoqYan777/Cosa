@@ -20,7 +20,7 @@ import com.example.cosa.databinding.FragmentDeletedNotesBinding
 import com.example.cosa.models.Notes
 import kotlinx.android.synthetic.main.fragment_deleted_notes.*
 
-class DeletedNotesFragment : Fragment(), SwipeHandler {
+class DeletedNotesFragment : Fragment() {
     private lateinit var binding: FragmentDeletedNotesBinding
     private lateinit var viewModel: DeletedNotesViewModel
 
@@ -123,12 +123,6 @@ class DeletedNotesFragment : Fragment(), SwipeHandler {
         })
     }
 
-    override fun onItemSwipedRight(position: Int) {
 
-    }
-
-    override fun onItemSwipedLeft(position: Int) {
-
-    }
 
 }
