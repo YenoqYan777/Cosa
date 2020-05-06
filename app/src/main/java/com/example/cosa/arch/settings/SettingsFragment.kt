@@ -12,17 +12,17 @@ import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.cosa.R
+import com.example.cosa.arch.helpers.LocalManager
+import com.example.cosa.arch.helpers.LocalManager.LANGUAGE_KEY
+import com.example.cosa.arch.helpers.LocalManager.SAVE_TRASH_KEY
+import com.example.cosa.arch.helpers.LocalManager.SAVE_TRASH_KEY_NOTES
+import com.example.cosa.arch.helpers.LocalManager.SHARED
 import com.example.cosa.databinding.FragmentSettingsBinding
-import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class SettingsFragment : Fragment() {
-    private val SHARED: String = "sharedPref"
-    private val LANGUAGE: String = "Language"
-    private val SAVETRASH:String = "SAVETRASH"
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var pref: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +32,8 @@ class SettingsFragment : Fragment() {
             inflater, R.layout.fragment_settings, container, false
         )
         pref = activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-        editor= pref.edit()
-        binding.saveInTrash.isChecked= pref.getBoolean(SAVETRASH, true)
+        binding.backUpThings.isChecked = pref.getBoolean(SAVE_TRASH_KEY, true)
+        binding.backUpNotes.isChecked = pref.getBoolean(SAVE_TRASH_KEY_NOTES, true)
         return binding.root
     }
 
@@ -44,9 +44,19 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setSwitcherListener() {
-        binding.saveInTrash.setOnCheckedChangeListener { buttonView, isChecked ->
-            editor.putBoolean(SAVETRASH, isChecked)
+        binding.backUpThings.setOnCheckedChangeListener { buttonView, isChecked ->
+            pref.edit().run {
+                putBoolean(SAVE_TRASH_KEY, isChecked)
+                apply()
+            }
         }
+        binding.backUpNotes.setOnCheckedChangeListener { buttonView, isChecked ->
+            pref.edit().run {
+                putBoolean(SAVE_TRASH_KEY_NOTES, isChecked)
+                apply()
+            }
+        }
+
     }
 
     private fun setList() {
@@ -57,7 +67,7 @@ class SettingsFragment : Fragment() {
 
         binding.langListSettings.adapter = adapter
         binding.langListSettings.choiceMode = ListView.CHOICE_MODE_SINGLE
-        when (pref.getString(LANGUAGE, "en")) {
+        when (pref.getString(LANGUAGE_KEY, "en")) {
             "am" -> {
                 binding.langListSettings.setItemChecked(0, true)
             }
@@ -71,18 +81,15 @@ class SettingsFragment : Fragment() {
         binding.langListSettings.setOnItemClickListener { parent, view, position, id ->
             when (position) {
                 0 -> {
-                    editor.putString(LANGUAGE, "am")
-                    editor.apply()
+                    LocalManager.setNewLocale(activity!!, "am")
                     refreshActivity()
                 }
                 1 -> {
-                    editor.putString(LANGUAGE, "ru")
-                    editor.apply()
+                    LocalManager.setNewLocale(activity!!, "ru")
                     refreshActivity()
                 }
                 2 -> {
-                    editor.putString(LANGUAGE, "en")
-                    editor.apply()
+                    LocalManager.setNewLocale(activity!!, "en")
                     refreshActivity()
                 }
             }

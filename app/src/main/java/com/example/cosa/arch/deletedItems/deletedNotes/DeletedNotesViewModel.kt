@@ -35,10 +35,12 @@ class DeletedNotesViewModel(application: Application) : AndroidViewModel(applica
         delNote.id = notes.id
         delNote.text = notes.text
 
+        val noteToRecover = Notes()
+        noteToRecover.text = notes.text
         Single.just(notes)
             .backgroundWork()
             .doOnSuccess {
-                notesDao.insert(notes)
+                notesDao.insert(noteToRecover)
                 deletedNotesDao.deleteItem(delNote)
             }
             .subscribe()

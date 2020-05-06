@@ -26,8 +26,6 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     fun getNotes(): LiveData<MutableList<Notes>> = notesDao.getAll()
 
     fun deleteItem(notes: Notes, boolean: Boolean) {
-
-
         if (boolean) {
             val delNote = DeletedNotes()
             delNote.text = notes.text

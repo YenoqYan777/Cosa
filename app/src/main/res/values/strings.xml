@@ -29,15 +29,16 @@
     <string name="search_for_item">Search for an item</string>
     <string name="search_for_note">Search for a note</string>
     <string name="language">Language</string>
-    <string name="restart_to_save_changes">Please restart your app to save changes</string>
-    <string name="am">Armenian</string>
-    <string name="ru">Russian</string>
+    <string name="am">Հայերեն</string>
+    <string name="ru">Русский</string>
     <string name="en">English</string>
     <string name="trash_is_empty">Recycle bin is empty</string>
     <string name="search_for_deleted_item">Search for a deleted item</string>
     <string name="search_for_deleted_note">Search for a deleted note</string>
-    <string name="save_deleted_items_in_trash">Add deleted items to recycle bin</string>
+    <string name="backup_things">Things</string>
+    <string name="backup_notes">Notes</string>
     <string name="delete_completely">Delete completely</string>
     <string name="recover_item">Recover</string>
+    <string name="backup_settings">Backup and restore</string>
 
 </resources>

@@ -30,16 +30,17 @@
     <string name="search_for_note">Որենել նշում</string>
     <string name="language">Լեզու</string>
     <string name="edit_or_view">Դիտել կամ փոփոխել</string>
-    <string name="restart_to_save_changes">Փոփոխությունները պահպանելու համար խնդրում ենք վերագործարկել ձեր ծրագիրը</string>
     <string name="am">Հայերեն</string>
-    <string name="ru">Ռուսերեն</string>
-    <string name="en">Անգլերեն</string>
+    <string name="ru">Русский</string>
+    <string name="en">English</string>
     <string name="trash_is_empty">Աղբարկղը դատարկ է</string>
     <string name="search_for_deleted_item">Փնտրել ջնջված իր</string>
     <string name="search_for_deleted_note">Փնտրել ջնջված նշում</string>
-    <string name="save_deleted_items_in_trash">Ջնջված իրերը ավելացնել ազբարկղում</string>
+    <string name="backup_things">Իրեր</string>
+    <string name="backup_notes">Նշումներ</string>
     <string name="delete_completely">Ջնջել վերջնականապես</string>
     <string name="recover_item">Վերականգնել</string>
+    <string name="backup_settings">Կրկնօրինակում և վերականգնում</string>
 
 
 </resources>

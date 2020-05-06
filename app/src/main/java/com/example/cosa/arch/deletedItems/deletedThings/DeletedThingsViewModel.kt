@@ -36,10 +36,14 @@ class DeletedThingsViewModel(application: Application) : AndroidViewModel(applic
         delThingAdded.cacheUri = thingAdded.cacheUri
         delThingAdded.place = thingAdded.place
         delThingAdded.thing = thingAdded.thing
+        val thing = ThingAdded()
+        thing.cacheUri = thingAdded.cacheUri
+        thing.place = thingAdded.place
+        thing.thing = thingAdded.thing
         Single.just(thingAdded)
             .backgroundWork()
             .doOnSuccess {
-                thingAddedDao.insert(thingAdded)
+                thingAddedDao.insert(thing)
                 deletedThingsDao.deleteItem(delThingAdded)
             }
             .subscribe()

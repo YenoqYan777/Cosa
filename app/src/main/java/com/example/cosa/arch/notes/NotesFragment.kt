@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.cosa.R
+import com.example.cosa.arch.helpers.LocalManager.SAVE_TRASH_KEY_NOTES
+import com.example.cosa.arch.helpers.LocalManager.SHARED
 import com.example.cosa.arch.helpers.OnItemClickListener
 import com.example.cosa.arch.helpers.SwipeHandler
 import com.example.cosa.arch.helpers.WrapContentLinearLayoutManager
@@ -26,8 +28,6 @@ import com.example.cosa.databinding.FragmentNotesBinding
 import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : Fragment(), SwipeHandler {
-    private val SAVETRASH: String = "SAVETRASH"
-    private val SHARED: String = "sharedPref"
 
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NotesViewModel
@@ -152,7 +152,11 @@ class NotesFragment : Fragment(), SwipeHandler {
                     DialogInterface.BUTTON_POSITIVE -> {
                         val pref: SharedPreferences =
                             activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-                        viewModel.deleteItem(notesAdapter.getData()[position], pref.getBoolean(SAVETRASH, true))
+                        viewModel.deleteItem(
+                            notesAdapter.getData()[position], pref.getBoolean(
+                                SAVE_TRASH_KEY_NOTES, true
+                            )
+                        )
                     }
                 }
             }
