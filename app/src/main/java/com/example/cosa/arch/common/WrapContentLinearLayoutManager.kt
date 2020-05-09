@@ -1,4 +1,4 @@
-package com.example.cosa.arch.helpers
+package com.example.cosa.arch.common
 
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager

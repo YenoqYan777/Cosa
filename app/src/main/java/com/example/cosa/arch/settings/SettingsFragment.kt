@@ -12,15 +12,17 @@ import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.cosa.R
-import com.example.cosa.arch.helpers.LocalManager
-import com.example.cosa.arch.helpers.LocalManager.LANGUAGE_KEY
-import com.example.cosa.arch.helpers.LocalManager.SAVE_TRASH_KEY
-import com.example.cosa.arch.helpers.LocalManager.SAVE_TRASH_KEY_NOTES
-import com.example.cosa.arch.helpers.LocalManager.SHARED
+import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.helper.LocalManager
+import com.example.cosa.helper.LocalManager.LANGUAGE_KEY
+import com.example.cosa.helper.LocalManager.SAVE_TRASH_KEY
+import com.example.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
+import com.example.cosa.helper.LocalManager.SHARED
 import com.example.cosa.databinding.FragmentSettingsBinding
+import kotlinx.android.synthetic.main.fragment_deleted_notes.*
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var pref: SharedPreferences
 
@@ -56,7 +58,6 @@ class SettingsFragment : Fragment() {
                 apply()
             }
         }
-
     }
 
     private fun setList() {

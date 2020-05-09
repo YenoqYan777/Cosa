@@ -9,7 +9,7 @@
 
         <variable
             name="swipeHandler"
-            type="com.example.cosa.arch.helpers.SwipeHandler" />
+            type="com.example.cosa.arch.common.SwipeHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

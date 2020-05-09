@@ -1,4 +1,4 @@
-package com.example.cosa.arch.helpers
+package com.example.cosa.arch.common
 
 import android.graphics.drawable.Drawable
 import androidx.databinding.BindingAdapter

@@ -11,7 +11,8 @@ import com.example.cosa.repository.db.dao.*
         (Settings::class),
         (DeletedThingAdded::class),
         (DeletedNotes::class)],
-    version = 6
+    version = 6,
+    exportSchema = false
 )
 abstract class DB : RoomDatabase() {
     abstract fun thingAddedDao(): ThingAddedDao

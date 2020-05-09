@@ -1,8 +1,10 @@
 package com.example.cosa.arch.thingAdded
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.cosa.CosaApplication
 import com.example.cosa.extension.backgroundWork
 import com.example.cosa.models.DeletedThingAdded
@@ -19,12 +21,27 @@ class ThingAddedViewModel(application: Application) : AndroidViewModel(applicati
         private val thingForDetailPage: ThingAdded = ThingAdded()
     }
 
+    private val mDotClicked = MutableLiveData<Pair<View, ThingAdded>>()
+    val dotClicked: LiveData<Pair<View, ThingAdded>> get() = mDotClicked
+
+    private val mWholeClicked = MutableLiveData<ThingAdded>()
+    val wholeClicked: LiveData<ThingAdded> get() = mWholeClicked
+
     private val compositeDisposable = CompositeDisposable()
     private val thingAddedDao: ThingAddedDao = CosaApplication.dataBase.thingAddedDao()
     private val deletedThingsDao: DeletedThingsDao = CosaApplication.dataBase.deletedThingAddedDao()
     fun getThingAdded(): LiveData<MutableList<ThingAdded>> = thingAddedDao.getAll()
     fun getDeletedThingAdded(): LiveData<MutableList<DeletedThingAdded>> = deletedThingsDao.getAll()
     fun getThingForDetail(): ThingAdded = thingForDetailPage
+
+
+    fun onDotsClicked(view: View, thingAdded: ThingAdded) {
+        mDotClicked.value = Pair(view, thingAdded)
+    }
+
+    fun onWholeItemClicked(thingAdded: ThingAdded) {
+        mWholeClicked.value = thingAdded
+    }
 
     fun insertThingAdded(thingAdded: ThingAdded) {
         Single.just(thingAdded)

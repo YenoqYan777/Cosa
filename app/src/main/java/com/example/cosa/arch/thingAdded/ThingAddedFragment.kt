@@ -22,13 +22,12 @@ import android.widget.PopupMenu
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosa.R
-import com.example.cosa.arch.helpers.OnItemClickListener
-import com.example.cosa.arch.helpers.SwipeHandler
+import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.arch.common.SwipeHandler
 import com.example.cosa.arch.thingAdded.adapters.ThingAddedAdapter
 import com.example.cosa.arch.thingAdded.adapters.ThingDiffCallBack
 import com.example.cosa.databinding.FragmentThingListBinding
@@ -42,7 +41,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
-class ThingAddedFragment : Fragment(), SwipeHandler {
+class ThingAddedFragment : BaseFragment(), SwipeHandler {
     private val SAVETRASH: String = "SAVETRASH"
     private val SHARED: String = "sharedPref"
 
@@ -76,7 +75,18 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
         initRecyclerView()
         onAddBtnClick()
         performSearch()
-        recyclerItemClickListener()
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.dotClicked.observe(viewLifecycleOwner, Observer {
+            createMenuForRecyclerView(it.first, it.second)
+        })
+
+        viewModel.wholeClicked.observe(viewLifecycleOwner, Observer {
+            viewModel.setThingForThingAdded(it)
+            context!!.startActivity(Intent(context, ThingDetailsActivity::class.java))
+        })
     }
 
     private fun initViewModel() {
@@ -99,36 +109,21 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
 
     private fun initRecyclerView() {
         val mLayoutManager = LinearLayoutManager(activity)
-        thingAddedAdapter = ThingAddedAdapter(ThingDiffCallBack(), context!!)
+        thingAddedAdapter = ThingAddedAdapter(ThingDiffCallBack(), context!!, viewModel)
         rv_thing_list.layoutManager = mLayoutManager
         rv_thing_list.adapter = thingAddedAdapter
     }
 
-    private fun recyclerItemClickListener() {
-        thingAddedAdapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(position: Int, view: View) {
-                createMenuForRecyclerView(position, view)
-            }
-
-            override fun onWholeItemClick(position: Int, view: View) {
-                viewModel.setThingForThingAdded(thingAddedAdapter.getData()[position])
-                context!!.startActivity(Intent(context, ThingDetailsActivity::class.java))
-            }
-
-
-        })
-    }
-
-    private fun createMenuForRecyclerView(position: Int, view: View) {
+    private fun createMenuForRecyclerView(view: View, thingAdded: ThingAdded) {
         val popup = PopupMenu(activity, view)
         popup.inflate(R.menu.itme_edit_menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.edit -> {
-                    onEditBtnClick(position)
+                    onEditBtnClick(thingAdded)
                 }
                 R.id.delete -> {
-                    itemDelete(position)
+                    itemDelete(thingAdded)
                 }
             }
             false
@@ -149,37 +144,47 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
         })
     }
 
-    private fun onEditBtnClick(position: Int) {
+    private fun onEditBtnClick(mThingAdded: ThingAdded) {
         val dialogViewEditItem =
             LayoutInflater.from(activity).inflate(R.layout.item_edit_fragment_dialog, null)
+
         val mBuilder = AlertDialog.Builder(activity)
             .setView(dialogViewEditItem)
-        if (thingAddedAdapter.getData()[position].cacheUri.isNotEmpty()) {
-            thingAdded.cacheUri = thingAddedAdapter.getData()[position].cacheUri
+
+        if (mThingAdded.cacheUri.isNotEmpty()) {
+            thingAdded.cacheUri = mThingAdded.cacheUri
             dialogViewEditItem.imgEditItem.setImageBitmap(
-                CacheStore.instance(thingAddedAdapter.getData()[position].cacheUri)!!
-                    .getCacheFile(thingAddedAdapter.getData()[position].cacheUri)
+                CacheStore.instance(mThingAdded.cacheUri)!!
+                    .getCacheFile(mThingAdded.cacheUri)
             )
         } else {
             dialogViewEditItem.imgEditItem.setImageResource(R.drawable.ic_take_photo)
         }
-        dialogViewEditItem.editNameText.setText(thingAddedAdapter.getData()[position].thing)
-        dialogViewEditItem.editPlaceText.setText(thingAddedAdapter.getData()[position].place)
+
+        dialogViewEditItem.editNameText.setText(mThingAdded.thing)
+        dialogViewEditItem.editPlaceText.setText(mThingAdded.place)
+
         val myAlarmDialog = mBuilder.show()
+
         myAlarmDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         imgEditThing = dialogViewEditItem.imgEditItem
+
         dialogViewEditItem.imgEditItem.setOnClickListener {
             takePhotoBtnClick()
         }
         dialogViewEditItem.btnSaveChanges.setOnClickListener {
-            saveChangesBtnClick(dialogViewEditItem, myAlarmDialog, position)
+            saveChangesBtnClick(dialogViewEditItem, myAlarmDialog, mThingAdded)
         }
         dialogViewEditItem.imgCloseEditDialog.setOnClickListener {
             myAlarmDialog.dismiss()
         }
     }
 
-    private fun saveChangesBtnClick(dialogView: View, myAlarmDialog: AlertDialog, position: Int) {
+    private fun saveChangesBtnClick(
+        dialogView: View,
+        myAlarmDialog: AlertDialog,
+        mThingAdded: ThingAdded
+    ) {
         when {
             dialogView.editNameText.text.toString()
                 .isEmpty() &&
@@ -204,9 +209,9 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
                 val cacheUri = if (thingAdded.cacheUri.isNotBlank()) {
                     thingAdded.cacheUri
                 } else {
-                    thingAddedAdapter.getData()[position].cacheUri
+                    mThingAdded.cacheUri
                 }
-                val id = thingAddedAdapter.getData()[position].id
+                val id = mThingAdded.id
                 setError(dialogView.editPlaceInputLayout, null)
                 setError(dialogView.editNameInputLayout, null)
                 viewModel.updateThingInfo(thingName, thingPlace, cacheUri, id)
@@ -331,7 +336,7 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
         }
     }
 
-    private fun itemDelete(position: Int) {
+    private fun itemDelete(mThingAdded: ThingAdded) {
         val dialogClickListener: DialogInterface.OnClickListener =
             DialogInterface.OnClickListener { dialog, which ->
                 when (which) {
@@ -339,7 +344,7 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
                         val pref: SharedPreferences =
                             activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
                         viewModel.deleteItem(
-                            thingAddedAdapter.getData()[position],
+                            mThingAdded,
                             pref.getBoolean(SAVETRASH, true)
                         )
                     }
@@ -349,7 +354,7 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
         val builder = AlertDialog.Builder(context)
         builder.setMessage(getString(R.string.are_you_sure))
             .setOnDismissListener {
-                thingAddedAdapter.notifyItemChanged(position)
+                thingAddedAdapter.notifyDataSetChanged()
             }
             .setPositiveButton(getString(R.string.yes), dialogClickListener)
             .setNegativeButton(getString(R.string.no), dialogClickListener)
@@ -357,11 +362,11 @@ class ThingAddedFragment : Fragment(), SwipeHandler {
     }
 
     override fun onItemSwipedRight(position: Int) {
-        itemDelete(position)
+        itemDelete(thingAddedAdapter.getData()[position])
     }
 
     override fun onItemSwipedLeft(position: Int) {
-        onEditBtnClick(position)
+        onEditBtnClick(thingAddedAdapter.getData()[position])
         thingAddedAdapter.notifyItemChanged(position)
     }
 }

@@ -11,7 +11,8 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cosa.R
-import com.example.cosa.arch.helpers.OnItemClickListener
+import com.example.cosa.arch.common.OnItemClickListener
+import com.example.cosa.arch.notes.NotesViewModel
 import com.example.cosa.models.Notes
 import kotlinx.android.synthetic.main.item_notes.view.*
 import java.util.*
@@ -20,12 +21,12 @@ import kotlin.collections.ArrayList
 
 class NotesAdapter(
     private val notesDiffCallback: NotesDiffCallback,
-    private val context: Context
+    private val context: Context,
+    private val viewModel: NotesViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
     private var originalItems: MutableList<Notes> = ArrayList()
     private var filteredItems: MutableList<Notes> = ArrayList()
     private var lastPosition = -1
-    private lateinit var clickListener: OnItemClickListener
 
     fun getData(): MutableList<Notes> = originalItems
 
@@ -38,7 +39,7 @@ class NotesAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is NotesViewHolder -> {
-                holder.bind(filteredItems[position], clickListener)
+                holder.bind(filteredItems[position], viewModel)
                 setAnimation(holder.itemView, position)
             }
         }
@@ -94,24 +95,5 @@ class NotesAdapter(
             viewToAnimate.startAnimation(animation)
             lastPosition = position
         }
-    }
-
-    class NotesViewHolder constructor(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
-        private val noteText = itemView.txtNotePreview
-        fun bind(
-            notes: Notes,
-            listener: OnItemClickListener
-        ) {
-            noteText.text = notes.text
-            noteText.setOnClickListener {
-                listener.onItemClick(adapterPosition, it)
-            }
-        }
-    }
-
-    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
-        clickListener = itemClickListener
     }
 }

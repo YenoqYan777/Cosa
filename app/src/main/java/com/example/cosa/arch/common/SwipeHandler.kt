@@ -1,4 +1,4 @@
-package com.example.cosa.arch.helpers
+package com.example.cosa.arch.common
 
 interface SwipeHandler {
     fun onItemSwipedRight(position: Int)

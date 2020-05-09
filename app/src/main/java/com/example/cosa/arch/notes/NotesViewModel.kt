@@ -1,8 +1,10 @@
 package com.example.cosa.arch.notes
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.cosa.CosaApplication
 import com.example.cosa.extension.backgroundWork
 import com.example.cosa.models.DeletedNotes
@@ -19,11 +21,19 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         private var itemId: Long = 0
     }
 
+    private val mItemClicked = MutableLiveData<Pair<View, Notes>>()
+    val itemClicked: LiveData<Pair<View, Notes>> get() = mItemClicked
+
     private val compositeDisposable = CompositeDisposable()
     private val notesDao: NotesDao = CosaApplication.dataBase.notesDao()
     private val deletedNotesDao = CosaApplication.dataBase.deletedNotes()
 
     fun getNotes(): LiveData<MutableList<Notes>> = notesDao.getAll()
+
+
+    fun onItemClicked(view: View, notes: Notes) {
+        mItemClicked.value = Pair(view, notes)
+    }
 
     fun deleteItem(notes: Notes, boolean: Boolean) {
         if (boolean) {

@@ -1,8 +1,10 @@
 package com.example.cosa.arch.deletedItems.deletedNotes
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.cosa.CosaApplication
 import com.example.cosa.extension.backgroundWork
 import com.example.cosa.models.DeletedNotes
@@ -13,12 +15,18 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
 class DeletedNotesViewModel(application: Application) : AndroidViewModel(application) {
+    private val mItemClicked = MutableLiveData<Pair<View, DeletedNotes>>()
+    val itemClicked: LiveData<Pair<View, DeletedNotes>> get() = mItemClicked
 
     private val compositeDisposable = CompositeDisposable()
     private val notesDao: NotesDao = CosaApplication.dataBase.notesDao()
     private val deletedNotesDao = CosaApplication.dataBase.deletedNotes()
 
     fun getDeletedData(): LiveData<MutableList<DeletedNotes>> = deletedNotesDao.getAll()
+
+    fun onItemClickedDel(view: View, notes: DeletedNotes) {
+        mItemClicked.value = Pair(view, notes)
+    }
 
     fun completelyDeleteNote(notes: DeletedNotes) {
         Single.just(notes)

@@ -1,4 +1,4 @@
-package com.example.cosa.arch.helpers
+package com.example.cosa.helper
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -16,18 +16,27 @@ object LocalManager {
     const val SAVE_TRASH_KEY_NOTES: String = "savetrashfornotes"
 
     fun setLocale(context: Context): Context {
-        return setNewLocale(context, getLanguage(context))
+        return setNewLocale(
+            context,
+            getLanguage(context)
+        )
     }
 
     fun setNewLocale(context: Context, language: String): Context {
         persistLanguage(context, language)
-        return updateResources(context, language)
+        return updateResources(
+            context,
+            language
+        )
     }
 
     fun getLanguage(context: Context): String {
         val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(this.SHARED, Context.MODE_PRIVATE)
-        return sharedPreferences.getString(LANGUAGE_KEY, defaultLanguage())!!
+            context.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+        return sharedPreferences.getString(
+            LANGUAGE_KEY,
+            defaultLanguage()
+        )!!
     }
 
     private fun defaultLanguage(): String {
@@ -43,7 +52,7 @@ object LocalManager {
         language: String
     ) {
         val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(this.SHARED, Context.MODE_PRIVATE)
+            context.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
         sharedPreferences.edit().putString(LANGUAGE_KEY, language).apply()
     }
 

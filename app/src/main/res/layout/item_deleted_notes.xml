@@ -5,22 +5,21 @@
     <data>
 
         <variable
-            name="notes"
-            type="com.example.cosa.models.Notes" />
+            name="delNotes"
+            type="com.example.cosa.models.DeletedNotes" />
 
         <variable
-            name="viewModel"
-            type="com.example.cosa.arch.notes.NotesViewModel" />
+            name="delViewModel"
+            type="com.example.cosa.arch.deletedItems.deletedNotes.DeletedNotesViewModel" />
 
         <variable
-            name="item"
+            name="delItem"
             type="androidx.cardview.widget.CardView" />
 
     </data>
 
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvNoteItem"
+        android:id="@+id/cvDelNoteItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -28,9 +27,8 @@
         android:layout_marginRight="16dp"
         android:background="?attr/selectableItemBackground"
         android:elevation="4dp"
-        android:onClick="@{() -> viewModel.onItemClicked(item, notes)}"
+        android:onClick="@{() -> delViewModel.onItemClickedDel(delItem, delNotes)}"
         app:cardCornerRadius="8dp">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,7 +36,7 @@
             android:background="@color/darkItemBckg">
 
             <TextView
-                android:id="@+id/txtNotePreview"
+                android:id="@+id/txtDelNotePreview"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
@@ -49,7 +47,7 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@{notes.text}"
+                android:text="@{delNotes.text}"
                 android:textColor="@color/textColor"
                 android:textSize="23sp"
                 android:textStyle="bold"

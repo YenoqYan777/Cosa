@@ -13,28 +13,27 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.cosa.R
-import com.example.cosa.arch.helpers.LocalManager.SAVE_TRASH_KEY_NOTES
-import com.example.cosa.arch.helpers.LocalManager.SHARED
-import com.example.cosa.arch.helpers.OnItemClickListener
-import com.example.cosa.arch.helpers.SwipeHandler
-import com.example.cosa.arch.helpers.WrapContentLinearLayoutManager
+import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.arch.common.SwipeHandler
+import com.example.cosa.arch.common.WrapContentLinearLayoutManager
 import com.example.cosa.arch.notes.adapters.NotesAdapter
 import com.example.cosa.arch.notes.adapters.NotesDiffCallback
 import com.example.cosa.databinding.FragmentNotesBinding
+import com.example.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
+import com.example.cosa.helper.LocalManager.SHARED
+import com.example.cosa.models.Notes
 import kotlinx.android.synthetic.main.fragment_notes.*
 
-class NotesFragment : Fragment(), SwipeHandler {
+class NotesFragment : BaseFragment(), SwipeHandler {
 
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NotesViewModel
     private lateinit var notesAdapter: NotesAdapter
     private val addNotesFragment: AddNoteFragment =
         AddNoteFragment()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,10 +51,16 @@ class NotesFragment : Fragment(), SwipeHandler {
         binding.swipeHandler = this
         initViewModel()
         initRecyclerView()
-        recyclerItemClickListener()
         onAddBtnClick()
         performSearch()
-        recyclerItemClickListener()
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.itemClicked.observe(viewLifecycleOwner, Observer {
+            createMenuForRecyclerView(it.first, it.second)
+
+        })
     }
 
     private fun performSearch() {
@@ -100,35 +105,23 @@ class NotesFragment : Fragment(), SwipeHandler {
 
     private fun initRecyclerView() {
         val mLayoutManager = WrapContentLinearLayoutManager(context!!)
-        notesAdapter = NotesAdapter(NotesDiffCallback(), context!!)
+        notesAdapter = NotesAdapter(NotesDiffCallback(), context!!, viewModel)
         rvNoteList.apply {
             adapter = notesAdapter
             layoutManager = mLayoutManager
         }
     }
 
-    private fun recyclerItemClickListener() {
-        notesAdapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(position: Int, view: View) {
-                createMenuForRecyclerView(position, view)
-            }
-
-            override fun onWholeItemClick(position: Int, view: View) {
-
-            }
-        })
-    }
-
-    private fun createMenuForRecyclerView(position: Int, view: View) {
+    private fun createMenuForRecyclerView(view: View, notes: Notes) {
         val popup = PopupMenu(activity, view)
         popup.inflate(R.menu.itme_edit_view_menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.edit -> {
-                    onEditBtnClick(position)
+                    onEditBtnClick(notes)
                 }
                 R.id.delete -> {
-                    itemDelete(position)
+                    itemDelete(notes)
                 }
             }
             false
@@ -136,16 +129,16 @@ class NotesFragment : Fragment(), SwipeHandler {
         popup.show()
     }
 
-    private fun onEditBtnClick(position: Int) {
-        viewModel.setEditTextMessage(notesAdapter.getData()[position].text)
-        viewModel.setItemId(notesAdapter.getData()[position].id)
+    private fun onEditBtnClick(notes: Notes) {
+        viewModel.setEditTextMessage(notes.text)
+        viewModel.setItemId(notes.id)
         val transaction = activity!!.supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment, EditNoteFragment())
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
-    private fun itemDelete(position: Int) {
+    private fun itemDelete(notes: Notes) {
         val dialogClickListener: DialogInterface.OnClickListener =
             DialogInterface.OnClickListener { dialog, which ->
                 when (which) {
@@ -153,7 +146,7 @@ class NotesFragment : Fragment(), SwipeHandler {
                         val pref: SharedPreferences =
                             activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
                         viewModel.deleteItem(
-                            notesAdapter.getData()[position], pref.getBoolean(
+                            notes, pref.getBoolean(
                                 SAVE_TRASH_KEY_NOTES, true
                             )
                         )
@@ -164,7 +157,7 @@ class NotesFragment : Fragment(), SwipeHandler {
         val builder = AlertDialog.Builder(activity)
         builder.setMessage(getString(R.string.are_you_sure))
             .setOnDismissListener {
-                notesAdapter.notifyItemChanged(position)
+                notesAdapter.notifyDataSetChanged()
             }
             .setPositiveButton(getString(R.string.yes), dialogClickListener)
             .setNegativeButton(getString(R.string.no), dialogClickListener)
@@ -173,14 +166,12 @@ class NotesFragment : Fragment(), SwipeHandler {
 
 
     override fun onItemSwipedRight(position: Int) {
-        itemDelete(position)
+        itemDelete(notesAdapter.getData()[position])
     }
 
     override fun onItemSwipedLeft(position: Int) {
-        onEditBtnClick(position)
+        onEditBtnClick(notesAdapter.getData()[position])
         notesAdapter.notifyItemChanged(position)
     }
-
-
 }
 

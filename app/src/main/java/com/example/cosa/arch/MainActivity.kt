@@ -2,26 +2,23 @@ package com.example.cosa.arch
 
 import android.Manifest
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.cosa.R
 import com.example.cosa.arch.deletedItems.DeletedItemsFragment
-import com.example.cosa.arch.helpers.LocalManager
 import com.example.cosa.arch.notes.NotesFragment
 import com.example.cosa.arch.settings.SettingsFragment
 import com.example.cosa.arch.thingAdded.ThingAddedFragment
 import com.example.cosa.databinding.ActivityMainBinding
-import com.example.cosa.utils.ActivityUtils
-import java.util.*
+import com.example.cosa.extension.isStoragePermissionGranted
+import com.example.cosa.extension.pushFragment
+import com.example.cosa.helper.LocalManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         isStoragePermissionGranted()
-        ActivityUtils().pushFragment(
+        pushFragment(
             thingAddedFragment,
             this.supportFragmentManager,
             R.id.fragment,
@@ -51,33 +48,15 @@ class MainActivity : AppCompatActivity() {
         onBottomNavClickListener()
     }
 
-    private fun isStoragePermissionGranted(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED
-            ) {
-                true
-            } else {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    1
-                )
-                false
-            }
-        } else true
-    }
-
-
     private fun onBottomNavClickListener() {
-        var selectedFragment: Fragment? = null
+        lateinit var selectedFragment: Fragment
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             (when (item.itemId) {
                 R.id.home -> {
-                    binding.bottomNavigationView.menu.getItem(2).isChecked = true
+                    binding.bottomNavigationView.menu.getItem(0).isChecked = true
                     selectedFragment = thingAddedFragment
-                    ActivityUtils().pushFragment(
-                        selectedFragment!!,
+                    pushFragment(
+                        selectedFragment,
                         this.supportFragmentManager,
                         R.id.fragment,
                         true
@@ -87,8 +66,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.notes -> {
                     binding.bottomNavigationView.menu.getItem(1).isChecked = true
                     selectedFragment = notesFragment
-                    ActivityUtils().pushFragment(
-                        selectedFragment!!,
+                    pushFragment(
+                        selectedFragment,
                         this.supportFragmentManager,
                         R.id.fragment,
                         true
@@ -98,8 +77,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.recycle_bin -> {
                     binding.bottomNavigationView.menu.getItem(2).isChecked = true
                     selectedFragment = deletedItemsFragment
-                    ActivityUtils().pushFragment(
-                        selectedFragment!!,
+                    pushFragment(
+                        selectedFragment,
                         this.supportFragmentManager,
                         R.id.fragment,
                         true
@@ -107,10 +86,10 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.settings -> {
-                    binding.bottomNavigationView.menu.getItem(2).isChecked = true
+                    binding.bottomNavigationView.menu.getItem(3).isChecked = true
                     selectedFragment = settingsFragment
-                    ActivityUtils().pushFragment(
-                        selectedFragment!!,
+                    pushFragment(
+                        selectedFragment,
                         this.supportFragmentManager,
                         R.id.fragment,
                         true
@@ -122,11 +101,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getCurrentFragment(): Fragment? {
-        return this.supportFragmentManager.findFragmentById(R.id.fragment)
-    }
-
-    private fun setBarItemChecked(currentFragment: Fragment) {
+    fun setBarItemChecked(currentFragment: Fragment) {
         when (currentFragment) {
             is NotesFragment -> {
                 binding.bottomNavigationView.menu.getItem(1).isChecked = true
@@ -154,11 +129,5 @@ class MainActivity : AppCompatActivity() {
             overrideConfiguration.uiMode = uiMode
         }
         super.applyOverrideConfiguration(overrideConfiguration)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val currentFragment = getCurrentFragment()
-        setBarItemChecked(currentFragment!!)
     }
 }

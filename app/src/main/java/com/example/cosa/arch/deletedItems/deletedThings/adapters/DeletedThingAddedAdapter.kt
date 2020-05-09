@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cosa.R
-import com.example.cosa.arch.helpers.OnItemClickListener
+import com.example.cosa.arch.common.OnItemClickListener
+import com.example.cosa.arch.deletedItems.deletedThings.DeletedThingsViewModel
 import com.example.cosa.models.DeletedThingAdded
 import com.example.cosa.repository.CacheStore
 import kotlinx.android.synthetic.main.item_thingadded.view.*
@@ -25,33 +26,32 @@ import kotlin.collections.ArrayList
 
 class DeletedThingAddedAdapter(
     private val thingDiffCallBack: DeletedThingDiffCallBack,
-    private val context: Context
+    private val context: Context,
+    private val viewModel: DeletedThingsViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     private var originalItems: MutableList<DeletedThingAdded> = ArrayList()
     private var filteredItems: MutableList<DeletedThingAdded> = ArrayList()
     private var lastPosition = -1
-    private lateinit var clickListener: OnItemClickListener
 
     fun getData(): MutableList<DeletedThingAdded> = originalItems
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ThingAddedViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_thingadded, parent, false)
+        return DeletedThingAddedViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_deleted_thingadded, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is ThingAddedViewHolder -> {
-                holder.bind(filteredItems[position], clickListener)
+            is DeletedThingAddedViewHolder -> {
+                holder.bind(filteredItems[position], viewModel)
                 setAnimation(holder.itemView, position)
             }
         }
     }
 
     override fun getItemCount(): Int = filteredItems.size
-
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -107,43 +107,5 @@ class DeletedThingAddedAdapter(
             viewToAnimate.startAnimation(animation)
             lastPosition = position
         }
-    }
-
-    class ThingAddedViewHolder constructor(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
-        private val thingImage: ImageView = itemView.image_thing_added
-        private val thingTitle: TextView = itemView.title_thing_added
-        private val thingDescrp: TextView = itemView.descrp_thing_added
-        private val editIcon: ImageView = itemView.btnEdit
-        fun bind(
-            thingAdded: DeletedThingAdded,
-            listener: OnItemClickListener
-        ) {
-            thingTitle.text = thingAdded.thing
-            thingDescrp.text = thingAdded.place
-            Glide.with(itemView.context)
-                .load(
-                    CacheStore.instance(itemView.context.getExternalFilesDir("").toString())
-                        ?.getCacheFile(thingAdded.cacheUri)
-                )
-                .error(R.drawable.ic_launcher_background)
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(thingImage)
-            itemView.setOnClickListener {
-                listener.onWholeItemClick(adapterPosition, it)
-            }
-            itemView.setOnLongClickListener {
-                listener.onItemClick(adapterPosition,it)
-                return@setOnLongClickListener true
-            }
-            editIcon.setOnClickListener {
-                listener.onItemClick(adapterPosition, it)
-            }
-        }
-    }
-
-    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
-        clickListener = itemClickListener
     }
 }

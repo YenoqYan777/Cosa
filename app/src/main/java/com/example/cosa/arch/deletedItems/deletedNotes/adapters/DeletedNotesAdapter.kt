@@ -11,34 +11,37 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cosa.R
-import com.example.cosa.arch.helpers.OnItemClickListener
+import com.example.cosa.arch.common.OnItemClickListener
+import com.example.cosa.arch.deletedItems.deletedNotes.DeletedNotesViewModel
+import com.example.cosa.arch.notes.NotesViewModel
+import com.example.cosa.arch.notes.adapters.NotesViewHolder
 import com.example.cosa.models.DeletedNotes
-import kotlinx.android.synthetic.main.item_notes.view.*
+import com.example.cosa.models.Notes
 import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
 
 class DeletedNotesAdapter(
     private val notesDiffCallback: DeletedNotesDiffCallback,
-    private val context: Context
+    private val context: Context,
+    private val viewModel: DeletedNotesViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
     private var originalItems: MutableList<DeletedNotes> = ArrayList()
     private var filteredItems: MutableList<DeletedNotes> = ArrayList()
     private var lastPosition = -1
-    private lateinit var clickListener: OnItemClickListener
 
     fun getData(): MutableList<DeletedNotes> = originalItems
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return NotesViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_notes, parent, false)
+        return DeletedNotesViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_deleted_notes, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is NotesViewHolder -> {
-                holder.bind(filteredItems[position], clickListener)
+            is DeletedNotesViewHolder -> {
+                holder.bind(filteredItems[position], viewModel)
                 setAnimation(holder.itemView, position)
             }
         }
@@ -94,24 +97,5 @@ class DeletedNotesAdapter(
             viewToAnimate.startAnimation(animation)
             lastPosition = position
         }
-    }
-
-    class NotesViewHolder constructor(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
-        private val noteText = itemView.txtNotePreview
-        fun bind(
-            delNote: DeletedNotes,
-            listener: OnItemClickListener
-        ) {
-            noteText.text = delNote.text
-            noteText.setOnClickListener {
-                listener.onItemClick(adapterPosition, it)
-            }
-        }
-    }
-
-    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
-        clickListener = itemClickListener
     }
 }

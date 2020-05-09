@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
 import androidx.room.Room
-import com.example.cosa.arch.helpers.LocalManager
+import com.example.cosa.helper.LocalManager
 import com.example.cosa.repository.db.DB
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
