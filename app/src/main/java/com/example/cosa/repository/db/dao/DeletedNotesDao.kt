@@ -13,9 +13,6 @@ interface DeletedNotesDao {
     @Query("SELECT * FROM deleted_notes")
     fun getAll(): LiveData<MutableList<DeletedNotes>>
 
-    @Query("UPDATE deleted_notes SET text = :text WHERE id = :id")
-    fun updateNote(id: Long, text: String?): Int
-
     @Insert
     fun insertAll(vararg delNote: DeletedNotes)
 

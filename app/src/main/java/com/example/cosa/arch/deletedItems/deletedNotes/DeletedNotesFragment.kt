@@ -10,29 +10,28 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosa.R
+import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.arch.deletedItems.deletedNotes.adapters.DeletedNotesAdapter
 import com.example.cosa.arch.deletedItems.deletedNotes.adapters.DeletedNotesDiffCallback
-import com.example.cosa.arch.common.OnItemClickListener
 import com.example.cosa.arch.common.WrapContentLinearLayoutManager
 import com.example.cosa.databinding.FragmentDeletedNotesBinding
 import com.example.cosa.models.DeletedNotes
-import com.example.cosa.models.Notes
 import kotlinx.android.synthetic.main.fragment_deleted_notes.*
 
 class DeletedNotesFragment : Fragment() {
     private lateinit var binding: FragmentDeletedNotesBinding
     private lateinit var viewModel: DeletedNotesViewModel
-
     private lateinit var adapter: DeletedNotesAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_deleted_notes, container, false)
-
-
         return binding.root
     }
 
@@ -45,7 +44,7 @@ class DeletedNotesFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.itemClicked.observe(viewLifecycleOwner, Observer {
+        viewModel.itemClickedDelNotes.observe(viewLifecycleOwner, Observer {
             createMenuForRecyclerView(it.first, it.second)
         })
     }
@@ -53,10 +52,9 @@ class DeletedNotesFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(DeletedNotesViewModel::class.java)
         viewModel.getDeletedData().observe(viewLifecycleOwner, Observer {
-            activity!!.runOnUiThread {
+            activity?.runOnUiThread {
                 adapter.setOriginalItems(it)
             }
-
             if (it.isEmpty()) {
                 noNotesDeleted.visibility = View.VISIBLE
                 imgNoNotesDeleted.visibility = View.VISIBLE
@@ -68,11 +66,11 @@ class DeletedNotesFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        val mLayoutManager = WrapContentLinearLayoutManager(activity!!)
+        val mLayoutManager = WrapContentLinearLayoutManager(requireActivity())
         adapter =
             DeletedNotesAdapter(
                 DeletedNotesDiffCallback(),
-                context!!,
+                requireContext(),
                 viewModel
             )
         rvDeletedNotes.layoutManager = mLayoutManager
@@ -80,17 +78,12 @@ class DeletedNotesFragment : Fragment() {
     }
 
     private fun createMenuForRecyclerView(view: View, delNotes: DeletedNotes) {
-        val delNote = Notes()
-        delNote.id = delNotes.id
-        delNote.text = delNotes.text
-
-
-        val popup = PopupMenu(activity, view)
+        val popup = PopupMenu(requireContext(), view)
         popup.inflate(R.menu.deleted_itme_edit_menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.recovery -> {
-                    viewModel.recoverNote(delNote)
+                    viewModel.recoverNote(delNotes)
                     adapter.notifyDataSetChanged()
                 }
                 R.id.delete -> {
@@ -114,7 +107,4 @@ class DeletedNotesFragment : Fragment() {
             }
         })
     }
-
-
-
 }

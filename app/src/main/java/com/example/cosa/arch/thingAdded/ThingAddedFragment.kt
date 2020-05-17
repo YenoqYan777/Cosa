@@ -27,15 +27,16 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosa.R
 import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.arch.common.SwipeHandler
 import com.example.cosa.arch.thingAdded.adapters.ThingAddedAdapter
 import com.example.cosa.arch.thingAdded.adapters.ThingDiffCallBack
-import com.example.cosa.databinding.FragmentThingListBinding
+import com.example.cosa.databinding.FragmentThingAddedBinding
 import com.example.cosa.models.ThingAdded
 import com.example.cosa.repository.CacheStore
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.add_item_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_thing_list.*
+import kotlinx.android.synthetic.main.fragment_thing_added.*
 import kotlinx.android.synthetic.main.item_edit_fragment_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,12 +46,13 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
     private val SAVETRASH: String = "SAVETRASH"
     private val SHARED: String = "sharedPref"
 
-    private lateinit var binding: FragmentThingListBinding
+    private lateinit var binding: FragmentThingAddedBinding
     private lateinit var viewModel: ThingAddedViewModel
     private lateinit var thingAddedAdapter: ThingAddedAdapter
     private lateinit var imgThingUploaded: ImageView
     private lateinit var imgEditThing: ImageView
     private var thingAdded: ThingAdded = ThingAdded()
+
     private var isImageUploaded: Boolean = false
 
     companion object {
@@ -62,11 +64,13 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_thing_list, container, false
+            inflater, R.layout.fragment_thing_added, container, false
         )
 
         return binding.root
     }
+
+    override fun getViewModel(): BaseViewModel = viewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,8 +88,11 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
         })
 
         viewModel.wholeClicked.observe(viewLifecycleOwner, Observer {
-            viewModel.setThingForThingAdded(it)
-            context!!.startActivity(Intent(context, ThingDetailsActivity::class.java))
+            viewModel.navigate(
+                ThingAddedFragmentDirections.actionThingAddedFragmentToThingDetailsFragment(
+                    it.id
+                )
+            )
         })
     }
 
@@ -109,7 +116,7 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
 
     private fun initRecyclerView() {
         val mLayoutManager = LinearLayoutManager(activity)
-        thingAddedAdapter = ThingAddedAdapter(ThingDiffCallBack(), context!!, viewModel)
+        thingAddedAdapter = ThingAddedAdapter(ThingDiffCallBack(), requireContext(), viewModel)
         rv_thing_list.layoutManager = mLayoutManager
         rv_thing_list.adapter = thingAddedAdapter
     }
@@ -342,7 +349,7 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
                 when (which) {
                     DialogInterface.BUTTON_POSITIVE -> {
                         val pref: SharedPreferences =
-                            activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+                            requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
                         viewModel.deleteItem(
                             mThingAdded,
                             pref.getBoolean(SAVETRASH, true)

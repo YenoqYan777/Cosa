@@ -11,14 +11,17 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.cosa.R
 import com.example.cosa.arch.MainActivity
 import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.arch.deletedItems.adapters.PagerAdapter
 import com.example.cosa.databinding.FragmentDeletedItemsBinding
 import kotlinx.android.synthetic.main.fragment_deleted_items.*
 
 
-class DeletedItemsFragment : BaseFragment(){
+class DeletedItemsFragment : Fragment(){
     private lateinit var binding: FragmentDeletedItemsBinding
     private lateinit var adapter: PagerAdapter
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

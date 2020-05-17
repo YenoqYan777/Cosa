@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.cosa.R
+import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.databinding.FragmentEditNoteBinding
+import com.example.cosa.extension.hideKeyboard
 
-class EditNoteFragment : Fragment() {
+class EditNoteFragment : BaseFragment() {
     private lateinit var binding: FragmentEditNoteBinding
     private lateinit var viewModel: NotesViewModel
-
+    private lateinit var navController: NavController
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +32,12 @@ class EditNoteFragment : Fragment() {
         return binding.root
     }
 
+    override fun getViewModel(): BaseViewModel = viewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+    }
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
@@ -36,11 +46,10 @@ class EditNoteFragment : Fragment() {
     private fun initToolbar() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar!!.title =
-            getString(R.string.edit_your_note);
         binding.toolbarEditNote.setNavigationIcon(R.drawable.ic_back)
         binding.toolbarEditNote.setNavigationOnClickListener {
-            (activity as AppCompatActivity).onBackPressed()
+            hideKeyboard(requireActivity())
+            viewModel.navigateBack()
         }
     }
 
@@ -58,21 +67,14 @@ class EditNoteFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-
     private fun onAcceptBtnClicked() {
         if (!binding.etEditNoteContent.text.isNullOrEmpty()) {
             viewModel.updateNoteInfo(
                 binding.etEditNoteContent.text.toString(),
                 viewModel.getItemId()
             )
-            fragmentManager!!.beginTransaction()
-                .replace(R.id.fragment, NotesFragment())
-                .commit()
-
-        } else {
-            fragmentManager!!.beginTransaction()
-                .replace(R.id.fragment, NotesFragment())
-                .commit()
         }
+        hideKeyboard(requireActivity())
+        viewModel.navigateBack()
     }
 }

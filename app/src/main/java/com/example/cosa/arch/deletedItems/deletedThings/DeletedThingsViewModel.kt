@@ -17,16 +17,16 @@ import io.reactivex.rxkotlin.addTo
 
 class DeletedThingsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val mItemClicked = MutableLiveData<Pair<View, DeletedThingAdded>>()
-    val itemClicked: LiveData<Pair<View, DeletedThingAdded>> get() = mItemClicked
+    private val mItemClickedDelThing = MutableLiveData<Pair<View, DeletedThingAdded>>()
+    val itemClickedDelThing: LiveData<Pair<View, DeletedThingAdded>> get() = mItemClickedDelThing
 
     private val compositeDisposable = CompositeDisposable()
     private val thingAddedDao: ThingAddedDao = CosaApplication.dataBase.thingAddedDao()
     private val deletedThingsDao: DeletedThingsDao = CosaApplication.dataBase.deletedThingAddedDao()
     fun getDeletedThingAdded(): LiveData<MutableList<DeletedThingAdded>> = deletedThingsDao.getAll()
 
-    fun onItemClicked(view: View, thingAdded: DeletedThingAdded){
-        mItemClicked.value = Pair(view, thingAdded)
+    fun onItemClickedDelThing(view: View, thingAdded: DeletedThingAdded){
+        mItemClickedDelThing.value = Pair(view, thingAdded)
     }
 
     fun completelyDeleteThing(thingAdded: DeletedThingAdded) {
@@ -39,12 +39,7 @@ class DeletedThingsViewModel(application: Application) : AndroidViewModel(applic
             .addTo(compositeDisposable)
     }
 
-    fun recoverItem(thingAdded: ThingAdded) {
-        val delThingAdded = DeletedThingAdded()
-        delThingAdded.id = thingAdded.id
-        delThingAdded.cacheUri = thingAdded.cacheUri
-        delThingAdded.place = thingAdded.place
-        delThingAdded.thing = thingAdded.thing
+    fun recoverItem(thingAdded: DeletedThingAdded) {
         val thing = ThingAdded()
         thing.cacheUri = thingAdded.cacheUri
         thing.place = thingAdded.place
@@ -53,7 +48,7 @@ class DeletedThingsViewModel(application: Application) : AndroidViewModel(applic
             .backgroundWork()
             .doOnSuccess {
                 thingAddedDao.insert(thing)
-                deletedThingsDao.deleteItem(delThingAdded)
+                deletedThingsDao.deleteItem(thingAdded)
             }
             .subscribe()
             .addTo(compositeDisposable)

@@ -20,7 +20,7 @@ class DeletedNotesViewHolder constructor(
         viewModel: DeletedNotesViewModel
     ) {
         binding.delNotes = deletedNotes
-        binding.delViewModel = viewModel
+        binding.delNotesViewModel = viewModel
         binding.delItem = binding.root.cvDelNoteItem
 
     }

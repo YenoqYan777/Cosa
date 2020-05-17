@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="deletedThingAdded"
             type="com.example.cosa.models.DeletedThingAdded" />
@@ -31,7 +30,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="?attr/selectableItemBackground"
-        android:onClick="@{() -> viewModel.onItemClicked(wholeItemDel,deletedThingAdded)}"
+        android:onClick="@{() -> viewModel.onItemClickedDelThing(wholeItemDel,deletedThingAdded)}"
         app:viewModelDel="@{viewModel}"
         app:thingAddedDel="@{deletedThingAdded}"
         app:cardCornerRadius="10dp"
@@ -76,7 +75,7 @@
                 android:fontFamily="@font/montserrat"
                 android:maxLines="1"
                 android:text="@{deletedThingAdded.thing}"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/btn_edit_del"
@@ -92,7 +91,7 @@
                 android:fontFamily="@font/montserrat"
                 android:maxLines="2"
                 android:text="@{deletedThingAdded.place}"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/textColor"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/title_deleted_thing_added"
@@ -104,7 +103,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@drawable/ic_menu"
-                android:onClick="@{() -> viewModel.onItemClicked(editDelButton,deletedThingAdded)}"
+                android:onClick="@{() -> viewModel.onItemClickedDelThing(editDelButton,deletedThingAdded)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/title_deleted_thing_added"
                 tools:ignore="ContentDescription" />

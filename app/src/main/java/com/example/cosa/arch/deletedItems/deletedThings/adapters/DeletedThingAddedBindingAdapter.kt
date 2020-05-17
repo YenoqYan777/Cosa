@@ -7,9 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.cosa.R
 import com.example.cosa.arch.deletedItems.deletedThings.DeletedThingsViewModel
-import com.example.cosa.arch.thingAdded.ThingAddedViewModel
 import com.example.cosa.models.DeletedThingAdded
-import com.example.cosa.models.ThingAdded
 import com.example.cosa.repository.CacheStore
 
 object DeletedThingAddedBindingAdapter {
@@ -30,7 +28,7 @@ object DeletedThingAddedBindingAdapter {
     @BindingAdapter(value = ["bind:viewModelDel", "bind:thingAddedDel"], requireAll = false)
     fun longClick(view: CardView, viewModel: DeletedThingsViewModel, thingAdded: DeletedThingAdded) {
         view.setOnLongClickListener(View.OnLongClickListener {
-            viewModel.onItemClicked(view, thingAdded)
+            viewModel.onItemClickedDelThing(view, thingAdded)
             return@OnLongClickListener true
         })
     }

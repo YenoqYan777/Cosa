@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.cosa.R
 import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.arch.common.SwipeHandler
 import com.example.cosa.arch.common.WrapContentLinearLayoutManager
 import com.example.cosa.arch.notes.adapters.NotesAdapter
@@ -32,8 +33,6 @@ class NotesFragment : BaseFragment(), SwipeHandler {
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NotesViewModel
     private lateinit var notesAdapter: NotesAdapter
-    private val addNotesFragment: AddNoteFragment =
-        AddNoteFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +44,9 @@ class NotesFragment : BaseFragment(), SwipeHandler {
 
         return binding.root
     }
+
+    override fun getViewModel(): BaseViewModel = viewModel
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +61,6 @@ class NotesFragment : BaseFragment(), SwipeHandler {
     private fun observe() {
         viewModel.itemClicked.observe(viewLifecycleOwner, Observer {
             createMenuForRecyclerView(it.first, it.second)
-
         })
     }
 
@@ -78,10 +79,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
 
     private fun onAddBtnClick() {
         binding.btnAddNote.setOnClickListener {
-            val transaction = activity!!.supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment, addNotesFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            viewModel.navigate(NotesFragmentDirections.actionNotesFragmentToAddNoteFragment())
         }
     }
 
@@ -104,8 +102,8 @@ class NotesFragment : BaseFragment(), SwipeHandler {
     }
 
     private fun initRecyclerView() {
-        val mLayoutManager = WrapContentLinearLayoutManager(context!!)
-        notesAdapter = NotesAdapter(NotesDiffCallback(), context!!, viewModel)
+        val mLayoutManager = WrapContentLinearLayoutManager(requireContext())
+        notesAdapter = NotesAdapter(NotesDiffCallback(), requireContext(), viewModel)
         rvNoteList.apply {
             adapter = notesAdapter
             layoutManager = mLayoutManager
@@ -132,10 +130,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
     private fun onEditBtnClick(notes: Notes) {
         viewModel.setEditTextMessage(notes.text)
         viewModel.setItemId(notes.id)
-        val transaction = activity!!.supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment, EditNoteFragment())
-        transaction.addToBackStack(null)
-        transaction.commit()
+        viewModel.navigate(NotesFragmentDirections.actionNotesFragmentToEditNoteFragment())
     }
 
     private fun itemDelete(notes: Notes) {
@@ -144,7 +139,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
                 when (which) {
                     DialogInterface.BUTTON_POSITIVE -> {
                         val pref: SharedPreferences =
-                            activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+                            requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
                         viewModel.deleteItem(
                             notes, pref.getBoolean(
                                 SAVE_TRASH_KEY_NOTES, true

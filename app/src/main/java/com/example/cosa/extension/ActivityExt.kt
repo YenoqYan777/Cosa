@@ -1,11 +1,12 @@
 package com.example.cosa.extension
 
 import android.app.Activity
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.cosa.R
 
 fun Activity.pushFragment(
     fragment: Fragment, fragmentManager: FragmentManager,
@@ -21,4 +22,14 @@ fun Activity.pushFragment(
     }
 
     transaction.commit()
+}
+
+fun hideKeyboard(activity: Activity) {
+    val imm: InputMethodManager =
+        activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    var view = activity.currentFocus
+    if (view == null) {
+        view = View(activity)
+    }
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
 }

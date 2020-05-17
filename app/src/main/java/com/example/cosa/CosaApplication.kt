@@ -3,6 +3,7 @@ package com.example.cosa
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import androidx.multidex.MultiDex
 import androidx.room.Room
 import com.example.cosa.helper.LocalManager
 import com.example.cosa.repository.db.DB
@@ -17,6 +18,7 @@ class CosaApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        MultiDex.install(this)
         MobileAds.initialize(this)
          if (BuildConfig.DEBUG){
              MobileAds.setRequestConfiguration(

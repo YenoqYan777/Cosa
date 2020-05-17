@@ -12,12 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosa.R
+import com.example.cosa.arch.common.WrapContentLinearLayoutManager
 import com.example.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingAddedAdapter
 import com.example.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingDiffCallBack
-import com.example.cosa.arch.common.OnItemClickListener
 import com.example.cosa.databinding.FragmentDeletedThingsBinding
 import com.example.cosa.models.DeletedThingAdded
-import com.example.cosa.models.ThingAdded
 import kotlinx.android.synthetic.main.fragment_deleted_things.*
 
 class DeletedThingsFragment : Fragment() {
@@ -31,13 +30,11 @@ class DeletedThingsFragment : Fragment() {
     ): View? {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_deleted_things, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initViewModel()
         initRecyclerView()
         addSearchViewTextChanges()
@@ -45,7 +42,7 @@ class DeletedThingsFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.itemClicked.observe(viewLifecycleOwner, Observer {
+        viewModel.itemClickedDelThing.observe(viewLifecycleOwner, Observer {
             createMenuForRecyclerView(it.first, it.second)
         })
     }
@@ -68,11 +65,11 @@ class DeletedThingsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        val mLayoutManager = LinearLayoutManager(activity)
+        val mLayoutManager = WrapContentLinearLayoutManager(requireContext())
         adapter =
             DeletedThingAddedAdapter(
                 DeletedThingDiffCallBack(),
-                context!!,
+                requireContext(),
                 viewModel
             )
         rvDeletedThings.layoutManager = mLayoutManager
@@ -80,18 +77,12 @@ class DeletedThingsFragment : Fragment() {
     }
 
     private fun createMenuForRecyclerView(view: View, deletedThingAdded: DeletedThingAdded) {
-        val delThing = ThingAdded()
-        delThing.id = deletedThingAdded.id
-        delThing.place = deletedThingAdded.place
-        delThing.cacheUri = deletedThingAdded.cacheUri
-        delThing.thing = deletedThingAdded.thing
-
         val popup = PopupMenu(activity, view)
         popup.inflate(R.menu.deleted_itme_edit_menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.recovery -> {
-                    viewModel.recoverItem(delThing)
+                    viewModel.recoverItem(deletedThingAdded)
                     adapter.notifyDataSetChanged()
                 }
                 R.id.delete -> {

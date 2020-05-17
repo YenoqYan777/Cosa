@@ -12,17 +12,15 @@ import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.cosa.R
-import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.databinding.FragmentSettingsBinding
 import com.example.cosa.helper.LocalManager
 import com.example.cosa.helper.LocalManager.LANGUAGE_KEY
 import com.example.cosa.helper.LocalManager.SAVE_TRASH_KEY
 import com.example.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
 import com.example.cosa.helper.LocalManager.SHARED
-import com.example.cosa.databinding.FragmentSettingsBinding
-import kotlinx.android.synthetic.main.fragment_deleted_notes.*
 
 
-class SettingsFragment : BaseFragment() {
+class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var pref: SharedPreferences
 
@@ -33,7 +31,7 @@ class SettingsFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_settings, container, false
         )
-        pref = activity!!.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+        pref = requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
         binding.backUpThings.isChecked = pref.getBoolean(SAVE_TRASH_KEY, true)
         binding.backUpNotes.isChecked = pref.getBoolean(SAVE_TRASH_KEY_NOTES, true)
         return binding.root
@@ -64,7 +62,7 @@ class SettingsFragment : BaseFragment() {
         val langList =
             listOf(getString(R.string.am), getString(R.string.ru), getString(R.string.en))
         val adapter: ArrayAdapter<String> =
-            ArrayAdapter(activity!!, R.layout.simple_list_item_single_choice_1, langList)
+            ArrayAdapter(requireActivity(), R.layout.simple_list_item_single_choice_1, langList)
 
         binding.langListSettings.adapter = adapter
         binding.langListSettings.choiceMode = ListView.CHOICE_MODE_SINGLE
@@ -82,15 +80,15 @@ class SettingsFragment : BaseFragment() {
         binding.langListSettings.setOnItemClickListener { parent, view, position, id ->
             when (position) {
                 0 -> {
-                    LocalManager.setNewLocale(activity!!, "am")
+                    LocalManager.setNewLocale(requireActivity(), "am")
                     refreshActivity()
                 }
                 1 -> {
-                    LocalManager.setNewLocale(activity!!, "ru")
+                    LocalManager.setNewLocale(requireActivity(), "ru")
                     refreshActivity()
                 }
                 2 -> {
-                    LocalManager.setNewLocale(activity!!, "en")
+                    LocalManager.setNewLocale(requireActivity(), "en")
                     refreshActivity()
                 }
             }
@@ -98,15 +96,15 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun refreshActivity() {
-        val intent = activity!!.intent
+        val intent = requireActivity().intent
         intent.addFlags(
             Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                     or Intent.FLAG_ACTIVITY_NO_ANIMATION
         )
-        activity!!.overridePendingTransition(0, 0)
-        activity!!.finish()
+        requireActivity().overridePendingTransition(0, 0)
+        requireActivity().finish()
 
-        activity!!.overridePendingTransition(0, 0)
+        requireActivity().overridePendingTransition(0, 0)
         startActivity(intent)
     }
 }

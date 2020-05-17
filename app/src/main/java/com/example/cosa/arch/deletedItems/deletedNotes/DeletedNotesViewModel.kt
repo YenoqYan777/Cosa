@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cosa.CosaApplication
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.extension.backgroundWork
 import com.example.cosa.models.DeletedNotes
 import com.example.cosa.models.Notes
@@ -15,8 +16,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
 class DeletedNotesViewModel(application: Application) : AndroidViewModel(application) {
-    private val mItemClicked = MutableLiveData<Pair<View, DeletedNotes>>()
-    val itemClicked: LiveData<Pair<View, DeletedNotes>> get() = mItemClicked
+    private val mItemClickedDelNotes= MutableLiveData<Pair<View, DeletedNotes>>()
+    val itemClickedDelNotes: LiveData<Pair<View, DeletedNotes>> get() = mItemClickedDelNotes
 
     private val compositeDisposable = CompositeDisposable()
     private val notesDao: NotesDao = CosaApplication.dataBase.notesDao()
@@ -24,8 +25,8 @@ class DeletedNotesViewModel(application: Application) : AndroidViewModel(applica
 
     fun getDeletedData(): LiveData<MutableList<DeletedNotes>> = deletedNotesDao.getAll()
 
-    fun onItemClickedDel(view: View, notes: DeletedNotes) {
-        mItemClicked.value = Pair(view, notes)
+    fun onItemClickedDelNotes(view: View, notes: DeletedNotes) {
+        mItemClickedDelNotes.value = Pair(view, notes)
     }
 
     fun completelyDeleteNote(notes: DeletedNotes) {
@@ -38,23 +39,19 @@ class DeletedNotesViewModel(application: Application) : AndroidViewModel(applica
             .addTo(compositeDisposable)
     }
 
-    fun recoverNote(notes: Notes) {
-        val delNote = DeletedNotes()
-        delNote.id = notes.id
-        delNote.text = notes.text
-
+    fun recoverNote(notes: DeletedNotes) {
         val noteToRecover = Notes()
         noteToRecover.text = notes.text
+
         Single.just(notes)
             .backgroundWork()
             .doOnSuccess {
                 notesDao.insert(noteToRecover)
-                deletedNotesDao.deleteItem(delNote)
+                deletedNotesDao.deleteItem(notes)
             }
             .subscribe()
             .addTo(compositeDisposable)
     }
-
 
     override fun onCleared() {
         compositeDisposable.dispose()

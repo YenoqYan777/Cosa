@@ -4,13 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.cosa.arch.thingDetail.ThingDetailViewModel" />
+
+        <variable
+            name="thingToShow"
+            type="com.example.cosa.models.ThingAdded" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mainBckg"
-        tools:context=".arch.thingAdded.ThingDetailsActivity">
+        android:background="@color/mainBckg">
 
         <ImageView
             android:id="@+id/btnBackDetail"
@@ -18,10 +26,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:onClick="@{() -> viewModel.navigateBack()}"
             android:padding="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back" />
+            app:srcCompat="@drawable/ic_back"
+            tools:ignore="ContentDescription" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
@@ -49,7 +59,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0"
+                    app:loadImageDetail="@{thingToShow.cacheUri}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -81,8 +92,8 @@
                     android:layout_marginTop="48dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/bottom_line"
-                    android:text="@string/things"
                     android:paddingBottom="8dp"
+                    android:text="@{thingToShow.thing}"
                     android:textAlignment="center"
                     android:textColor="@color/lightGray"
                     android:textSize="30sp"
@@ -97,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@string/are_you_sure"
+                    android:text="@{thingToShow.place}"
                     android:textColor="@color/textColor"
                     android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"

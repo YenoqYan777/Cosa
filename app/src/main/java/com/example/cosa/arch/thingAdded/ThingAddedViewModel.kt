@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cosa.CosaApplication
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.extension.backgroundWork
 import com.example.cosa.models.DeletedThingAdded
 import com.example.cosa.models.ThingAdded
@@ -15,11 +16,7 @@ import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
-class ThingAddedViewModel(application: Application) : AndroidViewModel(application) {
-
-    companion object {
-        private val thingForDetailPage: ThingAdded = ThingAdded()
-    }
+class ThingAddedViewModel(application: Application) : BaseViewModel(application) {
 
     private val mDotClicked = MutableLiveData<Pair<View, ThingAdded>>()
     val dotClicked: LiveData<Pair<View, ThingAdded>> get() = mDotClicked
@@ -31,8 +28,6 @@ class ThingAddedViewModel(application: Application) : AndroidViewModel(applicati
     private val thingAddedDao: ThingAddedDao = CosaApplication.dataBase.thingAddedDao()
     private val deletedThingsDao: DeletedThingsDao = CosaApplication.dataBase.deletedThingAddedDao()
     fun getThingAdded(): LiveData<MutableList<ThingAdded>> = thingAddedDao.getAll()
-    fun getDeletedThingAdded(): LiveData<MutableList<DeletedThingAdded>> = deletedThingsDao.getAll()
-    fun getThingForDetail(): ThingAdded = thingForDetailPage
 
 
     fun onDotsClicked(view: View, thingAdded: ThingAdded) {
@@ -76,12 +71,6 @@ class ThingAddedViewModel(application: Application) : AndroidViewModel(applicati
                 .subscribe()
                 .addTo(compositeDisposable)
         }
-    }
-
-    fun setThingForThingAdded(thingAdded: ThingAdded) {
-        thingForDetailPage.cacheUri = thingAdded.cacheUri
-        thingForDetailPage.place = thingAdded.place
-        thingForDetailPage.thing = thingAdded.thing
     }
 
     fun updateThingInfo(name: String, place: String, cacheUri: String, id: Long) {

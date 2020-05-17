@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,7 +10,7 @@
             type="com.example.cosa.models.DeletedNotes" />
 
         <variable
-            name="delViewModel"
+            name="delNotesViewModel"
             type="com.example.cosa.arch.deletedItems.deletedNotes.DeletedNotesViewModel" />
 
         <variable
@@ -27,7 +28,7 @@
         android:layout_marginRight="16dp"
         android:background="?attr/selectableItemBackground"
         android:elevation="4dp"
-        android:onClick="@{() -> delViewModel.onItemClickedDel(delItem, delNotes)}"
+        android:onClick="@{() -> delNotesViewModel.onItemClickedDelNotes(delItem, delNotes)}"
         app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

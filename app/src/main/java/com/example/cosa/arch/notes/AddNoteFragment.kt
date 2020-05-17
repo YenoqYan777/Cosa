@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.cosa.R
+import com.example.cosa.arch.base.BaseFragment
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.databinding.FragmentAddNoteBinding
+import com.example.cosa.extension.hideKeyboard
 import com.example.cosa.models.Notes
 
 
-class AddNoteFragment : Fragment() {
+class AddNoteFragment : BaseFragment() {
     private lateinit var binding: FragmentAddNoteBinding
     private lateinit var viewModel: NotesViewModel
 
@@ -29,6 +31,8 @@ class AddNoteFragment : Fragment() {
         return binding.root
     }
 
+    override fun getViewModel(): BaseViewModel = viewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
@@ -37,11 +41,10 @@ class AddNoteFragment : Fragment() {
     private fun initToolbar() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar!!.title =
-            getString(R.string.create_new_note);
-        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+
         binding.toolbar.setNavigationOnClickListener {
-            (activity as AppCompatActivity).onBackPressed()
+            hideKeyboard(requireActivity())
+            viewModel.navigateBack()
         }
     }
 
@@ -62,14 +65,13 @@ class AddNoteFragment : Fragment() {
     private fun onAcceptBtnClicked() {
         if (!binding.etNoteContent.text.isNullOrEmpty()) {
             viewModel.insertNote(Notes(text = binding.etNoteContent.text.toString()))
-            fragmentManager!!.beginTransaction()
-                .replace(R.id.fragment, NotesFragment())
-                .commit()
-
+            hideKeyboard(requireActivity())
+            viewModel.navigateBack()
         } else {
-            fragmentManager!!.beginTransaction()
-                .replace(R.id.fragment, NotesFragment())
-                .commit()
+            hideKeyboard(requireActivity())
+            viewModel.navigateBack()
         }
     }
+
+
 }

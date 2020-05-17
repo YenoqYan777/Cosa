@@ -22,6 +22,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/darkerBckg"
             android:elevation="4dp"
+            app:title="@string/create_new_note"
+            app:navigationIcon="@drawable/ic_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

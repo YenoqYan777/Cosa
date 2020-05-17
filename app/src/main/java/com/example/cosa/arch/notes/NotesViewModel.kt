@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cosa.CosaApplication
+import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.extension.backgroundWork
 import com.example.cosa.models.DeletedNotes
 import com.example.cosa.models.Notes
@@ -14,7 +15,7 @@ import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
-class NotesViewModel(application: Application) : AndroidViewModel(application) {
+class NotesViewModel(application: Application) : BaseViewModel(application) {
 
     companion object {
         private var editTextMessage: String = ""
