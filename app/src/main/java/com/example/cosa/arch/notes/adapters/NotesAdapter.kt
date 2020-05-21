@@ -47,21 +47,6 @@ class NotesAdapter(
 
     override fun getItemCount(): Int = filteredItems.size
 
-    fun setOriginalItems(originalList: MutableList<Notes>) {
-        originalItems.clear()
-        originalItems.addAll(originalList)
-        originalItems.sortWith(Comparator { o1, o2 -> o1.id.compareTo(o2.id) })
-        submitList(originalList)
-    }
-
-    private fun submitList(notesList: MutableList<Notes>) {
-        notesDiffCallback.setItems(filteredItems, notesList)
-        val result = DiffUtil.calculateDiff(notesDiffCallback)
-        filteredItems.clear()
-        filteredItems.addAll(notesList)
-        result.dispatchUpdatesTo(this)
-    }
-
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
@@ -86,6 +71,21 @@ class NotesAdapter(
                 submitList(results!!.values as MutableList<Notes>)
             }
         }
+    }
+
+    fun setOriginalItems(originalList: MutableList<Notes>) {
+        originalItems.clear()
+        originalItems.addAll(originalList)
+        originalItems.sortWith(Comparator { o1, o2 -> o1.id.compareTo(o2.id) })
+        submitList(originalList)
+    }
+
+    private fun submitList(notesList: MutableList<Notes>) {
+        notesDiffCallback.setItems(filteredItems, notesList)
+        val result = DiffUtil.calculateDiff(notesDiffCallback)
+        filteredItems.clear()
+        filteredItems.addAll(notesList)
+        result.dispatchUpdatesTo(this)
     }
 
     private fun setAnimation(viewToAnimate: View, position: Int) {

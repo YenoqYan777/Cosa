@@ -1,4 +1,4 @@
-package com.example.cosa.arch.thingDetail
+package com.example.cosa.arch.thingsDetails
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.example.cosa.R
 import com.example.cosa.repository.CacheStore
 
-object ThingAddedDetailBindingAdapter {
+object ThingsDetailBindingAdapter {
     @JvmStatic
     @BindingAdapter("loadImageDetail")
     fun loadImage(view: ImageView, cacheUri: String) {

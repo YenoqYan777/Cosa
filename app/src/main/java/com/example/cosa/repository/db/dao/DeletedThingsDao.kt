@@ -5,30 +5,29 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.cosa.models.DeletedThingAdded
-import com.example.cosa.models.ThingAdded
+import com.example.cosa.models.DeletedThings
 
 @Dao
 interface DeletedThingsDao {
-    @Query("SELECT * FROM deleted_thing_added")
-    fun getAll(): LiveData<MutableList<DeletedThingAdded>>
+    @Query("SELECT * FROM deleted_things")
+    fun getAll(): LiveData<MutableList<DeletedThings>>
 
-    @Query("UPDATE deleted_thing_added SET thing = :name WHERE id = :id")
+    @Query("UPDATE deleted_things SET thing = :name WHERE id = :id")
     fun updateDeletedThingName(id: Long, name: String?): Int
 
-    @Query("UPDATE deleted_thing_added SET place = :place WHERE id = :id")
+    @Query("UPDATE deleted_things SET place = :place WHERE id = :id")
     fun updateDeletedThingPlace(id: Long, place: String?): Int
 
-    @Query("UPDATE deleted_thing_added SET cacheUri = :cacheUri WHERE id = :id")
+    @Query("UPDATE deleted_things SET cacheUri = :cacheUri WHERE id = :id")
     fun updateDeletedThingImage(id: Long, cacheUri: String?): Int
 
     @Insert
-    fun insertAll(vararg deletedThingAdded: DeletedThingAdded)
+    fun insertAll(vararg deletedThings: DeletedThings)
 
     @Insert
-    fun insert(deletedThingAdded: DeletedThingAdded)
+    fun insert(deletedThings: DeletedThings)
 
     @Delete
-    fun deleteItem(deletedThingAdded: DeletedThingAdded)
+    fun deleteItem(deletedThings: DeletedThings)
 
 }

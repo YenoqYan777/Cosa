@@ -6,45 +6,49 @@
 
     <data>
         <variable
-            name="deletedThingAdded"
-            type="com.example.cosa.models.DeletedThingAdded" />
+            name="things"
+            type="com.example.cosa.models.Things" />
 
         <variable
             name="viewModel"
-            type="com.example.cosa.arch.deletedItems.deletedThings.DeletedThingsViewModel" />
+            type="com.example.cosa.arch.things.ThingsViewModel" />
 
         <variable
-            name="editDelButton"
-            type="android.widget.ImageView" />
-
-        <variable
-            name="wholeItemDel"
+            name="wholeItem"
             type="androidx.cardview.widget.CardView" />
+
+        <variable
+            name="imgThingAdded"
+            type="android.widget.ImageView" />
+        <variable
+            name="editButton"
+            type="android.widget.ImageView" />
 
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvDelThingAdded"
+        android:id="@+id/cvThingAdded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:longClickable="true"
+        app:viewModel="@{viewModel}"
+        app:thingAdded="@{things}"
         android:background="?attr/selectableItemBackground"
-        android:onClick="@{() -> viewModel.onItemClickedDelThing(wholeItemDel,deletedThingAdded)}"
-        app:viewModelDel="@{viewModel}"
-        app:thingAddedDel="@{deletedThingAdded}"
+        android:onClick="@{() -> viewModel.onWholeItemClicked(things)}"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true"
-        >
+        app:cardUseCompatPadding="true">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/darkItemBckg">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardViewDel"
+                android:id="@+id/cardView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 app:cardCornerRadius="10dp"
@@ -55,18 +59,18 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/image_deleted_thing_added"
+                    android:id="@+id/image_thing_added"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:padding="0dp"
                     android:scaleType="centerCrop"
-                    app:loadImageDel="@{deletedThingAdded.cacheUri}"
+                    app:loadImage="@{things.cacheUri}"
                     tools:ignore="ContentDescription" />
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/title_deleted_thing_added"
+                android:id="@+id/title_thing_added"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -74,38 +78,38 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/montserrat"
                 android:maxLines="1"
-                android:text="@{deletedThingAdded.thing}"
-                android:textColor="@color/textColor"
+                android:text="@{things.thing}"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/btn_edit_del"
-                app:layout_constraintStart_toEndOf="@+id/cardViewDel"
+                app:layout_constraintEnd_toStartOf="@+id/btn_edit"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/descrp_deleted_thing_added"
+                android:id="@+id/descrp_thing_added"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/montserrat"
                 android:maxLines="2"
-                android:text="@{deletedThingAdded.place}"
-                android:textColor="@color/textColor"
+                android:text="@{things.place}"
+                android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/title_deleted_thing_added"
-                app:layout_constraintStart_toStartOf="@+id/title_deleted_thing_added"
-                app:layout_constraintTop_toBottomOf="@+id/title_deleted_thing_added" />
+                app:layout_constraintEnd_toEndOf="@+id/title_thing_added"
+                app:layout_constraintStart_toStartOf="@+id/title_thing_added"
+                app:layout_constraintTop_toBottomOf="@+id/title_thing_added" />
 
             <ImageView
-                android:id="@+id/btn_edit_del"
+                android:id="@+id/btn_edit"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@drawable/ic_menu"
-                android:onClick="@{() -> viewModel.onItemClickedDelThing(editDelButton,deletedThingAdded)}"
+                android:onClick="@{() -> viewModel.onDotsClicked(editButton,things)}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/title_deleted_thing_added"
+                app:layout_constraintTop_toTopOf="@+id/title_thing_added"
                 tools:ignore="ContentDescription" />
 
 

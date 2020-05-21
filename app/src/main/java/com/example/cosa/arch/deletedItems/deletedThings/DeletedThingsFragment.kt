@@ -10,19 +10,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosa.R
 import com.example.cosa.arch.common.WrapContentLinearLayoutManager
-import com.example.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingAddedAdapter
-import com.example.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingDiffCallBack
+import com.example.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingsAdapter
+import com.example.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingsDiffCallBack
 import com.example.cosa.databinding.FragmentDeletedThingsBinding
-import com.example.cosa.models.DeletedThingAdded
+import com.example.cosa.models.DeletedThings
 import kotlinx.android.synthetic.main.fragment_deleted_things.*
 
 class DeletedThingsFragment : Fragment() {
     private lateinit var binding: FragmentDeletedThingsBinding
     private lateinit var viewModel: DeletedThingsViewModel
-    private lateinit var adapter: DeletedThingAddedAdapter
+    private lateinit var adapter: DeletedThingsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,8 +66,8 @@ class DeletedThingsFragment : Fragment() {
     private fun initRecyclerView() {
         val mLayoutManager = WrapContentLinearLayoutManager(requireContext())
         adapter =
-            DeletedThingAddedAdapter(
-                DeletedThingDiffCallBack(),
+            DeletedThingsAdapter(
+                DeletedThingsDiffCallBack(),
                 requireContext(),
                 viewModel
             )
@@ -76,17 +75,17 @@ class DeletedThingsFragment : Fragment() {
         rvDeletedThings.adapter = adapter
     }
 
-    private fun createMenuForRecyclerView(view: View, deletedThingAdded: DeletedThingAdded) {
+    private fun createMenuForRecyclerView(view: View, deletedThings: DeletedThings) {
         val popup = PopupMenu(activity, view)
         popup.inflate(R.menu.deleted_itme_edit_menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.recovery -> {
-                    viewModel.recoverItem(deletedThingAdded)
+                    viewModel.recoverItem(deletedThings)
                     adapter.notifyDataSetChanged()
                 }
                 R.id.delete -> {
-                    viewModel.completelyDeleteThing(deletedThingAdded)
+                    viewModel.completelyDeleteThing(deletedThings)
                 }
             }
             false

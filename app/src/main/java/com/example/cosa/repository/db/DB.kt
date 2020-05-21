@@ -6,16 +6,16 @@ import com.example.cosa.models.*
 import com.example.cosa.repository.db.dao.*
 
 @Database(
-    entities = [(ThingAdded::class),
+    entities = [(Things::class),
         (Notes::class),
         (Settings::class),
-        (DeletedThingAdded::class),
+        (DeletedThings::class),
         (DeletedNotes::class)],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 abstract class DB : RoomDatabase() {
-    abstract fun thingAddedDao(): ThingAddedDao
+    abstract fun thingAddedDao(): ThingsDao
     abstract fun notesDao(): NotesDao
     abstract fun settingsDao(): SettingsDao
     abstract fun deletedThingAddedDao(): DeletedThingsDao

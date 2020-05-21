@@ -1,4 +1,4 @@
-package com.example.cosa.arch.thingAdded.adapters
+package com.example.cosa.arch.deletedItems.deletedThings.adapters
 
 import android.view.View
 import android.widget.ImageView
@@ -6,13 +6,13 @@ import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.cosa.R
-import com.example.cosa.arch.thingAdded.ThingAddedViewModel
-import com.example.cosa.models.ThingAdded
+import com.example.cosa.arch.deletedItems.deletedThings.DeletedThingsViewModel
+import com.example.cosa.models.DeletedThings
 import com.example.cosa.repository.CacheStore
 
-object ThingAddedBindingAdapter {
+object DeletedThingsBindingAdapter {
     @JvmStatic
-    @BindingAdapter("loadImage")
+    @BindingAdapter("loadImageDel")
     fun loadImage(view: ImageView, cacheUri: String) {
         Glide.with(view.context)
             .load(
@@ -25,10 +25,10 @@ object ThingAddedBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["bind:viewModel", "bind:thingAdded"], requireAll = false)
-    fun longClick(view: CardView, viewModel: ThingAddedViewModel, thingAdded: ThingAdded) {
+    @BindingAdapter(value = ["bind:viewModelDel", "bind:thingAddedDel"], requireAll = false)
+    fun longClick(view: CardView, viewModel: DeletedThingsViewModel, things: DeletedThings) {
         view.setOnLongClickListener(View.OnLongClickListener {
-            viewModel.onDotsClicked(view, thingAdded)
+            viewModel.onItemClickedDelThing(view, things)
             return@OnLongClickListener true
         })
     }

@@ -8,7 +8,7 @@ class DeletedNotesDiffCallback : DiffUtil.Callback() {
     private lateinit var oldList: MutableList<DeletedNotes>
     private lateinit var newList: MutableList<DeletedNotes>
 
-    fun setItems(newList: MutableList<DeletedNotes>, oldList: MutableList<DeletedNotes>) {
+    fun setItems(oldList: MutableList<DeletedNotes>, newList: MutableList<DeletedNotes>) {
         this.oldList = oldList
         this.newList = newList
     }

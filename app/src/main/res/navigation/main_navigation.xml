@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/thingAddedFragment">
+    app:startDestination="@id/thingsFragment">
 
     <fragment
-        android:id="@+id/thingAddedFragment"
-        android:name="com.example.cosa.arch.thingAdded.ThingAddedFragment"
-        tools:layout="@layout/fragment_thing_added">
+        android:id="@+id/thingsFragment"
+        android:name="com.example.cosa.arch.things.ThingsFragment"
+        tools:layout="@layout/fragment_things">
         <action
-            android:id="@+id/action_thingAddedFragment_to_thingDetailsFragment"
-            app:destination="@id/thingDetailsFragment"
+            android:id="@+id/action_thingsFragment_to_thingsDetailFragment"
+            app:destination="@id/thingsDetailsFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
@@ -24,12 +24,14 @@
             android:id="@+id/action_notesFragment_to_editNoteFragment"
             app:destination="@id/editNoteFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_pop_exit_anim" />
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/notesFragment" />
         <action
             android:id="@+id/action_notesFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/notesFragment" />
     </fragment>
 
     <fragment
@@ -54,11 +56,11 @@
         tools:layout="@layout/fragment_edit_note" />
 
     <fragment
-        android:id="@+id/thingDetailsFragment"
-        android:name="com.example.cosa.arch.thingDetail.ThingDetailsFragment"
-        tools:layout="@layout/fragment_thing_details">
+        android:id="@+id/thingsDetailsFragment"
+        android:name="com.example.cosa.arch.thingsDetails.ThingsDetailsFragment"
+        tools:layout="@layout/fragment_things_details">
         <argument
-            android:name="thingAddedId"
+            android:name="thingsId"
             app:argType="long"
             android:defaultValue="-1L" />
     </fragment>

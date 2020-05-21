@@ -1,4 +1,4 @@
-package com.example.cosa.arch.thingAdded
+package com.example.cosa.arch.things
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -29,29 +29,31 @@ import com.example.cosa.R
 import com.example.cosa.arch.base.BaseFragment
 import com.example.cosa.arch.base.BaseViewModel
 import com.example.cosa.arch.common.SwipeHandler
-import com.example.cosa.arch.thingAdded.adapters.ThingAddedAdapter
-import com.example.cosa.arch.thingAdded.adapters.ThingDiffCallBack
-import com.example.cosa.databinding.FragmentThingAddedBinding
-import com.example.cosa.models.ThingAdded
+import com.example.cosa.arch.things.adapters.ThingsAdapter
+import com.example.cosa.arch.things.adapters.ThingsDiffCallBack
+import com.example.cosa.databinding.FragmentThingsBinding
+import com.example.cosa.helper.LocalManager
+import com.example.cosa.models.Things
 import com.example.cosa.repository.CacheStore
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.add_item_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_thing_added.*
+import kotlinx.android.synthetic.main.dialog_are_you_sure.view.*
+import kotlinx.android.synthetic.main.fragment_things.*
 import kotlinx.android.synthetic.main.item_edit_fragment_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
-class ThingAddedFragment : BaseFragment(), SwipeHandler {
+class ThingsFragment : BaseFragment(), SwipeHandler {
     private val SAVETRASH: String = "SAVETRASH"
     private val SHARED: String = "sharedPref"
 
-    private lateinit var binding: FragmentThingAddedBinding
-    private lateinit var viewModel: ThingAddedViewModel
-    private lateinit var thingAddedAdapter: ThingAddedAdapter
+    private lateinit var binding: FragmentThingsBinding
+    private lateinit var viewModel: ThingsViewModel
+    private lateinit var thingsAdapter: ThingsAdapter
     private lateinit var imgThingUploaded: ImageView
     private lateinit var imgEditThing: ImageView
-    private var thingAdded: ThingAdded = ThingAdded()
+    private var things: Things = Things()
 
     private var isImageUploaded: Boolean = false
 
@@ -64,7 +66,7 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_thing_added, container, false
+            inflater, R.layout.fragment_things, container, false
         )
 
         return binding.root
@@ -89,7 +91,7 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
 
         viewModel.wholeClicked.observe(viewLifecycleOwner, Observer {
             viewModel.navigate(
-                ThingAddedFragmentDirections.actionThingAddedFragmentToThingDetailsFragment(
+                ThingsFragmentDirections.actionThingsFragmentToThingsDetailFragment(
                     it.id
                 )
             )
@@ -97,10 +99,10 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ThingAddedViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ThingsViewModel::class.java)
         viewModel.getThingAdded().observe(viewLifecycleOwner, Observer {
             activity?.runOnUiThread {
-                thingAddedAdapter.setOriginalItems(it)
+                thingsAdapter.setOriginalItems(it)
             }
             if (it.isEmpty()) {
                 noItemYetText.visibility = VISIBLE
@@ -116,21 +118,21 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
 
     private fun initRecyclerView() {
         val mLayoutManager = LinearLayoutManager(activity)
-        thingAddedAdapter = ThingAddedAdapter(ThingDiffCallBack(), requireContext(), viewModel)
+        thingsAdapter = ThingsAdapter(ThingsDiffCallBack(), requireContext(), viewModel)
         rv_thing_list.layoutManager = mLayoutManager
-        rv_thing_list.adapter = thingAddedAdapter
+        rv_thing_list.adapter = thingsAdapter
     }
 
-    private fun createMenuForRecyclerView(view: View, thingAdded: ThingAdded) {
+    private fun createMenuForRecyclerView(view: View, things: Things) {
         val popup = PopupMenu(activity, view)
         popup.inflate(R.menu.itme_edit_menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.edit -> {
-                    onEditBtnClick(thingAdded)
+                    onEditBtnClick(things)
                 }
                 R.id.delete -> {
-                    itemDelete(thingAdded)
+                    itemDelete(things)
                 }
             }
             false
@@ -145,31 +147,31 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                thingAddedAdapter.filter.filter(newText)
+                thingsAdapter.filter.filter(newText)
                 return false
             }
         })
     }
 
-    private fun onEditBtnClick(mThingAdded: ThingAdded) {
+    private fun onEditBtnClick(mThings: Things) {
         val dialogViewEditItem =
             LayoutInflater.from(activity).inflate(R.layout.item_edit_fragment_dialog, null)
 
         val mBuilder = AlertDialog.Builder(activity)
             .setView(dialogViewEditItem)
 
-        if (mThingAdded.cacheUri.isNotEmpty()) {
-            thingAdded.cacheUri = mThingAdded.cacheUri
+        if (mThings.cacheUri.isNotEmpty()) {
+            things.cacheUri = mThings.cacheUri
             dialogViewEditItem.imgEditItem.setImageBitmap(
-                CacheStore.instance(mThingAdded.cacheUri)!!
-                    .getCacheFile(mThingAdded.cacheUri)
+                CacheStore.instance(mThings.cacheUri)!!
+                    .getCacheFile(mThings.cacheUri)
             )
         } else {
             dialogViewEditItem.imgEditItem.setImageResource(R.drawable.ic_take_photo)
         }
 
-        dialogViewEditItem.editNameText.setText(mThingAdded.thing)
-        dialogViewEditItem.editPlaceText.setText(mThingAdded.place)
+        dialogViewEditItem.editNameText.setText(mThings.thing)
+        dialogViewEditItem.editPlaceText.setText(mThings.place)
 
         val myAlarmDialog = mBuilder.show()
 
@@ -180,7 +182,7 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
             takePhotoBtnClick()
         }
         dialogViewEditItem.btnSaveChanges.setOnClickListener {
-            saveChangesBtnClick(dialogViewEditItem, myAlarmDialog, mThingAdded)
+            saveChangesBtnClick(dialogViewEditItem, myAlarmDialog, mThings)
         }
         dialogViewEditItem.imgCloseEditDialog.setOnClickListener {
             myAlarmDialog.dismiss()
@@ -190,7 +192,7 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
     private fun saveChangesBtnClick(
         dialogView: View,
         myAlarmDialog: AlertDialog,
-        mThingAdded: ThingAdded
+        mThings: Things
     ) {
         when {
             dialogView.editNameText.text.toString()
@@ -213,12 +215,12 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
             else -> {
                 val thingName = dialogView.editNameText.text.toString()
                 val thingPlace = dialogView.editPlaceText.text.toString()
-                val cacheUri = if (thingAdded.cacheUri.isNotBlank()) {
-                    thingAdded.cacheUri
+                val cacheUri = if (things.cacheUri.isNotBlank()) {
+                    things.cacheUri
                 } else {
-                    mThingAdded.cacheUri
+                    mThings.cacheUri
                 }
-                val id = mThingAdded.id
+                val id = mThings.id
                 setError(dialogView.editPlaceInputLayout, null)
                 setError(dialogView.editNameInputLayout, null)
                 viewModel.updateThingInfo(thingName, thingPlace, cacheUri, id)
@@ -230,7 +232,7 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
     private fun onAddBtnClick() {
         btnAddNote.setOnClickListener {
             isImageUploaded = false
-            thingAdded.cacheUri = ""
+            things.cacheUri = ""
             val dialogView = LayoutInflater.from(activity).inflate(R.layout.add_item_dialog, null)
             val mBuilder = AlertDialog.Builder(activity)
                 .setView(dialogView)
@@ -300,10 +302,10 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
                 setError(dialogView.placeInputLayout, null)
                 setError(dialogView.nameInputLayout, null)
                 myAlarmDialog.dismiss()
-                thingAdded.place = dialogView.placeText.text.toString()
-                thingAdded.thing = dialogView.nameText.text.toString()
-                viewModel.insertThingAdded(thingAdded)
-                rv_thing_list.smoothScrollToPosition(thingAddedAdapter.itemCount);
+                things.place = dialogView.placeText.text.toString()
+                things.thing = dialogView.nameText.text.toString()
+                viewModel.insertThingAdded(things)
+                rv_thing_list.smoothScrollToPosition(thingsAdapter.itemCount);
             }
         }
     }
@@ -339,41 +341,42 @@ class ThingAddedFragment : BaseFragment(), SwipeHandler {
 
             CacheStore.instance(context?.getExternalFilesDir("").toString())!!
                 .saveCacheFile(generatedCacheUri, photo!!)
-            thingAdded.cacheUri = generatedCacheUri
+            things.cacheUri = generatedCacheUri
         }
     }
 
-    private fun itemDelete(mThingAdded: ThingAdded) {
-        val dialogClickListener: DialogInterface.OnClickListener =
-            DialogInterface.OnClickListener { dialog, which ->
-                when (which) {
-                    DialogInterface.BUTTON_POSITIVE -> {
-                        val pref: SharedPreferences =
-                            requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-                        viewModel.deleteItem(
-                            mThingAdded,
-                            pref.getBoolean(SAVETRASH, true)
-                        )
-                    }
-                }
-            }
+    private fun itemDelete(mThings: Things) {
+        val dialogViewDelItem =
+            LayoutInflater.from(activity).inflate(R.layout.dialog_are_you_sure, null)
 
-        val builder = AlertDialog.Builder(context)
-        builder.setMessage(getString(R.string.are_you_sure))
-            .setOnDismissListener {
-                thingAddedAdapter.notifyDataSetChanged()
-            }
-            .setPositiveButton(getString(R.string.yes), dialogClickListener)
-            .setNegativeButton(getString(R.string.no), dialogClickListener)
-            .show()
+        val mBuilder = AlertDialog.Builder(activity)
+            .setView(dialogViewDelItem)
+        val myAlarmDialog = mBuilder.show()
+
+        myAlarmDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialogViewDelItem.choice_yes.setOnClickListener {
+            val pref: SharedPreferences =
+                requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+            viewModel.deleteItem(
+                mThings,
+                pref.getBoolean(SAVETRASH, true)
+            )
+            myAlarmDialog.dismiss()
+        }
+
+        dialogViewDelItem.choice_no.setOnClickListener {
+            myAlarmDialog.dismiss()
+            thingsAdapter.notifyDataSetChanged()
+        }
     }
 
     override fun onItemSwipedRight(position: Int) {
-        itemDelete(thingAddedAdapter.getData()[position])
+        itemDelete(thingsAdapter.getData()[position])
     }
 
     override fun onItemSwipedLeft(position: Int) {
-        onEditBtnClick(thingAddedAdapter.getData()[position])
-        thingAddedAdapter.notifyItemChanged(position)
+        onEditBtnClick(thingsAdapter.getData()[position])
+        thingsAdapter.notifyItemChanged(position)
     }
 }

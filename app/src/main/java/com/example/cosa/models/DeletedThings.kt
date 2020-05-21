@@ -4,8 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "thing_added")
-data class ThingAdded @JvmOverloads constructor(
+@Entity(tableName = "deleted_things")
+data class DeletedThings @JvmOverloads constructor(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
 

@@ -1,4 +1,4 @@
-package com.example.cosa.arch.deletedItems.deletedThings.adapters
+package com.example.cosa.arch.things.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,43 +8,36 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.cosa.R
-import com.example.cosa.arch.common.OnItemClickListener
-import com.example.cosa.arch.deletedItems.deletedThings.DeletedThingsViewModel
-import com.example.cosa.models.DeletedThingAdded
-import com.example.cosa.repository.CacheStore
-import kotlinx.android.synthetic.main.item_thingadded.view.*
+import com.example.cosa.arch.things.ThingsViewModel
+import com.example.cosa.models.Things
 import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
 
 
-class DeletedThingAddedAdapter(
-    private val thingDiffCallBack: DeletedThingDiffCallBack,
+class ThingsAdapter(
+    private val thingsDiffCallBack: ThingsDiffCallBack,
     private val context: Context,
-    private val viewModel: DeletedThingsViewModel
+    private val viewModel: ThingsViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
-
-    private var originalItems: MutableList<DeletedThingAdded> = ArrayList()
-    private var filteredItems: MutableList<DeletedThingAdded> = ArrayList()
+    private var originalItems: MutableList<Things> = ArrayList()
+    private var filteredItems: MutableList<Things> = ArrayList()
     private var lastPosition = -1
 
-    fun getData(): MutableList<DeletedThingAdded> = originalItems
+    fun getData(): MutableList<Things> = originalItems
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return DeletedThingAddedViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_deleted_thingadded, parent, false)
+        return ThingsViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_things, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is DeletedThingAddedViewHolder -> {
+            is ThingsViewHolder -> {
                 holder.bind(filteredItems[position], viewModel)
                 setAnimation(holder.itemView, position)
             }
@@ -55,8 +48,8 @@ class DeletedThingAddedAdapter(
 
     override fun getFilter(): Filter {
         return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val list = ArrayList<DeletedThingAdded>()
+            override fun performFiltering(constraint: CharSequence?): FilterResults? {
+                val list = ArrayList<Things>()
                 if (constraint.isNullOrEmpty()) {
                     list.addAll(originalItems)
                 } else {
@@ -80,21 +73,21 @@ class DeletedThingAddedAdapter(
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                submitList(results!!.values as MutableList<DeletedThingAdded>)
+                submitList(results!!.values as MutableList<Things>)
             }
         }
     }
 
-    fun setOriginalItems(originalList: MutableList<DeletedThingAdded>) {
+    fun setOriginalItems(originalList: MutableList<Things>) {
         originalItems.clear()
         originalItems.addAll(originalList)
         originalItems.sortWith(Comparator { o1, o2 -> o1.id.compareTo(o2.id) })
         submitList(originalList)
     }
 
-    private fun submitList(thingList: MutableList<DeletedThingAdded>) {
-        thingDiffCallBack.setItems(filteredItems, thingList)
-        val result = DiffUtil.calculateDiff(thingDiffCallBack)
+    private fun submitList(thingList: MutableList<Things>) {
+        thingsDiffCallBack.setItems(filteredItems, thingList)
+        val result = DiffUtil.calculateDiff(thingsDiffCallBack)
         filteredItems.clear()
         filteredItems.addAll(thingList)
         result.dispatchUpdatesTo(this)

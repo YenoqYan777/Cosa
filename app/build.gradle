@@ -95,9 +95,9 @@ dependencies {
     //Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
 
     //Material
     implementation "com.google.android.material:material:${versions.material_version}"
-
 
 }

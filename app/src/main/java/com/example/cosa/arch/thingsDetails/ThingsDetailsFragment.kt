@@ -1,4 +1,4 @@
-package com.example.cosa.arch.thingDetail
+package com.example.cosa.arch.thingsDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,17 +11,16 @@ import androidx.navigation.fragment.navArgs
 import com.example.cosa.R
 import com.example.cosa.arch.base.BaseFragment
 import com.example.cosa.arch.base.BaseViewModel
-import com.example.cosa.databinding.FragmentThingDetailsBinding
+import com.example.cosa.databinding.FragmentThingsDetailsBinding
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
-import kotlinx.coroutines.Delay
 
-class ThingDetailsFragment : BaseFragment() {
-    private lateinit var binding: FragmentThingDetailsBinding
-    private lateinit var viewModel: ThingDetailViewModel
+class ThingsDetailsFragment : BaseFragment() {
+    private lateinit var binding: FragmentThingsDetailsBinding
+    private lateinit var viewModel: ThingsDetailViewModel
     private lateinit var mInterstitialAd: InterstitialAd
-    private val args : ThingDetailsFragmentArgs by navArgs()
+    private val args : ThingsDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +28,7 @@ class ThingDetailsFragment : BaseFragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_thing_details, container, false
+            inflater, R.layout.fragment_things_details, container, false
         )
         initViewModel()
         return binding.root
@@ -59,9 +58,9 @@ class ThingDetailsFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ThingDetailViewModel::class.java)
-        viewModel.getThingDetail(args.thingAddedId)
-        viewModel.thingAdded.observe(viewLifecycleOwner, Observer {
+        viewModel = ViewModelProviders.of(this).get(ThingsDetailViewModel::class.java)
+        viewModel.getThingDetail(args.thingsId)
+        viewModel.things.observe(viewLifecycleOwner, Observer {
             binding.viewModel = viewModel
             binding.thingToShow = it
         })

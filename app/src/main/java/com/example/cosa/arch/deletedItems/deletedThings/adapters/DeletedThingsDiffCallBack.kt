@@ -1,13 +1,13 @@
-package com.example.cosa.arch.thingAdded.adapters
+package com.example.cosa.arch.deletedItems.deletedThings.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.cosa.models.ThingAdded
+import com.example.cosa.models.DeletedThings
 
-class ThingDiffCallBack : DiffUtil.Callback() {
-    private lateinit var oldList: MutableList<ThingAdded>
-    private lateinit var newList: MutableList<ThingAdded>
+class DeletedThingsDiffCallBack : DiffUtil.Callback() {
+    private lateinit var oldList: MutableList<DeletedThings>
+    private lateinit var newList: MutableList<DeletedThings>
 
-    fun setItems(oldList: MutableList<ThingAdded>, newList: MutableList<ThingAdded>) {
+    fun setItems(oldList: MutableList<DeletedThings>, newList: MutableList<DeletedThings>) {
         this.oldList = oldList
         this.newList = newList
     }

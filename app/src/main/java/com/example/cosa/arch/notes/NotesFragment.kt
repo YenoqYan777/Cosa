@@ -2,8 +2,9 @@ package com.example.cosa.arch.notes
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import com.example.cosa.databinding.FragmentNotesBinding
 import com.example.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
 import com.example.cosa.helper.LocalManager.SHARED
 import com.example.cosa.models.Notes
+import kotlinx.android.synthetic.main.dialog_are_you_sure.view.*
 import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : BaseFragment(), SwipeHandler {
@@ -133,30 +135,33 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         viewModel.navigate(NotesFragmentDirections.actionNotesFragmentToEditNoteFragment())
     }
 
-    private fun itemDelete(notes: Notes) {
-        val dialogClickListener: DialogInterface.OnClickListener =
-            DialogInterface.OnClickListener { dialog, which ->
-                when (which) {
-                    DialogInterface.BUTTON_POSITIVE -> {
-                        val pref: SharedPreferences =
-                            requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-                        viewModel.deleteItem(
-                            notes, pref.getBoolean(
-                                SAVE_TRASH_KEY_NOTES, true
-                            )
-                        )
-                    }
-                }
-            }
 
-        val builder = AlertDialog.Builder(activity)
-        builder.setMessage(getString(R.string.are_you_sure))
-            .setOnDismissListener {
-                notesAdapter.notifyDataSetChanged()
-            }
-            .setPositiveButton(getString(R.string.yes), dialogClickListener)
-            .setNegativeButton(getString(R.string.no), dialogClickListener)
-            .show()
+    private fun itemDelete(notes: Notes) {
+        val dialogViewDelItem =
+            LayoutInflater.from(activity).inflate(R.layout.dialog_are_you_sure, null)
+
+        val mBuilder = AlertDialog.Builder(activity)
+            .setView(dialogViewDelItem)
+        val myAlarmDialog = mBuilder.show()
+
+        myAlarmDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialogViewDelItem.choice_yes.setOnClickListener {
+            val pref: SharedPreferences =
+                requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
+            viewModel.deleteItem(
+                notes, pref.getBoolean(
+                    SAVE_TRASH_KEY_NOTES, true
+                )
+            )
+            myAlarmDialog.dismiss()
+        }
+
+        dialogViewDelItem.choice_no.setOnClickListener {
+            myAlarmDialog.dismiss()
+            notesAdapter.notifyDataSetChanged()
+        }
+
     }
 
 

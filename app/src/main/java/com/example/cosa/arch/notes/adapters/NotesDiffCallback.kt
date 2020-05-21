@@ -2,12 +2,13 @@ package com.example.cosa.arch.notes.adapters
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.cosa.models.Notes
+import com.example.cosa.models.Things
 
 class NotesDiffCallback : DiffUtil.Callback() {
     private lateinit var oldList: MutableList<Notes>
     private lateinit var newList: MutableList<Notes>
 
-    fun setItems(newList: MutableList<Notes>, oldList: MutableList<Notes>) {
+    fun setItems(oldList: MutableList<Notes>, newList: MutableList<Notes>) {
         this.oldList = oldList
         this.newList = newList
     }

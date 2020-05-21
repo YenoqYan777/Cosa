@@ -1,4 +1,4 @@
-package com.example.cosa.arch.thingAdded.adapters
+package com.example.cosa.arch.deletedItems.deletedThings.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,34 +11,34 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cosa.R
-import com.example.cosa.arch.thingAdded.ThingAddedViewModel
-import com.example.cosa.models.ThingAdded
+import com.example.cosa.arch.deletedItems.deletedThings.DeletedThingsViewModel
+import com.example.cosa.models.DeletedThings
 import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
 
 
-class ThingAddedAdapter(
-    private val thingDiffCallBack: ThingDiffCallBack,
+class DeletedThingsAdapter(
+    private val thingsDiffCallBack: DeletedThingsDiffCallBack,
     private val context: Context,
-    private val viewModel: ThingAddedViewModel
+    private val viewModel: DeletedThingsViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
-    private var originalItems: MutableList<ThingAdded> = ArrayList()
-    private var filteredItems: MutableList<ThingAdded> = ArrayList()
+    private var originalItems: MutableList<DeletedThings> = ArrayList()
+    private var filteredItems: MutableList<DeletedThings> = ArrayList()
     private var lastPosition = -1
 
-    fun getData(): MutableList<ThingAdded> = originalItems
+    fun getData(): MutableList<DeletedThings> = originalItems
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ThingAddedViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_thingadded, parent, false)
+        return DeletedThingsViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_deleted_things, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is ThingAddedViewHolder -> {
+            is DeletedThingsViewHolder -> {
                 holder.bind(filteredItems[position], viewModel)
                 setAnimation(holder.itemView, position)
             }
@@ -49,8 +49,8 @@ class ThingAddedAdapter(
 
     override fun getFilter(): Filter {
         return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults? {
-                val list = ArrayList<ThingAdded>()
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val list = ArrayList<DeletedThings>()
                 if (constraint.isNullOrEmpty()) {
                     list.addAll(originalItems)
                 } else {
@@ -74,21 +74,21 @@ class ThingAddedAdapter(
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                submitList(results!!.values as MutableList<ThingAdded>)
+                submitList(results!!.values as MutableList<DeletedThings>)
             }
         }
     }
 
-    fun setOriginalItems(originalList: MutableList<ThingAdded>) {
+    fun setOriginalItems(originalList: MutableList<DeletedThings>) {
         originalItems.clear()
         originalItems.addAll(originalList)
         originalItems.sortWith(Comparator { o1, o2 -> o1.id.compareTo(o2.id) })
         submitList(originalList)
     }
 
-    private fun submitList(thingList: MutableList<ThingAdded>) {
-        thingDiffCallBack.setItems(filteredItems, thingList)
-        val result = DiffUtil.calculateDiff(thingDiffCallBack)
+    private fun submitList(thingList: MutableList<DeletedThings>) {
+        thingsDiffCallBack.setItems(filteredItems, thingList)
+        val result = DiffUtil.calculateDiff(thingsDiffCallBack)
         filteredItems.clear()
         filteredItems.addAll(thingList)
         result.dispatchUpdatesTo(this)
