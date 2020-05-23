@@ -35,7 +35,7 @@
         android:longClickable="true"
         app:viewModel="@{viewModel}"
         app:thingAdded="@{things}"
-        android:background="?attr/selectableItemBackground"
+        android:foreground="?attr/selectableItemBackground"
         android:onClick="@{() -> viewModel.onWholeItemClicked(things)}"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"

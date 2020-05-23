@@ -2,7 +2,8 @@
 <resources>
     <color name="mainBckg">#303540</color>
     <color name="darkerBckg">#262A32</color>
-    <color name="darkItemBckg">#3F6973</color>
+<!--    <color name="darkItemBckg">#3F6973</color>-->
+    <color name="darkItemBckg">#136A75</color>
     <color name="gray">#f59524</color>
     <color name="lightGray">#efede1</color>
     <color name="hintcolor">#4a4a4a</color>
@@ -12,7 +13,5 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-
     <color name="app_red">#F44336</color>
-
 </resources>

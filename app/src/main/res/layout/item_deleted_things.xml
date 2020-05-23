@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:background="?attr/selectableItemBackground"
+        android:foreground="?attr/selectableItemBackground"
         android:onClick="@{() -> viewModel.onItemClickedDelThing(wholeItemDel,deletedThingAdded)}"
         app:viewModelDel="@{viewModel}"
         app:thingAddedDel="@{deletedThingAdded}"

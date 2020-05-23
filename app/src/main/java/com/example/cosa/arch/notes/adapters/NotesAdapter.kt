@@ -57,7 +57,7 @@ class NotesAdapter(
                     val filteredPattern = constraint.toString().toLowerCase(Locale.getDefault())
                         .trim()
                     originalItems.forEach {
-                        if (it.text.toLowerCase(Locale.getDefault()).startsWith(filteredPattern)) {
+                        if (it.text.toLowerCase(Locale.getDefault()).contains(filteredPattern)) {
                             list.add(it)
                         }
                     }

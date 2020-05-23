@@ -58,11 +58,11 @@ class DeletedThingsAdapter(
                         .trim()
                     originalItems.forEach {
                         if (it.thing.toLowerCase(Locale.getDefault())
-                                .startsWith(filteredPattern)
+                                .contains(filteredPattern)
                         ) {
                             list.add(it)
                         } else if (it.place.toLowerCase(Locale.getDefault())
-                                .startsWith(filteredPattern)
+                                .contains(filteredPattern)
                         ) {
                             list.add(it)
                         }
