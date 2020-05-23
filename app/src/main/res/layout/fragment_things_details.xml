@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.cosa.arch.thingsDetails.ThingsDetailViewModel" />
+            type="com.cosa.arch.thingsDetails.ThingsDetailViewModel" />
 
         <variable
             name="thingToShow"
-            type="com.example.cosa.models.Things" />
+            type="com.cosa.models.Things" />
 
     </data>
 

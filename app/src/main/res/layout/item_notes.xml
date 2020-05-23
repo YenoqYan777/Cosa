@@ -6,11 +6,11 @@
 
         <variable
             name="notes"
-            type="com.example.cosa.models.Notes" />
+            type="com.cosa.models.Notes" />
 
         <variable
             name="viewModel"
-            type="com.example.cosa.arch.notes.NotesViewModel" />
+            type="com.cosa.arch.notes.NotesViewModel" />
 
         <variable
             name="item"

@@ -8,7 +8,7 @@
 
         <variable
             name="swipeHandler"
-            type="com.example.cosa.arch.common.SwipeHandler" />
+            type="com.cosa.arch.common.SwipeHandler" />
 
 
 

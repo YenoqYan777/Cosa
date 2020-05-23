@@ -7,11 +7,11 @@
     <data>
         <variable
             name="deletedThingAdded"
-            type="com.example.cosa.models.DeletedThings" />
+            type="com.cosa.models.DeletedThings" />
 
         <variable
             name="viewModel"
-            type="com.example.cosa.arch.deletedItems.deletedThings.DeletedThingsViewModel" />
+            type="com.cosa.arch.deletedItems.deletedThings.DeletedThingsViewModel" />
 
         <variable
             name="editDelButton"

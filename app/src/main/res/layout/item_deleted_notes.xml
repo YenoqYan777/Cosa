@@ -7,11 +7,11 @@
 
         <variable
             name="delNotes"
-            type="com.example.cosa.models.DeletedNotes" />
+            type="com.cosa.models.DeletedNotes" />
 
         <variable
             name="delNotesViewModel"
-            type="com.example.cosa.arch.deletedItems.deletedNotes.DeletedNotesViewModel" />
+            type="com.cosa.arch.deletedItems.deletedNotes.DeletedNotesViewModel" />
 
         <variable
             name="delItem"

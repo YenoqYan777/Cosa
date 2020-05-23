@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/thingsFragment"
-        android:name="com.example.cosa.arch.things.ThingsFragment"
+        android:name="com.cosa.arch.things.ThingsFragment"
         tools:layout="@layout/fragment_things">
         <action
             android:id="@+id/action_thingsFragment_to_thingsDetailFragment"
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.example.cosa.arch.notes.NotesFragment"
+        android:name="com.cosa.arch.notes.NotesFragment"
         tools:layout="@layout/fragment_notes">
         <action
             android:id="@+id/action_notesFragment_to_editNoteFragment"
@@ -36,28 +36,28 @@
 
     <fragment
         android:id="@+id/deletedItemsFragment"
-        android:name="com.example.cosa.arch.deletedItems.DeletedItemsFragment"
+        android:name="com.cosa.arch.deletedItems.DeletedItemsFragment"
         tools:layout="@layout/fragment_deleted_items"/>
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.cosa.arch.settings.SettingsFragment"
+        android:name="com.cosa.arch.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings"
         />
 
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.example.cosa.arch.notes.AddNoteFragment"
+        android:name="com.cosa.arch.notes.AddNoteFragment"
         tools:layout="@layout/fragment_add_note" />
 
     <fragment
         android:id="@+id/editNoteFragment"
-        android:name="com.example.cosa.arch.notes.EditNoteFragment"
+        android:name="com.cosa.arch.notes.EditNoteFragment"
         tools:layout="@layout/fragment_edit_note" />
 
     <fragment
         android:id="@+id/thingsDetailsFragment"
-        android:name="com.example.cosa.arch.thingsDetails.ThingsDetailsFragment"
+        android:name="com.cosa.arch.thingsDetails.ThingsDetailsFragment"
         tools:layout="@layout/fragment_things_details">
         <argument
             android:name="thingsId"

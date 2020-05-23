@@ -7,11 +7,11 @@
     <data>
         <variable
             name="things"
-            type="com.example.cosa.models.Things" />
+            type="com.cosa.models.Things" />
 
         <variable
             name="viewModel"
-            type="com.example.cosa.arch.things.ThingsViewModel" />
+            type="com.cosa.arch.things.ThingsViewModel" />
 
         <variable
             name="wholeItem"
