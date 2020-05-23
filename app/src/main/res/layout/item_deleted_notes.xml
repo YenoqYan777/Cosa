@@ -13,8 +13,6 @@
             name="delNotesViewModel"
             type="com.example.cosa.arch.deletedItems.deletedNotes.DeletedNotesViewModel" />
 
-
-
         <variable
             name="delItem"
             type="androidx.cardview.widget.CardView" />

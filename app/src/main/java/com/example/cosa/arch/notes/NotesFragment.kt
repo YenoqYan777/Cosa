@@ -31,7 +31,6 @@ import kotlinx.android.synthetic.main.dialog_are_you_sure.view.*
 import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : BaseFragment(), SwipeHandler {
-
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NotesViewModel
     private lateinit var notesAdapter: NotesAdapter
@@ -66,6 +65,24 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         })
     }
 
+    private fun initViewModel() {
+        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
+        viewModel.getNotes().observe(viewLifecycleOwner, Observer {
+            activity?.runOnUiThread {
+                notesAdapter.setOriginalItems(it)
+            }
+            if (it.isEmpty()) {
+                txtNoNotes.visibility = VISIBLE
+                imgNoNotes.visibility = VISIBLE
+                txtIntroductionNotes.visibility = GONE
+            } else {
+                txtNoNotes.visibility = GONE
+                imgNoNotes.visibility = GONE
+                txtIntroductionNotes.visibility = VISIBLE
+            }
+        })
+    }
+
     private fun performSearch() {
         searchViewNotes.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -83,24 +100,6 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         binding.btnAddNote.setOnClickListener {
             viewModel.navigate(NotesFragmentDirections.actionNotesFragmentToAddNoteFragment())
         }
-    }
-
-    private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
-        viewModel.getNotes().observe(viewLifecycleOwner, Observer {
-            activity?.runOnUiThread {
-                notesAdapter.setOriginalItems(it)
-            }
-            if (it.isEmpty()) {
-                txtNoNotes.visibility = VISIBLE
-                imgNoNotes.visibility = VISIBLE
-                txtIntroductionNotes.visibility = GONE
-            } else {
-                txtNoNotes.visibility = GONE
-                imgNoNotes.visibility = GONE
-                txtIntroductionNotes.visibility = VISIBLE
-            }
-        })
     }
 
     private fun initRecyclerView() {

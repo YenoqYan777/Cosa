@@ -10,13 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosa.R
-import com.example.cosa.arch.base.BaseFragment
-import com.example.cosa.arch.base.BaseViewModel
+import com.example.cosa.arch.common.WrapContentLinearLayoutManager
 import com.example.cosa.arch.deletedItems.deletedNotes.adapters.DeletedNotesAdapter
 import com.example.cosa.arch.deletedItems.deletedNotes.adapters.DeletedNotesDiffCallback
-import com.example.cosa.arch.common.WrapContentLinearLayoutManager
 import com.example.cosa.databinding.FragmentDeletedNotesBinding
 import com.example.cosa.models.DeletedNotes
 import kotlinx.android.synthetic.main.fragment_deleted_notes.*
@@ -30,8 +27,10 @@ class DeletedNotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_deleted_notes, container, false)
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_deleted_notes, container, false
+            )
+
         return binding.root
     }
 
@@ -73,8 +72,10 @@ class DeletedNotesFragment : Fragment() {
                 requireContext(),
                 viewModel
             )
-        rvDeletedNotes.layoutManager = mLayoutManager
-        rvDeletedNotes.adapter = adapter
+        rvDeletedNotes.apply {
+            adapter = this@DeletedNotesFragment.adapter
+            layoutManager = mLayoutManager
+        }
     }
 
     private fun createMenuForRecyclerView(view: View, delNotes: DeletedNotes) {
@@ -84,7 +85,6 @@ class DeletedNotesFragment : Fragment() {
             when (item.itemId) {
                 R.id.recovery -> {
                     viewModel.recoverNote(delNotes)
-                    adapter.notifyDataSetChanged()
                 }
                 R.id.delete -> {
                     viewModel.completelyDeleteNote(delNotes)
