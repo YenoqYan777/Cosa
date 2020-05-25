@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.cosa.arch.thingsDetails.ThingsDetailViewModel" />
@@ -26,8 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:onClick="@{() -> viewModel.navigateBack()}"
             android:padding="5dp"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back"
@@ -41,6 +40,7 @@
             android:elevation="7dp"
             android:translationZ="2dp"
             app:cardCornerRadius="15dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="@+id/cardView3"
             app:layout_constraintStart_toStartOf="@+id/cardView3"
             app:layout_constraintTop_toBottomOf="@+id/btnBackDetail">
@@ -72,9 +72,9 @@
             android:layout_marginTop="168dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@color/darkerBckg"
             android:elevation="4dp"
             app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:background="@color/darkerBckg">
 
                 <TextView
                     android:id="@+id/thingNameDetail"

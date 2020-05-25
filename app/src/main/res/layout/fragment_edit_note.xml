@@ -3,11 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,9 +15,7 @@
             android:id="@+id/toolbarEditNote"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/darkerBckg"
-            android:elevation="4dp"
-            app:title="@string/edit_your_note"
+            android:background="@color/mainBckg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,9 +28,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/lightGray"
-            android:elevation="4dp"
-            app:cardCornerRadius="5dp"
+            android:background="@color/mainBckg"
+            android:elevation="8dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +38,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/mainBckg"
+                app:cardUseCompatPadding="true">
 
                 <EditText
                     android:id="@+id/etEditNoteContent"
@@ -59,11 +54,11 @@
                     android:gravity="top|left"
                     android:hint="@string/your_notes_here"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:textColor="@color/darkerBckg"
-                    android:textColorHint="@color/hintcolor"
+                    android:textColor="@color/textColor"
+                    android:textColorHint="@color/textColor"
+                    android:textCursorDrawable="@null"
                     android:textSize="20sp"
                     android:textStyle="normal"
-                    android:textCursorDrawable="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

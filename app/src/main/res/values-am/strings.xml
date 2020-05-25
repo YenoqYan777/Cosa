@@ -6,13 +6,13 @@
     <string name="take_photo">Լուսանկարել</string>
     <string name="thing">Իրի անվանումը</string>
     <string name="place">Վայրի անվանումը</string>
-    <string name="add_item">Ավելացնել իր</string>
+    <string name="add_item">Ավելացնել</string>
     <string name="cancel">Չեղարկել</string>
     <string name="place_required_error">Վայրի անվանումը չի կարող դատարկ լինել!</string>
     <string name="name_required_error">Իրի անվանումը չի կարող դատարկ լինել!</string>
     <string name="no_things_added">Ավելացված իրեր չկան</string>
     <string name="search">Փնտրել</string>
-    <string name="save_changes">Պահպանել փոփոխությունները</string>
+    <string name="save_changes">Պահպանել</string>
     <string name="edit">Փոփոխել</string>
     <string name="delete">Ջնջել</string>
     <string name="take_a_photo">Լուսանկարեք ձեր իրը!</string>

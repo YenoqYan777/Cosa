@@ -20,8 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/darkerBckg"
-            android:elevation="4dp"
+            android:background="@color/mainBckg"
             app:title="@string/create_new_note"
             app:navigationIcon="@drawable/ic_back"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +36,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:background="@color/lightGray"
-            android:elevation="4dp"
-            app:cardCornerRadius="5dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +45,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/mainBckg">
 
                 <EditText
                     android:id="@+id/etNoteContent"
@@ -60,8 +60,8 @@
                     android:gravity="top|left"
                     android:hint="@string/your_notes_here"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:textColor="@color/darkerBckg"
-                    android:textColorHint="@color/hintcolor"
+                    android:textColor="@color/textColor"
+                    android:textColorHint="@color/textColor"
                     android:textCursorDrawable="@null"
                     android:textSize="20sp"
                     android:textStyle="normal"

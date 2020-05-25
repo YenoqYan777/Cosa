@@ -46,6 +46,7 @@ class EditNoteFragment : BaseFragment() {
     private fun initToolbar() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false);
         binding.toolbarEditNote.setNavigationIcon(R.drawable.ic_back)
         binding.toolbarEditNote.setNavigationOnClickListener {
             hideKeyboard(requireActivity())

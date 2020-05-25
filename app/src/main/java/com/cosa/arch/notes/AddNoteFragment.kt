@@ -41,6 +41,7 @@ class AddNoteFragment : BaseFragment() {
     private fun initToolbar() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         binding.toolbar.setNavigationOnClickListener {
             hideKeyboard(requireActivity())

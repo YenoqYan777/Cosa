@@ -13,7 +13,8 @@
             android:id="@+id/action_thingsFragment_to_thingsDetailFragment"
             app:destination="@id/thingsDetailsFragment"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/thingsFragment" />
     </fragment>
 
     <fragment
@@ -24,14 +25,12 @@
             android:id="@+id/action_notesFragment_to_editNoteFragment"
             app:destination="@id/editNoteFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/notesFragment" />
+            app:exitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_notesFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popUpTo="@id/notesFragment" />
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
@@ -63,6 +62,11 @@
             android:name="thingsId"
             app:argType="long"
             android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_thingsDetailsFragment_to_thingsFragment"
+            app:destination="@id/thingsFragment"
+            app:popUpTo="@id/thingsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

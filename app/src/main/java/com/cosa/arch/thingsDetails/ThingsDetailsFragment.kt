@@ -20,17 +20,17 @@ class ThingsDetailsFragment : BaseFragment() {
     private lateinit var binding: FragmentThingsDetailsBinding
     private lateinit var viewModel: ThingsDetailViewModel
     private lateinit var mInterstitialAd: InterstitialAd
-    private val args : ThingsDetailsFragmentArgs by navArgs()
+    private val args: ThingsDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_things_details, container, false
         )
         initViewModel()
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -38,9 +38,7 @@ class ThingsDetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initAd()
-
     }
 
     private fun initAd() {
@@ -53,7 +51,14 @@ class ThingsDetailsFragment : BaseFragment() {
                 if (mInterstitialAd.isLoaded) {
                     mInterstitialAd.show()
                 }
+                backPressed()
             }
+        }
+    }
+
+    fun backPressed() {
+        binding.btnBackDetail.setOnClickListener {
+            viewModel.navigate(ThingsDetailsFragmentDirections.actionThingsDetailsFragmentToThingsFragment())
         }
     }
 
@@ -61,8 +66,9 @@ class ThingsDetailsFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(ThingsDetailViewModel::class.java)
         viewModel.getThingDetail(args.thingsId)
         viewModel.things.observe(viewLifecycleOwner, Observer {
-            binding.viewModel = viewModel
-            binding.thingToShow = it
+            requireActivity().runOnUiThread {
+                binding.thingToShow = it
+            }
         })
     }
 }

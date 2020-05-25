@@ -16,18 +16,17 @@ class ThingsDetailViewModel(application: Application) : BaseViewModel(applicatio
     var things: MutableLiveData<Things> = mThingAdded
     private val compositeDisposable = CompositeDisposable()
 
-    fun getThingDetail(id: Long){
+    fun getThingDetail(id: Long) {
         if (id != -1L) {
             Single.just(mThingAdded)
                 .backgroundWork()
                 .doOnSuccess {
-                    mThingAdded.value = thingAddedDao.getThingAddedBy(id)
-                    things = mThingAdded
+                    mThingAdded.postValue(thingAddedDao.getThingAddedBy(id))
                 }
                 .subscribe()
                 .addTo(compositeDisposable)
-
         }
+
     }
 
     override fun onCleared() {

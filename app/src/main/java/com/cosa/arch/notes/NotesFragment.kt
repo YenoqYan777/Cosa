@@ -61,7 +61,9 @@ class NotesFragment : BaseFragment(), SwipeHandler {
 
     private fun observe() {
         viewModel.itemClicked.observe(viewLifecycleOwner, Observer {
-            createMenuForRecyclerView(it.first, it.second)
+            it.getContentIfNotHandled()?.let { pair ->
+                createMenuForRecyclerView(pair.first, pair.second)
+            }
         })
     }
 

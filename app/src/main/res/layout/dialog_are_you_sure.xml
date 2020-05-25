@@ -7,6 +7,8 @@
     android:layout_marginRight="16dp"
     android:background="@color/mainBckg"
     android:elevation="4dp"
+    android:layout_margin="5dp"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,9 +20,7 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/are_you_sure"
             android:textAlignment="center"
@@ -36,9 +36,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/round_button_dark"
             android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/montserrat"
             android:foreground="?attr/selectableItemBackground"
             android:paddingLeft="10dp"
@@ -50,9 +52,8 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:focusable="true" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/choice_no"

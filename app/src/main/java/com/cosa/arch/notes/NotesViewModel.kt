@@ -10,6 +10,7 @@ import com.cosa.extension.backgroundWork
 import com.cosa.models.DeletedNotes
 import com.cosa.models.Notes
 import com.cosa.repository.db.dao.NotesDao
+import com.cosa.util.Event
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -21,8 +22,8 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
         private var itemId: Long = 0
     }
 
-    private val mItemClicked = MutableLiveData<Pair<View, Notes>>()
-    val itemClicked: LiveData<Pair<View, Notes>> get() = mItemClicked
+    private val mItemClicked = MutableLiveData<Event<Pair<View, Notes>>>()
+    val itemClicked: LiveData<Event<Pair<View, Notes>>> get() = mItemClicked
 
     private val compositeDisposable = CompositeDisposable()
     private val notesDao: NotesDao = CosaApplication.dataBase.notesDao()
@@ -30,9 +31,8 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
 
     fun getNotes(): LiveData<MutableList<Notes>> = notesDao.getAll()
 
-
     fun onItemClicked(view: View, notes: Notes) {
-        mItemClicked.value = Pair(view, notes)
+        mItemClicked.value = Event(Pair(view, notes))
     }
 
     fun deleteItem(notes: Notes, boolean: Boolean) {
@@ -70,7 +70,6 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
 
     fun getEditTextMessage(): String = editTextMessage
 
-
     fun updateNoteInfo(text: String, id: Long) {
         Single.just(text)
             .backgroundWork()
@@ -95,5 +94,4 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
         compositeDisposable.dispose()
         super.onCleared()
     }
-
 }

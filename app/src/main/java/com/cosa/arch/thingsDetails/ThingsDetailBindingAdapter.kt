@@ -9,18 +9,16 @@ import com.cosa.repository.CacheStore
 object ThingsDetailBindingAdapter {
     @JvmStatic
     @BindingAdapter("loadImageDetail")
-    fun loadImage(view: ImageView, cacheUri: String) {
-        Glide.with(view.context)
-            .load(
-                CacheStore.instance(view.context.getExternalFilesDir("").toString())
-                    ?.getCacheFile(cacheUri)
-            )
-            .error(R.drawable.ic_launcher_background)
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(view)
+    fun loadImageDetail(view: ImageView, cacheUri: String?) {
+        cacheUri?.let {
+            Glide.with(view.context)
+                .load(
+                    CacheStore.instance(view.context.getExternalFilesDir("").toString())
+                        ?.getCacheFile(it)
+                )
+                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(view)
+        }
     }
-
-
-
-
 }

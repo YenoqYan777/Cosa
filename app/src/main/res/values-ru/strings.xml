@@ -5,13 +5,13 @@
     <string name="take_photo">Снять фото</string>
     <string name="thing">Название вещи</string>
     <string name="place">Укажите место</string>
-    <string name="add_item">Добавить вещь</string>
+    <string name="add_item">Добавить</string>
     <string name="cancel">Отмена</string>
     <string name="place_required_error">Место не может быть пустым!</string>
     <string name="name_required_error">Название не может быть пустым!</string>
     <string name="no_things_added">Нет добавленных вещей</string>
     <string name="search">Поиск</string>
-    <string name="save_changes">Сохранить изменения</string>
+    <string name="save_changes">Сохранить</string>
     <string name="edit">Изменить</string>
     <string name="delete">Удалить</string>
     <string name="take_a_photo">Сделайте фото вещи!</string>
