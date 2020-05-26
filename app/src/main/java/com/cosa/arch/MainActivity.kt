@@ -1,9 +1,13 @@
 package com.cosa.arch
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -19,6 +23,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        this.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        this.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.darkerBckg)
+        };
+        val pref: SharedPreferences =
+            this.getSharedPreferences(LocalManager.SHARED, Context.MODE_PRIVATE)
+
+        if (pref.getString(LocalManager.THEME_KEY, "dark") == "light") {
+            setTheme(R.style.AppTheme_NoActionBar_Light)
+        } else {
+            setTheme(R.style.AppTheme_NoActionBar)
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         isStoragePermissionGranted()
         setUpNavigation()
@@ -46,5 +66,14 @@ class MainActivity : AppCompatActivity() {
         super.applyOverrideConfiguration(overrideConfiguration)
     }
 
+    override fun onBackPressed() {
+        val count = supportFragmentManager.backStackEntryCount
+
+        if (count == 0) {
+            super.onBackPressed()
+        } else {
+            supportFragmentManager.popBackStack()
+        }
+    }
 }
 

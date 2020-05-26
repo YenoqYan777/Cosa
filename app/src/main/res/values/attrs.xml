@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds">
+        <attr name="backgroundColor" format="color"/>
+        <attr name="backgroundColorMore" format="color"/>
+        <attr name="itemBackgroundColor" format="color"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textColorLight" format="color"/>
+        <attr name="inactiveColor" format="color"/>
+        <attr name="activeColor" format="color"/>
+
+<!--        Icons-->
+        <attr name="backIcon" format="reference" />
+        <attr name="confirmIcon" format="reference" />
+        <attr name="searchIcon" format="reference" />
+        <attr name="addIcon" format="reference" />
+        <attr name="noThingsIcon" format="reference" />
+
+    </declare-styleable>
+
+</resources>

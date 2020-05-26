@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    android:background="@color/mainBckg"
+    android:background="?attr/backgroundColor"
     android:elevation="4dp"
     android:layout_margin="5dp"
     app:cardUseCompatPadding="true"
@@ -14,17 +14,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/mainBckg">
+        android:background="?attr/backgroundColor">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/are_you_sure"
             android:textAlignment="center"
-            android:textColor="@color/textColor"
+            android:textColor="?attr/textColor"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +50,7 @@
             android:paddingRight="10dp"
             android:paddingBottom="6dp"
             android:text="@string/yes"
-            android:textColor="@color/darkItemBckg"
+            android:textColor="?attr/textColor"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -69,9 +71,8 @@
             android:paddingRight="10dp"
             android:paddingBottom="6dp"
             android:text="@string/no"
-            android:textColor="@android:color/white"
+            android:textColor="?attr/textColor"
             android:textSize="18sp"
-            android:textStyle="bold"
 
             app:layout_constraintBottom_toBottomOf="@+id/choice_yes"
             app:layout_constraintEnd_toStartOf="@+id/choice_yes"

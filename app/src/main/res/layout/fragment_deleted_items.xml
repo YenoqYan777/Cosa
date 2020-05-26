@@ -15,7 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/mainBckg"
+            android:background="?attr/backgroundColor"
             android:clickable="true"
             android:focusable="true"
             tools:context=".arch.deletedItems.DeletedItemsFragment">
@@ -23,30 +23,22 @@
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/darkerBckg"
+                android:background="?attr/backgroundColorMore"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchView2">
 
-                <!--<androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarDeletedItems"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkerBckg"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:title="Deleted items"
-        app:titleTextColor="@color/textColor"/>-->
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayoutDeletedItems"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabGravity="fill"
-                    app:tabIndicatorColor="@color/textColor"
+                    app:tabIndicatorColor="?attr/textColor"
                     app:tabMaxWidth="0dp"
                     app:tabMode="fixed"
-                    app:tabTextColor="@color/lightGray" />
+                    app:tabTextColor="?attr/textColorLight" />
 
             </com.google.android.material.appbar.AppBarLayout>
 

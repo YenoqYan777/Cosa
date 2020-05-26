@@ -1,5 +1,6 @@
 package com.cosa.arch.settings
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -12,12 +13,15 @@ import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.cosa.R
+import com.cosa.arch.MainActivity
+import com.cosa.arch.base.BaseViewModel
 import com.cosa.databinding.FragmentSettingsBinding
 import com.cosa.helper.LocalManager
 import com.cosa.helper.LocalManager.LANGUAGE_KEY
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
 import com.cosa.helper.LocalManager.SHARED
+import com.cosa.helper.LocalManager.THEME_KEY
 
 
 class SettingsFragment : Fragment() {
@@ -39,7 +43,8 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setList()
+        setLangList()
+        setThemeList()
         setSwitcherListener()
     }
 
@@ -58,7 +63,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun setList() {
+    private fun setLangList() {
         val langList =
             listOf(getString(R.string.am), getString(R.string.ru), getString(R.string.en))
         val adapter: ArrayAdapter<String> =
@@ -94,6 +99,51 @@ class SettingsFragment : Fragment() {
             }
         }
     }
+
+    private fun setThemeList(){
+        val themeList =
+            listOf(getString(R.string.dark), getString(R.string.light))
+        val adapter: ArrayAdapter<String> =
+            ArrayAdapter(requireActivity(), R.layout.simple_list_item_single_choice_1, themeList)
+
+        binding.themeListSettings.adapter = adapter
+        binding.themeListSettings.choiceMode = ListView.CHOICE_MODE_SINGLE
+        when(pref.getString(THEME_KEY, "dark")){
+            "dark" -> {
+                binding.themeListSettings.setItemChecked(0, true)
+            }
+            "light" -> {
+                binding.themeListSettings.setItemChecked(1, true)
+            }
+        }
+        
+        binding.themeListSettings.setOnItemClickListener { parent, view, position, id ->
+            when(position){
+                0 -> {
+                   pref.edit().run {
+                       putString(THEME_KEY, "dark")
+                       apply()
+                       restartApp()
+                   }
+                }
+                1 -> {
+                    pref.edit().run {
+                        putString(THEME_KEY, "light")
+                        apply()
+                        restartApp()
+                    }
+                }
+            }
+
+        }
+
+    }
+    private fun restartApp(){
+        val i = Intent(activity , MainActivity::class.java)
+        startActivity(i)
+        requireActivity().fragmentManager.popBackStack()
+    }
+
 
     private fun refreshActivity() {
         val intent = requireActivity().intent

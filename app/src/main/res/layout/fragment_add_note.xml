@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mainBckg"
+        android:background="?attr/backgroundColor"
         android:clickable="true"
         android:focusable="true"
         tools:context=".arch.notes.AddNoteFragment">
@@ -20,13 +20,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/mainBckg"
+            android:background="?attr/backgroundColor"
             app:title="@string/create_new_note"
-            app:navigationIcon="@drawable/ic_back"
+            app:navigationIcon="?attr/backIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@color/textColor" />
+            app:titleTextColor="?attr/textColor" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -35,7 +35,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/lightGray"
+            android:background="?attr/textColorLight"
             android:elevation="8dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +46,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/mainBckg">
+                android:background="?attr/backgroundColor">
 
                 <EditText
                     android:id="@+id/etNoteContent"
@@ -60,7 +60,7 @@
                     android:gravity="top|left"
                     android:hint="@string/your_notes_here"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:textColor="@color/textColor"
+                    android:textColor="?attr/textColor"
                     android:textColorHint="@color/textColor"
                     android:textCursorDrawable="@null"
                     android:textSize="20sp"

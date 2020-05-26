@@ -41,7 +41,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/darkItemBckg">
+            android:background="?attr/itemBackgroundColor">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewDel"
@@ -75,7 +75,7 @@
                 android:fontFamily="@font/montserrat"
                 android:maxLines="1"
                 android:text="@{deletedThingAdded.thing}"
-                android:textColor="@color/textColor"
+                android:textColor="?attr/textColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/btn_edit_del"
@@ -91,7 +91,7 @@
                 android:fontFamily="@font/montserrat"
                 android:maxLines="2"
                 android:text="@{deletedThingAdded.place}"
-                android:textColor="@color/textColor"
+                android:textColor="?attr/textColor"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/title_deleted_thing_added"

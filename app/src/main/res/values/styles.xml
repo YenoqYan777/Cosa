@@ -2,15 +2,31 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/darkerItemBckg</item>
-        <item name="colorPrimaryDark">@color/mainBckg</item>
+        <item name="colorPrimaryDark">@color/mainDarkBckg</item>
         <item name="colorAccent">@color/textColor</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
+<!--    <attr name="searchIcon" format="reference" />-->
+<!--    <attr name="addIcon" format="reference" />-->
+
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/darkerItemBckg</item>
-        <item name="colorPrimaryDark">@color/mainBckg</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/mainDarkBckg</item>
+        <item name="colorAccent">@color/textColor</item>
         <item name="colorControlNormal">#c5c5c5</item>
+        <item name="backgroundColor">@color/mainDarkBckg</item>
+        <item name="backgroundColorMore">@color/darkerBckg</item>
+        <item name="activeColor">@color/darkItemBckg</item>
+        <item name="inactiveColor">@color/notSelectedItem</item>
+        <item name="textColor">@color/textColor</item>
+        <item name="textColorLight">@color/lightGray</item>
+        <item name="backIcon">@drawable/ic_back</item>
+        <item name="confirmIcon">@drawable/ic_confirm</item>
+        <item name="noThingsIcon">@drawable/ic_no_things</item>
+        <item name="searchIcon">@drawable/ic_search</item>
+        <item name="addIcon">@drawable/ic_add</item>
+        <item name="itemBackgroundColor">@color/darkItemBckg</item>
         <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
         <item name="android:itemTextAppearance">@style/itemTextStyle.AppTheme</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
@@ -19,6 +35,7 @@
         <item name="android:editTextColor">@color/textColor</item>
         <item name="android:textColorHint">@color/textColor</item>
     </style>
+
 
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
         <item name="android:popupBackground">@drawable/round_popup_menu</item>
@@ -29,10 +46,10 @@
     </style>
 
     <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="android:textColorHint">@color/mainBckg</item>
+        <item name="android:textColorHint">@color/mainDarkBckg</item>
         <item name="android:textSize">20sp</item>
         <item name="backgroundTint">@color/darkerBckg</item>
-        <item name="colorControlActivated">@color/mainBckg</item>
+        <item name="colorControlActivated">@color/mainDarkBckg</item>
     </style>
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
@@ -47,4 +64,52 @@
         <item name="colorOnSurface">@color/textColor</item>
     </style>
 
+    <!--   Light Theme attr-->
+
+    <style name="AppTheme.NoActionBar.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/lighterItemBckg</item>
+        <item name="colorPrimaryDark">@color/mainLightBckg</item>
+        <item name="colorAccent">@color/mainDarkBckg</item>
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="backgroundColor">@color/mainLightBckg</item>
+        <item name="activeColor">@color/lighterItemBckg</item>
+        <item name="inactiveColor">@color/notSelectedItem</item>
+        <item name="backgroundColorMore">@color/lighterBckg</item>
+        <item name="textColor">@color/darkerBckg</item>
+        <item name="textColorLight">@color/lightGrayLight</item>
+        <item name="itemBackgroundColor">@color/lightItemBckg</item>
+        <item name="backIcon">@drawable/ic_back_light</item>
+        <item name="noThingsIcon">@drawable/ic_no_things_light</item>
+        <item name="confirmIcon">@drawable/ic_confirm_light</item>
+        <item name="searchIcon">@drawable/ic_search_light</item>
+        <item name="addIcon">@drawable/ic_add_light</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyleLight</item>
+        <item name="android:itemTextAppearance">@style/itemTextStyle.AppThemeLight</item>
+        <item name="android:popupMenuStyle">@style/PopupMenuLight</item>
+        <item name="colorControlActivated">@color/darkerBckg</item>
+        <item name="colorControlHighlight">@color/darkerBckg</item>
+        <item name="android:editTextColor">@color/darkerBckg</item>
+        <item name="android:textColorHint">@color/darkerBckg</item>
+    </style>
+
+
+    <style name="mySpinnerItemStyleLight" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/darkerBckg</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+    </style>
+
+    <style name="BottomNavViewLight" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="colorOnPrimary">@color/darkerItemBckg</item>
+        <item name="colorOnSurface">@color/darkerBckg</item>
+    </style>
+
+    <style name="PopupMenuLight" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">@drawable/light_round_popup_menu</item>
+    </style>
+
+    <style name="itemTextStyle.AppThemeLight" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/darkerBckg</item>
+    </style>
 </resources>

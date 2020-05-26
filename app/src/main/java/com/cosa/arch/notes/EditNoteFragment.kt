@@ -1,8 +1,10 @@
 package com.cosa.arch.notes
 
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -12,6 +14,7 @@ import com.cosa.arch.base.BaseFragment
 import com.cosa.arch.base.BaseViewModel
 import com.cosa.databinding.FragmentEditNoteBinding
 import com.cosa.extension.hideKeyboard
+
 
 class EditNoteFragment : BaseFragment() {
     private lateinit var binding: FragmentEditNoteBinding
@@ -47,7 +50,11 @@ class EditNoteFragment : BaseFragment() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false);
-        binding.toolbarEditNote.setNavigationIcon(R.drawable.ic_back)
+        val a: TypedArray =
+            requireActivity().theme.obtainStyledAttributes(R.style.AppTheme, intArrayOf(R.attr.backIcon))
+        val attributeResourceId = a.getResourceId(0, 0)
+        val drawable = resources.getDrawable(attributeResourceId)
+        binding.toolbarEditNote.navigationIcon = drawable
         binding.toolbarEditNote.setNavigationOnClickListener {
             hideKeyboard(requireActivity())
             viewModel.navigateBack()

@@ -2,6 +2,7 @@ package com.cosa
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.multidex.MultiDex
 import androidx.room.Room
@@ -18,6 +19,7 @@ class CosaApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         MultiDex.install(this)
         MobileAds.initialize(this)
          if (BuildConfig.DEBUG){
@@ -33,6 +35,13 @@ class CosaApplication : Application() {
         )
             .fallbackToDestructiveMigration()
             .build()
+        val pref: SharedPreferences = this.getSharedPreferences(LocalManager.SHARED, Context.MODE_PRIVATE)
+
+        if(pref.getString(LocalManager.THEME_KEY, "dark") == "light"){
+            setTheme(R.style.AppTheme_NoActionBar_Light)
+        }else{
+            setTheme(R.style.AppTheme_NoActionBar)
+        }
     }
 
 

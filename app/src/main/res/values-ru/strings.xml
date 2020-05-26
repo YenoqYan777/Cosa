@@ -40,5 +40,8 @@
     <string name="delete_completely">Удалить окончательно</string>
     <string name="recover_item">Восстановить</string>
     <string name="backup_settings">Резервное копирование и восстановление</string>
+    <string name="theme">Тема</string>
+    <string name="dark">Тeмная</string>
+    <string name="light">Светлая</string>
 
 </resources>

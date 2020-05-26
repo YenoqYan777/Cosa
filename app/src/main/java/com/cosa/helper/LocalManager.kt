@@ -12,6 +12,7 @@ import java.util.*
 object LocalManager {
     const val SHARED = "sharedPref"
     const val LANGUAGE_KEY = "Language"
+    const val THEME_KEY = "Theme"
     const val SAVE_TRASH_KEY:String = "SAVETRASH"
     const val SAVE_TRASH_KEY_NOTES: String = "savetrashfornotes"
 

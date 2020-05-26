@@ -41,6 +41,9 @@
     <string name="delete_completely">Ջնջել վերջնականապես</string>
     <string name="recover_item">Վերականգնել</string>
     <string name="backup_settings">Կրկնօրինակում և վերականգնում</string>
+    <string name="theme">Ոճ</string>
+    <string name="dark">Մուգ</string>
+    <string name="light">Լուսավոր</string>
 
 
 </resources>

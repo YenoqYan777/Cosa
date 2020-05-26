@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mainBckg"
+        android:background="?attr/backgroundColor"
         tools:context=".arch.notes.EditNoteFragment"
         android:focusable="true"
         android:clickable="true">
@@ -15,11 +15,11 @@
             android:id="@+id/toolbarEditNote"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/mainBckg"
+            android:background="?attr/backgroundColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@color/textColor" />
+            app:titleTextColor="?attr/textColor" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -28,7 +28,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/mainBckg"
+            android:background="?attr/backgroundColor"
             android:elevation="8dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +39,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/mainBckg"
+                android:background="?attr/backgroundColor"
                 app:cardUseCompatPadding="true">
 
                 <EditText
@@ -54,8 +54,8 @@
                     android:gravity="top|left"
                     android:hint="@string/your_notes_here"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:textColor="@color/textColor"
-                    android:textColorHint="@color/textColor"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
                     android:textCursorDrawable="@null"
                     android:textSize="20sp"
                     android:textStyle="normal"

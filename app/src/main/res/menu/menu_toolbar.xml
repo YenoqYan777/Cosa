@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/accept"
-        android:icon="@drawable/ic_confirm"
+        android:icon="?attr/confirmIcon"
         app:showAsAction="ifRoom"
         android:title="@string/confirm"/>
 

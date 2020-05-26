@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mainBckg"
+        android:background="?attr/backgroundColor"
         tools:context=".arch.deletedItems.deletedNotes.DeletedNotesFragment">
 
         <SearchView
@@ -21,14 +21,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/darkerBckg"
+            android:background="?attr/backgroundColorMore"
             android:clickable="true"
             android:focusable="true"
             android:iconifiedByDefault="false"
             android:inputType="text"
             android:queryBackground="@android:color/transparent"
             android:queryHint="@string/search_for_deleted_note"
-            android:textColor="@color/textColor"
+            android:textColor="?attr/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,8 +36,8 @@
 
         <ImageView
             android:id="@+id/imgNoNotesDeleted"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/rvDeletedNotes"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:text="@string/trash_is_empty"
-            android:textColor="@color/textColor"
+            android:textColor="?attr/textColor"
             android:textSize="22sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/imgNoNotesDeleted"

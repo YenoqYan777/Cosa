@@ -7,7 +7,7 @@
             <solid android:color="@android:color/transparent" />
             <stroke
                 android:width="2dp"
-                android:color="#ababb2" />
+                android:color="?attr/textColorLight" />
         </shape>
     </item>
 

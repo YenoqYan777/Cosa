@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mainBckg">
+        android:background="?attr/backgroundColor">
 
         <ImageView
             android:id="@+id/btnBackDetail"
@@ -29,7 +29,7 @@
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back"
+            app:srcCompat="?attr/backIcon"
             tools:ignore="ContentDescription" />
 
         <androidx.cardview.widget.CardView
@@ -83,7 +83,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/darkerBckg">
+                android:background="?attr/backgroundColorMore">
 
                 <TextView
                     android:id="@+id/thingNameDetail"
@@ -96,7 +96,7 @@
                     android:paddingBottom="8dp"
                     android:text="@{thingToShow.thing}"
                     android:textAlignment="center"
-                    android:textColor="@color/lightGray"
+                    android:textColor="?attr/textColorLight"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +110,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:text="@{thingToShow.place}"
-                    android:textColor="@color/textColor"
+                    android:textColor="?attr/textColor"
                     android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/thingNameDetail"

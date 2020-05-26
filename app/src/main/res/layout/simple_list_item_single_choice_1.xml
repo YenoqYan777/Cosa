@@ -20,7 +20,7 @@
     android:layout_height="?android:attr/listPreferredItemHeightSmall"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:gravity="center_vertical"
-    android:textColor="@color/textColor"
+    android:textColor="?attr/textColor"
     android:textSize="20sp"
     android:checkMark="?android:attr/listChoiceIndicatorSingle"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
