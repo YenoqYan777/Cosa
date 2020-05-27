@@ -11,6 +11,7 @@ import com.cosa.models.DeletedThings
 import com.cosa.models.Things
 import com.cosa.repository.db.dao.DeletedThingsDao
 import com.cosa.repository.db.dao.ThingsDao
+import com.cosa.util.Event
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -20,8 +21,8 @@ class ThingsViewModel(application: Application) : BaseViewModel(application) {
     private val mDotClicked = MutableLiveData<Pair<View, Things>>()
     val dotClicked: LiveData<Pair<View, Things>> get() = mDotClicked
 
-    private val mWholeClicked = MutableLiveData<Things>()
-    val wholeClicked: LiveData<Things> get() = mWholeClicked
+    private val mWholeClicked = MutableLiveData<Event<Things>>()
+    val wholeClicked: LiveData<Event<Things>> get() = mWholeClicked
 
     private val compositeDisposable = CompositeDisposable()
     private val thingsDao: ThingsDao = CosaApplication.dataBase.thingAddedDao()
@@ -34,7 +35,7 @@ class ThingsViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun onWholeItemClicked(things: Things) {
-        mWholeClicked.value = things
+        mWholeClicked.value = Event(things)
     }
 
     fun insertThingAdded(things: Things) {

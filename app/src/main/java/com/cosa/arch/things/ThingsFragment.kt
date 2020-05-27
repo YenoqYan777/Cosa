@@ -88,11 +88,13 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         })
 
         viewModel.wholeClicked.observe(viewLifecycleOwner, Observer {
-            viewModel.navigate(
+         it.getContentIfNotHandled()?.let{ things ->
+             viewModel.navigate(
                 ThingsFragmentDirections.actionThingsFragmentToThingsDetailFragment(
-                    it.id
+                    things.id
                 )
             )
+         }
         })
     }
 

@@ -13,8 +13,7 @@
             android:id="@+id/action_thingsFragment_to_thingsDetailFragment"
             app:destination="@id/thingsDetailsFragment"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popUpTo="@id/thingsFragment" />
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment

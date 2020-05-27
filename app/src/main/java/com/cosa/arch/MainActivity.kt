@@ -23,14 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setToolbarColor()
 
-        this.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        this.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.window.statusBarColor = ContextCompat.getColor(this, R.color.darkerBckg)
-        };
         val pref: SharedPreferences =
             this.getSharedPreferences(LocalManager.SHARED, Context.MODE_PRIVATE)
 
@@ -51,6 +45,18 @@ class MainActivity : AppCompatActivity() {
             navController
         )
 
+    }
+
+    private fun setToolbarColor() {
+        this.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.darkerBckg)
+        }
     }
 
     override fun attachBaseContext(newBase: Context) {
