@@ -13,6 +13,7 @@ import com.cosa.R
 import com.cosa.arch.deletedItems.adapters.PagerAdapter
 import com.cosa.databinding.FragmentDeletedItemsBinding
 import com.cosa.extension.setToolBarColor
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class DeletedItemsFragment : Fragment(){
@@ -25,6 +26,7 @@ class DeletedItemsFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.darkerBckg)
+        requireActivity().bottomNavigationView.visibility = View.VISIBLE
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_deleted_items, container, false)
         adapter = PagerAdapter(this.childFragmentManager, requireActivity())

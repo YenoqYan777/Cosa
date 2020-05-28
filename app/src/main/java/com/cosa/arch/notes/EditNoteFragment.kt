@@ -15,6 +15,7 @@ import com.cosa.arch.base.BaseViewModel
 import com.cosa.databinding.FragmentEditNoteBinding
 import com.cosa.extension.hideKeyboard
 import com.cosa.extension.setToolBarColor
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class EditNoteFragment : BaseFragment() {
@@ -26,7 +27,7 @@ class EditNoteFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
-
+        requireActivity().bottomNavigationView.visibility = View.GONE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_edit_note, container, false
         )
@@ -50,9 +51,9 @@ class EditNoteFragment : BaseFragment() {
     }
 
     private fun initToolbar() {
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false);
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false)
         val a: TypedArray =
             requireActivity().theme.obtainStyledAttributes(R.style.AppTheme, intArrayOf(R.attr.backIcon))
         val attributeResourceId = a.getResourceId(0, 0)

@@ -11,21 +11,19 @@
             type="com.cosa.arch.common.SwipeHandler" />
 
 
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/backgroundColor"
-        tools:context=".arch.notes.NotesFragment"
+        android:clickable="true"
         android:focusable="true"
-        android:clickable="true">
+        tools:context=".arch.notes.NotesFragment">
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNoteList"
-            android:layout_width="0dp"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/clNotesFragment"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,14 +31,22 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtIntroductionNotes"
-            app:layout_constraintVertical_bias="0.0"
-            bind:bgColorSwipeLeft="@{@color/app_red}"
-            bind:bgColorSwipeRight="@{@color/app_red}"
-            bind:drawableSwipeLeft="@{@drawable/ic_close_white_24dp}"
-            bind:drawableSwipeRight="@{@drawable/ic_close_white_24dp}"
-            bind:onItemSwipeLeft="@{(position) -> swipeHandler.onItemSwipedLeft(position)}"
-            bind:onItemSwipeRight="@{(position) -> swipeHandler.onItemSwipedRight(position)}"
-            bind:swipeEnabled="@{true}" />
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNoteList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                app:layout_behavior=".helper.OverScrollBehavior"
+                bind:bgColorSwipeLeft="@{@color/app_red}"
+                bind:bgColorSwipeRight="@{@color/app_red}"
+                bind:drawableSwipeLeft="@{@drawable/ic_close_white_24dp}"
+                bind:drawableSwipeRight="@{@drawable/ic_close_white_24dp}"
+                bind:onItemSwipeLeft="@{(position) -> swipeHandler.onItemSwipedLeft(position)}"
+                bind:onItemSwipeRight="@{(position) -> swipeHandler.onItemSwipedRight(position)}"
+                bind:swipeEnabled="@{true}" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <ImageView
             android:id="@+id/imgNoNotes"
@@ -49,10 +55,10 @@
             android:layout_marginBottom="180dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/rvNoteList"
+            app:layout_constraintEnd_toEndOf="@+id/clNotesFragment"
             app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="@+id/rvNoteList"
-            app:layout_constraintTop_toTopOf="@+id/rvNoteList"
+            app:layout_constraintStart_toStartOf="@+id/clNotesFragment"
+            app:layout_constraintTop_toTopOf="@+id/clNotesFragment"
             app:srcCompat="@drawable/ic_no_notes" />
 
         <SearchView
@@ -88,7 +94,7 @@
             android:src="?attr/addIcon"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/rvNoteList"
+            app:layout_constraintEnd_toEndOf="@+id/clNotesFragment"
             bind:targetApi="lollipop" />
 
         <TextView

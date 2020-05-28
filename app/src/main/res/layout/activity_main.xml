@@ -21,6 +21,7 @@
             android:theme="@style/BottomNavView"
             app:itemBackground="@null"
             app:labelVisibilityMode="unlabeled"
+            android:elevation="8dp"
             app:itemIconTint="@color/bottom_nav_colors"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

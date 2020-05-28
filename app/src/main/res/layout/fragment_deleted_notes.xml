@@ -39,9 +39,9 @@
             android:layout_width="170dp"
             android:layout_height="170dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/rvDeletedNotes"
+            app:layout_constraintBottom_toBottomOf="@+id/clDelNotesFragment"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/rvDeletedNotes"
+            app:layout_constraintStart_toStartOf="@+id/clDelNotesFragment"
             app:layout_constraintTop_toBottomOf="@+id/svDeletedNotes"
             app:layout_constraintVertical_bias="0.35000002"
             app:srcCompat="@drawable/ic_trash_green" />
@@ -61,9 +61,8 @@
             app:layout_constraintTop_toBottomOf="@+id/imgNoNotesDeleted"
             tools:textStyle="bold" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDeletedNotes"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/clDelNotesFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="1dp"
@@ -74,7 +73,16 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/svDeletedNotes"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDeletedNotes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                app:layout_behavior=".helper.OverScrollBehavior" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

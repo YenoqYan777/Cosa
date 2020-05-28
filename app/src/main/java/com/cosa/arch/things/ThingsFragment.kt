@@ -35,6 +35,7 @@ import com.cosa.extension.setToolBarColor
 import com.cosa.models.Things
 import com.cosa.repository.CacheStore
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_item_dialog.view.*
 import kotlinx.android.synthetic.main.dialog_are_you_sure.view.*
 import kotlinx.android.synthetic.main.fragment_things.*
@@ -64,7 +65,12 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+        requireActivity().setToolBarColor(
+            requireActivity(),
+            requireActivity(),
+            R.color.mainDarkBckg
+        )
+        requireActivity().bottomNavigationView.visibility = VISIBLE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_things, container, false
         )
@@ -89,13 +95,13 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         })
 
         viewModel.wholeClicked.observe(viewLifecycleOwner, Observer {
-         it.getContentIfNotHandled()?.let{ things ->
-             viewModel.navigate(
-                ThingsFragmentDirections.actionThingsFragmentToThingsDetailFragment(
-                    things.id
+            it.getContentIfNotHandled()?.let { things ->
+                viewModel.navigate(
+                    ThingsFragmentDirections.actionThingsFragmentToThingsDetailFragment(
+                        things.id
+                    )
                 )
-            )
-         }
+            }
         })
     }
 
@@ -348,7 +354,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
 
     private fun itemDelete(mThings: Things) {
         val dialogViewDelItem =
-            LayoutInflater.from(activity).inflate(R.layout.dialog_are_you_sure, null)
+            View.inflate(requireContext(), R.layout.dialog_are_you_sure, null)
 
         val mBuilder = AlertDialog.Builder(activity)
             .setView(dialogViewDelItem)

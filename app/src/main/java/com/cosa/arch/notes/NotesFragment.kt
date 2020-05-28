@@ -28,6 +28,7 @@ import com.cosa.extension.setToolBarColor
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
 import com.cosa.helper.LocalManager.SHARED
 import com.cosa.models.Notes
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_are_you_sure.view.*
 import kotlinx.android.synthetic.main.fragment_notes.*
 
@@ -40,8 +41,12 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
-
+        requireActivity().setToolBarColor(
+            requireActivity(),
+            requireActivity(),
+            R.color.mainDarkBckg
+        )
+        requireActivity().bottomNavigationView.visibility = VISIBLE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_notes, container, false
         )
@@ -142,7 +147,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
 
     private fun itemDelete(notes: Notes) {
         val dialogViewDelItem =
-            LayoutInflater.from(activity).inflate(R.layout.dialog_are_you_sure, null)
+            View.inflate(requireContext(), R.layout.dialog_are_you_sure, null)
 
         val mBuilder = AlertDialog.Builder(activity)
             .setView(dialogViewDelItem)

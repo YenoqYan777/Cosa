@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,6 +18,7 @@ import com.cosa.databinding.ActivityMainBinding
 import com.cosa.extension.isStoragePermissionGranted
 import com.cosa.extension.setToolBarColor
 import com.cosa.helper.LocalManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setToolBarColor(this, this, R.color.mainDarkBckg)
-
         val pref: SharedPreferences =
             this.getSharedPreferences(LocalManager.SHARED, Context.MODE_PRIVATE)
 
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             setTheme(R.style.AppTheme_NoActionBar)
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.bottomNavigationView.visibility = View.VISIBLE
         isStoragePermissionGranted()
         setUpNavigation()
     }

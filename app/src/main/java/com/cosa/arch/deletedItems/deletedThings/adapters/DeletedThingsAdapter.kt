@@ -45,6 +45,7 @@ class DeletedThingsAdapter(
 
     override fun getItemCount(): Int = filteredItems.size
 
+    @Suppress("UNCHECKED_CAST")
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {

@@ -19,6 +19,7 @@ import com.cosa.extension.setToolBarColor
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
+import kotlinx.android.synthetic.main.activity_main.*
 
 class ThingsDetailsFragment : BaseFragment() {
     private lateinit var binding: FragmentThingsDetailsBinding
@@ -31,6 +32,7 @@ class ThingsDetailsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+        requireActivity().bottomNavigationView.visibility = View.GONE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_things_details, container, false
         )

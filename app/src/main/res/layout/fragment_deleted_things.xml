@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:background="?attr/backgroundColor"
         tools:context=".arch.deletedItems.deletedThings.DeletedThingsFragment">
+
         <SearchView
             android:id="@+id/svDeletedThings"
             android:layout_width="match_parent"
@@ -37,9 +38,9 @@
             android:layout_width="170dp"
             android:layout_height="170dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/rvDeletedThings"
+            app:layout_constraintBottom_toBottomOf="@+id/clDelThingsFragment"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/rvDeletedThings"
+            app:layout_constraintStart_toStartOf="@+id/clDelThingsFragment"
             app:layout_constraintTop_toBottomOf="@+id/svDeletedThings"
             app:layout_constraintVertical_bias="0.36"
             app:srcCompat="@drawable/ic_trash_orange" />
@@ -59,8 +60,8 @@
             tools:textStyle="bold" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDeletedThings"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/clDelThingsFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="1dp"
@@ -69,8 +70,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/svDeletedThings" />
+            app:layout_constraintTop_toBottomOf="@+id/svDeletedThings">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDeletedThings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                app:layout_behavior=".helper.OverScrollBehavior" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

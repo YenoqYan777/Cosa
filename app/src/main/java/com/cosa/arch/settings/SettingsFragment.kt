@@ -24,6 +24,7 @@ import com.cosa.helper.LocalManager.SAVE_TRASH_KEY
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
 import com.cosa.helper.LocalManager.SHARED
 import com.cosa.helper.LocalManager.THEME_KEY
+import kotlinx.android.synthetic.main.activity_main.*
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
@@ -34,6 +35,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+        requireActivity().bottomNavigationView.visibility = View.VISIBLE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_settings, container, false
         )
@@ -136,9 +138,7 @@ class SettingsFragment : Fragment() {
                     }
                 }
             }
-
         }
-
     }
 
     private fun restartApp() {

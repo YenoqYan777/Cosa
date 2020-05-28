@@ -99,5 +99,4 @@ dependencies {
 
     //Material
     implementation "com.google.android.material:material:${versions.material_version}"
-
 }

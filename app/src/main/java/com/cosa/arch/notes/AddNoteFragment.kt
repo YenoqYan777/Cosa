@@ -12,6 +12,7 @@ import com.cosa.databinding.FragmentAddNoteBinding
 import com.cosa.extension.hideKeyboard
 import com.cosa.extension.setToolBarColor
 import com.cosa.models.Notes
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class AddNoteFragment : BaseFragment() {
@@ -23,7 +24,7 @@ class AddNoteFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
-
+        requireActivity().bottomNavigationView.visibility = View.GONE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_add_note, container, false
         )
@@ -42,7 +43,7 @@ class AddNoteFragment : BaseFragment() {
     }
 
     private fun initToolbar() {
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true);
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false)
 
