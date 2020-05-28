@@ -9,14 +9,14 @@
     <string name="cancel">Отмена</string>
     <string name="place_required_error">Место не может быть пустым!</string>
     <string name="name_required_error">Название не может быть пустым!</string>
-    <string name="no_things_added">Нет добавленных вещей</string>
+    <string name="no_things_added">Нет вещей</string>
     <string name="search">Поиск</string>
     <string name="save_changes">Сохранить</string>
     <string name="edit">Изменить</string>
     <string name="delete">Удалить</string>
     <string name="take_a_photo">Сделайте фото вещи!</string>
     <string name="no_notes_added">Заметок нету</string>
-    <string name="your_notes_here">Ваши заметки здесь!</string>
+    <string name="your_notes_here">Текст</string>
     <string name="confirm">Подтвердить</string>
     <string name="things">Вещи</string>
     <string name="notes">Заметки</string>

@@ -10,14 +10,14 @@
     <string name="cancel">Չեղարկել</string>
     <string name="place_required_error">Վայրի անվանումը չի կարող դատարկ լինել!</string>
     <string name="name_required_error">Իրի անվանումը չի կարող դատարկ լինել!</string>
-    <string name="no_things_added">Ավելացված իրեր չկան</string>
+    <string name="no_things_added">Իրեր չկան</string>
     <string name="search">Փնտրել</string>
     <string name="save_changes">Պահպանել</string>
     <string name="edit">Փոփոխել</string>
     <string name="delete">Ջնջել</string>
     <string name="take_a_photo">Լուսանկարեք ձեր իրը!</string>
     <string name="no_notes_added">Նշումներ չկան</string>
-    <string name="your_notes_here">Ձեր նշումները այստեղ</string>
+    <string name="your_notes_here">Տեքստ</string>
     <string name="confirm">Հաստատել</string>
     <string name="things">Իրեր</string>
     <string name="notes">Նշումներ</string>

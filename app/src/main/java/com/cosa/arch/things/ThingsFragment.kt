@@ -202,20 +202,20 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         mThings: Things
     ) {
         when {
-            dialogView.editNameText.text.toString()
-                .isEmpty() &&
-                    dialogView.editPlaceText.text.toString()
-                        .isEmpty() -> {
+            dialogView.editNameText.text!!.trim().toString()
+                .isBlank() &&
+                    dialogView.editPlaceText.text!!.trim().toString()
+                        .isBlank() -> {
                 setError(dialogView.editPlaceInputLayout, R.string.place_required_error)
                 setError(dialogView.editNameInputLayout, R.string.name_required_error)
             }
-            dialogView.editNameText.text.toString()
-                .isEmpty() -> {
+            dialogView.editNameText.text!!.trim().toString()
+                .isBlank() -> {
                 setError(dialogView.editPlaceInputLayout, null)
                 setError(dialogView.editNameInputLayout, R.string.name_required_error)
             }
-            dialogView.editPlaceText.text.toString()
-                .isEmpty() -> {
+            dialogView.editPlaceText.text!!.trim().toString()
+                .isBlank() -> {
                 setError(dialogView.editPlaceInputLayout, R.string.place_required_error)
                 setError(dialogView.editNameInputLayout, null)
             }
@@ -263,45 +263,49 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
 
         when {
             !isImageUploaded &&
-                    dialogView.nameText.text.toString()
-                        .isEmpty() &&
-                    dialogView.placeText.text.toString()
-                        .isEmpty() -> {
+                    dialogView.nameText.text!!.trim().toString()
+                        .isBlank() &&
+                    dialogView.placeText.text!!.trim().toString()
+                        .isBlank() -> {
                 setError(dialogView.placeInputLayout, R.string.place_required_error)
                 setError(dialogView.nameInputLayout, R.string.name_required_error)
                 Toast.makeText(activity, getString(R.string.take_a_photo), Toast.LENGTH_LONG).show()
             }
             !isImageUploaded &&
-                    dialogView.nameText.text.toString()
-                        .isEmpty() -> {
+                    dialogView.nameText.text!!.trim().toString()
+                        .isBlank() -> {
                 Toast.makeText(activity, getString(R.string.take_a_photo), Toast.LENGTH_LONG).show()
                 setError(dialogView.placeInputLayout, null)
                 setError(dialogView.nameInputLayout, R.string.name_required_error)
             }
             !isImageUploaded &&
-                    dialogView.placeText.text.toString()
-                        .isEmpty() -> {
+                    dialogView.placeText.text!!.trim().toString()
+                        .isBlank() -> {
                 setError(dialogView.placeInputLayout, R.string.place_required_error)
                 setError(dialogView.nameInputLayout, null)
                 Toast.makeText(activity, getString(R.string.take_a_photo), Toast.LENGTH_LONG).show()
             }
             !isImageUploaded -> {
+                setError(dialogView.nameInputLayout, null)
+                setError(dialogView.placeInputLayout, null)
                 Toast.makeText(activity, getString(R.string.take_a_photo), Toast.LENGTH_LONG).show()
             }
-            dialogView.nameText.text.toString()
-                .isEmpty() &&
-                    dialogView.placeText.text.toString()
-                        .isEmpty() -> {
+
+            dialogView.nameText.text!!.trim().toString()
+                .isBlank() &&
+                    dialogView.placeText.text!!.trim().toString()
+                        .isBlank() -> {
                 setError(dialogView.placeInputLayout, R.string.place_required_error)
                 setError(dialogView.nameInputLayout, R.string.name_required_error)
             }
-            dialogView.nameText.text.toString()
-                .isEmpty() -> {
+
+            dialogView.nameText.text!!.trim().toString()
+                .isBlank() -> {
                 setError(dialogView.placeInputLayout, null)
                 setError(dialogView.nameInputLayout, R.string.name_required_error)
             }
-            dialogView.placeText.text.toString()
-                .isEmpty() -> {
+            dialogView.placeText.text!!.trim().toString()
+                .isBlank() -> {
                 setError(dialogView.placeInputLayout, R.string.place_required_error)
                 setError(dialogView.nameInputLayout, null)
             }

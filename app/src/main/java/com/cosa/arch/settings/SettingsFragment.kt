@@ -127,6 +127,7 @@ class SettingsFragment : Fragment() {
                     pref.edit().run {
                         putString(THEME_KEY, "dark")
                         apply()
+                        requireActivity().finish()
                         restartApp()
                     }
                 }
@@ -134,6 +135,7 @@ class SettingsFragment : Fragment() {
                     pref.edit().run {
                         putString(THEME_KEY, "light")
                         apply()
+                        requireActivity().finish()
                         restartApp()
                     }
                 }
@@ -144,7 +146,7 @@ class SettingsFragment : Fragment() {
     private fun restartApp() {
         val i = Intent(activity, MainActivity::class.java)
         startActivity(i)
-        requireActivity().fragmentManager.popBackStack()
+        requireActivity().fragmentManager.popBackStackImmediate()
     }
 
     private fun refreshActivity() {

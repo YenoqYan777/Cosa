@@ -23,7 +23,11 @@ class AddNoteFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+        requireActivity().setToolBarColor(
+            requireActivity(),
+            requireActivity(),
+            R.color.mainDarkBckg
+        )
         requireActivity().bottomNavigationView.visibility = View.GONE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_add_note, container, false
@@ -68,7 +72,9 @@ class AddNoteFragment : BaseFragment() {
     }
 
     private fun onAcceptBtnClicked() {
-        if (!binding.etNoteContent.text.isNullOrEmpty()) {
+        if (!binding.etNoteContent.text.isNullOrEmpty() && binding.etNoteContent.text.toString()
+                .trim().isNotEmpty()
+        ) {
             viewModel.insertNote(Notes(text = binding.etNoteContent.text.toString()))
             hideKeyboard(requireActivity())
             viewModel.navigateBack()

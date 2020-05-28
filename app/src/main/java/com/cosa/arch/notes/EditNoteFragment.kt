@@ -4,7 +4,6 @@ import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -26,7 +25,11 @@ class EditNoteFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+        requireActivity().setToolBarColor(
+            requireActivity(),
+            requireActivity(),
+            R.color.mainDarkBckg
+        )
         requireActivity().bottomNavigationView.visibility = View.GONE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_edit_note, container, false
@@ -55,7 +58,10 @@ class EditNoteFragment : BaseFragment() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false)
         val a: TypedArray =
-            requireActivity().theme.obtainStyledAttributes(R.style.AppTheme, intArrayOf(R.attr.backIcon))
+            requireActivity().theme.obtainStyledAttributes(
+                R.style.AppTheme,
+                intArrayOf(R.attr.backIcon)
+            )
         val attributeResourceId = a.getResourceId(0, 0)
         val drawable = resources.getDrawable(attributeResourceId)
         binding.toolbarEditNote.navigationIcon = drawable
@@ -80,7 +86,9 @@ class EditNoteFragment : BaseFragment() {
     }
 
     private fun onAcceptBtnClicked() {
-        if (!binding.etEditNoteContent.text.isNullOrEmpty()) {
+        if (!binding.etEditNoteContent.text.isNullOrEmpty() && binding.etEditNoteContent.text.toString()
+                .trim().isNotEmpty()
+        ) {
             viewModel.updateNoteInfo(
                 binding.etEditNoteContent.text.toString(),
                 viewModel.getItemId()
