@@ -8,6 +8,7 @@
         <attr name="textColorLight" format="color"/>
         <attr name="inactiveColor" format="color"/>
         <attr name="activeColor" format="color"/>
+        <attr name="separatorLineColor" format="color"/>
 
 <!--        Icons-->
         <attr name="backIcon" format="reference" />

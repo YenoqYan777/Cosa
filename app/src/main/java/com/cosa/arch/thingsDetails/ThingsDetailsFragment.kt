@@ -45,13 +45,14 @@ class ThingsDetailsFragment : BaseFragment() {
         mInterstitialAd = InterstitialAd(requireActivity())
         mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
         mInterstitialAd.loadAd(AdRequest.Builder().build())
+        backPressed()
         mInterstitialAd.adListener = object : AdListener() {
             override fun onAdLoaded() {
                 super.onAdLoaded()
                 if (mInterstitialAd.isLoaded) {
                     mInterstitialAd.show()
                 }
-                backPressed()
+
             }
         }
     }

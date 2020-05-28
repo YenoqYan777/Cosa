@@ -12,6 +12,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="separatorColorDark">#26626C</color>
 
     <!-- light Theme colors -->
 
@@ -24,6 +25,7 @@
     <color name="lightItemBckg">#dee4e7</color>
     <color name="lighterItemBckg">#0784b5</color>
     <color name="notSelectedItem">#99aab5</color>
+    <color name="separatorColorLight">#D1D7DA</color>
     <!--    <color name="lightItemBckg">#ebf2ea</color>-->
     <color name="app_red">#F44336</color>
 </resources>

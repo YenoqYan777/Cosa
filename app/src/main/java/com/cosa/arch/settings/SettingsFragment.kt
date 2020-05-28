@@ -1,6 +1,5 @@
 package com.cosa.arch.settings
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,7 +13,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.cosa.R
 import com.cosa.arch.MainActivity
-import com.cosa.arch.base.BaseViewModel
 import com.cosa.databinding.FragmentSettingsBinding
 import com.cosa.helper.LocalManager
 import com.cosa.helper.LocalManager.LANGUAGE_KEY
@@ -22,7 +20,6 @@ import com.cosa.helper.LocalManager.SAVE_TRASH_KEY
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
 import com.cosa.helper.LocalManager.SHARED
 import com.cosa.helper.LocalManager.THEME_KEY
-
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
@@ -100,7 +97,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun setThemeList(){
+    private fun setThemeList() {
         val themeList =
             listOf(getString(R.string.dark), getString(R.string.light))
         val adapter: ArrayAdapter<String> =
@@ -108,7 +105,7 @@ class SettingsFragment : Fragment() {
 
         binding.themeListSettings.adapter = adapter
         binding.themeListSettings.choiceMode = ListView.CHOICE_MODE_SINGLE
-        when(pref.getString(THEME_KEY, "dark")){
+        when (pref.getString(THEME_KEY, "dark")) {
             "dark" -> {
                 binding.themeListSettings.setItemChecked(0, true)
             }
@@ -116,15 +113,15 @@ class SettingsFragment : Fragment() {
                 binding.themeListSettings.setItemChecked(1, true)
             }
         }
-        
+
         binding.themeListSettings.setOnItemClickListener { parent, view, position, id ->
-            when(position){
+            when (position) {
                 0 -> {
-                   pref.edit().run {
-                       putString(THEME_KEY, "dark")
-                       apply()
-                       restartApp()
-                   }
+                    pref.edit().run {
+                        putString(THEME_KEY, "dark")
+                        apply()
+                        restartApp()
+                    }
                 }
                 1 -> {
                     pref.edit().run {
@@ -138,8 +135,9 @@ class SettingsFragment : Fragment() {
         }
 
     }
-    private fun restartApp(){
-        val i = Intent(activity , MainActivity::class.java)
+
+    private fun restartApp() {
+        val i = Intent(activity, MainActivity::class.java)
         startActivity(i)
         requireActivity().fragmentManager.popBackStack()
     }

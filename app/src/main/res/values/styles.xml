@@ -26,6 +26,7 @@
         <item name="noThingsIcon">@drawable/ic_no_things</item>
         <item name="searchIcon">@drawable/ic_search</item>
         <item name="addIcon">@drawable/ic_add</item>
+        <item name="separatorLineColor">@color/separatorColorDark</item>
         <item name="itemBackgroundColor">@color/darkItemBckg</item>
         <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
         <item name="android:itemTextAppearance">@style/itemTextStyle.AppTheme</item>
@@ -83,6 +84,7 @@
         <item name="confirmIcon">@drawable/ic_confirm_light</item>
         <item name="searchIcon">@drawable/ic_search_light</item>
         <item name="addIcon">@drawable/ic_add_light</item>
+        <item name="separatorLineColor">@color/separatorColorLight</item>
         <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyleLight</item>
         <item name="android:itemTextAppearance">@style/itemTextStyle.AppThemeLight</item>
         <item name="android:popupMenuStyle">@style/PopupMenuLight</item>
