@@ -26,7 +26,6 @@ class ThingsDetailViewModel(application: Application) : BaseViewModel(applicatio
                 .subscribe()
                 .addTo(compositeDisposable)
         }
-
     }
 
     override fun onCleared() {

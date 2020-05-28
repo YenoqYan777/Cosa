@@ -20,7 +20,5 @@ class ThingsViewHolder constructor(
         binding.editButton = binding.root.btn_edit
         binding.wholeItem = binding.root.cvThingAdded
         binding.imgThingAdded = binding.root.image_thing_added
-
-
     }
 }

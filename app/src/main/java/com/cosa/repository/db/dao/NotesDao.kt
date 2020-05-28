@@ -16,9 +16,6 @@ interface NotesDao {
     fun updateNote(id: Long, text: String?): Int
 
     @Insert
-    fun insertAll(vararg notes: Notes)
-
-    @Insert
     fun insert(notes: Notes)
 
     @Delete

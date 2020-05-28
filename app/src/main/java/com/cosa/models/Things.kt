@@ -8,11 +8,7 @@ import androidx.room.PrimaryKey
 data class Things @JvmOverloads constructor(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
-
     var thing: String = "",
-
     var place: String = "",
-
     var cacheUri: String = ""
-
 )

@@ -3,17 +3,21 @@ package com.cosa.arch.settings
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.cosa.R
 import com.cosa.arch.MainActivity
 import com.cosa.databinding.FragmentSettingsBinding
+import com.cosa.extension.setToolBarColor
 import com.cosa.helper.LocalManager
 import com.cosa.helper.LocalManager.LANGUAGE_KEY
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY
@@ -29,6 +33,7 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_settings, container, false
         )
@@ -142,7 +147,6 @@ class SettingsFragment : Fragment() {
         requireActivity().fragmentManager.popBackStack()
     }
 
-
     private fun refreshActivity() {
         val intent = requireActivity().intent
         intent.addFlags(
@@ -155,4 +159,6 @@ class SettingsFragment : Fragment() {
         requireActivity().overridePendingTransition(0, 0)
         startActivity(intent)
     }
+
+
 }

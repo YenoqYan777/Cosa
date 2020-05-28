@@ -32,6 +32,4 @@ object ThingsBindingAdapter {
             return@OnLongClickListener true
         })
     }
-
-
 }

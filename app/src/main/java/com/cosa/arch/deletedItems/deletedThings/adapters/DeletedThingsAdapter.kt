@@ -28,8 +28,6 @@ class DeletedThingsAdapter(
     private var filteredItems: MutableList<DeletedThings> = ArrayList()
     private var lastPosition = -1
 
-    fun getData(): MutableList<DeletedThings> = originalItems
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return DeletedThingsViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_deleted_things, parent, false)

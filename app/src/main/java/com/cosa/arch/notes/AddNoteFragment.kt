@@ -10,6 +10,7 @@ import com.cosa.arch.base.BaseFragment
 import com.cosa.arch.base.BaseViewModel
 import com.cosa.databinding.FragmentAddNoteBinding
 import com.cosa.extension.hideKeyboard
+import com.cosa.extension.setToolBarColor
 import com.cosa.models.Notes
 
 
@@ -21,6 +22,8 @@ class AddNoteFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_add_note, container, false
         )
@@ -73,6 +76,4 @@ class AddNoteFragment : BaseFragment() {
             viewModel.navigateBack()
         }
     }
-
-
 }

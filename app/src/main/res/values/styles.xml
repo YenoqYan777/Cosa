@@ -6,10 +6,6 @@
         <item name="colorAccent">@color/textColor</item>
     </style>
 
-<!--    <attr name="searchIcon" format="reference" />-->
-<!--    <attr name="addIcon" format="reference" />-->
-
-
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/darkerItemBckg</item>
         <item name="colorPrimaryDark">@color/mainDarkBckg</item>
@@ -37,9 +33,8 @@
         <item name="android:textColorHint">@color/textColor</item>
     </style>
 
-
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
-        <item name="android:popupBackground">@drawable/round_popup_menu</item>
+        <item name="android:popupBackground">@drawable/rounded_popup_menu</item>
     </style>
 
     <style name="itemTextStyle.AppTheme" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
@@ -108,7 +103,7 @@
     </style>
 
     <style name="PopupMenuLight" parent="@android:style/Widget.PopupMenu">
-        <item name="android:popupBackground">@drawable/light_round_popup_menu</item>
+        <item name="android:popupBackground">@drawable/rounded_popup_menu_light</item>
     </style>
 
     <style name="itemTextStyle.AppThemeLight" parent="@android:style/TextAppearance.Widget.IconMenu.Item">

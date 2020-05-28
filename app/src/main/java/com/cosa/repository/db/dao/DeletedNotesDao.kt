@@ -13,9 +13,6 @@ interface DeletedNotesDao {
     fun getAll(): LiveData<MutableList<DeletedNotes>>
 
     @Insert
-    fun insertAll(vararg delNote: DeletedNotes)
-
-    @Insert
     fun insert(delNote: DeletedNotes)
 
     @Delete

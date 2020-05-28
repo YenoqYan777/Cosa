@@ -24,6 +24,7 @@ import com.cosa.arch.common.WrapContentLinearLayoutManager
 import com.cosa.arch.notes.adapters.NotesAdapter
 import com.cosa.arch.notes.adapters.NotesDiffCallback
 import com.cosa.databinding.FragmentNotesBinding
+import com.cosa.extension.setToolBarColor
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
 import com.cosa.helper.LocalManager.SHARED
 import com.cosa.models.Notes
@@ -39,6 +40,8 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_notes, container, false
         )
@@ -164,7 +167,6 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         }
 
     }
-
 
     override fun onItemSwipedRight(position: Int) {
         itemDelete(notesAdapter.getData()[position])

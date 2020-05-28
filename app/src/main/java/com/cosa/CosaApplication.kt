@@ -44,7 +44,6 @@ class CosaApplication : Application() {
         }
     }
 
-
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(LocalManager.setLocale(base))
     }

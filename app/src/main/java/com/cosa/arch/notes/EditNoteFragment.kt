@@ -14,6 +14,7 @@ import com.cosa.arch.base.BaseFragment
 import com.cosa.arch.base.BaseViewModel
 import com.cosa.databinding.FragmentEditNoteBinding
 import com.cosa.extension.hideKeyboard
+import com.cosa.extension.setToolBarColor
 
 
 class EditNoteFragment : BaseFragment() {
@@ -24,6 +25,8 @@ class EditNoteFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_edit_note, container, false
         )

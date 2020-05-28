@@ -12,7 +12,6 @@ class CacheStore private constructor(private val externalCacheDir: String) {
     private var cacheMap: HashMap<String, String>
     private val bitmapMap: HashMap<String, Bitmap>
 
-
     private fun cleanCacheStart() {
         cacheMap = HashMap()
         val fullCacheDir = File(
@@ -87,7 +86,6 @@ class CacheStore private constructor(private val externalCacheDir: String) {
         bitmapMap[cacheUri] = bm
         return bm
     }
-
 
     companion object {
         private var INSTANCE: CacheStore? = null

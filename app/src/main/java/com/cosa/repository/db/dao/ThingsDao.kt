@@ -10,7 +10,7 @@ interface ThingsDao {
     fun getAll(): LiveData<MutableList<Things>>
 
     @Query("SELECT * FROM things WHERE id = :id")
-    fun getThingAddedBy(id:Long): Things
+    fun getThingAddedBy(id: Long): Things
 
     @Query("UPDATE things SET thing = :name WHERE id = :id")
     fun updateThingName(id: Long, name: String?): Int
@@ -29,5 +29,4 @@ interface ThingsDao {
 
     @Delete
     fun deleteItem(things: Things)
-
 }

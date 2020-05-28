@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI
 import com.cosa.R
 import com.cosa.databinding.ActivityMainBinding
 import com.cosa.extension.isStoragePermissionGranted
+import com.cosa.extension.setToolBarColor
 import com.cosa.helper.LocalManager
 
 
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setToolbarColor()
+        setToolBarColor(this, this, R.color.mainDarkBckg)
 
         val pref: SharedPreferences =
             this.getSharedPreferences(LocalManager.SHARED, Context.MODE_PRIVATE)
@@ -45,18 +46,6 @@ class MainActivity : AppCompatActivity() {
             navController
         )
 
-    }
-
-    private fun setToolbarColor() {
-        this.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.window.statusBarColor = ContextCompat.getColor(this, R.color.darkerBckg)
-        }
     }
 
     override fun attachBaseContext(newBase: Context) {

@@ -31,6 +31,7 @@ import com.cosa.arch.common.SwipeHandler
 import com.cosa.arch.things.adapters.ThingsAdapter
 import com.cosa.arch.things.adapters.ThingsDiffCallBack
 import com.cosa.databinding.FragmentThingsBinding
+import com.cosa.extension.setToolBarColor
 import com.cosa.models.Things
 import com.cosa.repository.CacheStore
 import com.google.android.material.textfield.TextInputLayout
@@ -63,10 +64,10 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_things, container, false
         )
-
         return binding.root
     }
 

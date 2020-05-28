@@ -12,9 +12,6 @@ interface SettingsDao {
     fun getAll(): LiveData<MutableList<Settings>>
 
     @Insert
-    fun insertAll(vararg settings: Settings)
-
-    @Insert
     fun insert(settings: Settings)
 
 }
