@@ -52,6 +52,7 @@ class DeletedThingsFragment : Fragment() {
         viewModel.getDeletedThingAdded().observe(viewLifecycleOwner, Observer {
             activity?.runOnUiThread {
                 adapter.setOriginalItems(it)
+                binding.rvDeletedThings.smoothScrollToPosition(adapter.itemCount)
             }
             if (it.isEmpty()) {
                 noItemDeleted.visibility = View.VISIBLE
@@ -65,14 +66,13 @@ class DeletedThingsFragment : Fragment() {
 
     private fun initRecyclerView() {
         val mLayoutManager = WrapContentLinearLayoutManager(requireContext())
-        adapter =
-            DeletedThingsAdapter(
-                DeletedThingsDiffCallBack(),
-                requireContext(),
-                viewModel
-            )
-        rvDeletedThings.layoutManager = mLayoutManager
-        rvDeletedThings.adapter = adapter
+        adapter = DeletedThingsAdapter(DeletedThingsDiffCallBack(), requireContext(), viewModel)
+        mLayoutManager.reverseLayout = true
+        mLayoutManager.stackFromEnd = true
+        binding.rvDeletedThings.apply {
+            layoutManager = mLayoutManager
+            adapter = this@DeletedThingsFragment.adapter
+        }
     }
 
     private fun createMenuForRecyclerView(view: View, deletedThings: DeletedThings) {
@@ -82,7 +82,6 @@ class DeletedThingsFragment : Fragment() {
             when (item.itemId) {
                 R.id.recovery -> {
                     viewModel.recoverItem(deletedThings)
-                    adapter.notifyDataSetChanged()
                 }
                 R.id.delete -> {
                     viewModel.completelyDeleteThing(deletedThings)

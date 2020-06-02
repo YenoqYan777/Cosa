@@ -24,7 +24,6 @@ class DeletedNotesAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
     private var originalItems: MutableList<DeletedNotes> = ArrayList()
     private var filteredItems: MutableList<DeletedNotes> = ArrayList()
-    private var lastPosition = -1
 
     fun getData(): MutableList<DeletedNotes> = originalItems
 
@@ -38,7 +37,7 @@ class DeletedNotesAdapter(
         when (holder) {
             is DeletedNotesViewHolder -> {
                 holder.bind(filteredItems[position], viewModel)
-                setAnimation(holder.itemView, position)
+                setAnimation(holder.itemView)
             }
         }
     }
@@ -86,12 +85,9 @@ class DeletedNotesAdapter(
         result.dispatchUpdatesTo(this)
     }
 
-    private fun setAnimation(viewToAnimate: View, position: Int) {
-        if (position > lastPosition) {
+    private fun setAnimation(viewToAnimate: View) {
             val animation: Animation =
-                AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left)
+                AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down)
             viewToAnimate.startAnimation(animation)
-            lastPosition = position
-        }
     }
 }

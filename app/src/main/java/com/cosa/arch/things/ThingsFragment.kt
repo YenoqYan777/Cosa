@@ -16,6 +16,8 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.SearchView
@@ -23,11 +25,12 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.cosa.R
 import com.cosa.arch.base.BaseFragment
 import com.cosa.arch.base.BaseViewModel
 import com.cosa.arch.common.SwipeHandler
+import com.cosa.arch.common.WrapContentLinearLayoutManager
 import com.cosa.arch.things.adapters.ThingsAdapter
 import com.cosa.arch.things.adapters.ThingsDiffCallBack
 import com.cosa.databinding.FragmentThingsBinding
@@ -91,7 +94,9 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
 
     private fun observe() {
         viewModel.dotClicked.observe(viewLifecycleOwner, Observer {
-            createMenuForRecyclerView(it.first, it.second)
+            it.getContentIfNotHandled()?.let { pair ->
+                createMenuForRecyclerView(pair.first, pair.second)
+            }
         })
 
         viewModel.wholeClicked.observe(viewLifecycleOwner, Observer {
@@ -110,6 +115,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         viewModel.getThingAdded().observe(viewLifecycleOwner, Observer {
             activity?.runOnUiThread {
                 thingsAdapter.setOriginalItems(it)
+                binding.rvThingList.smoothScrollToPosition(thingsAdapter.itemCount)
             }
             if (it.isEmpty()) {
                 noItemYetText.visibility = VISIBLE
@@ -124,10 +130,15 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
     }
 
     private fun initRecyclerView() {
-        val mLayoutManager = LinearLayoutManager(activity)
+        val mLayoutManager = WrapContentLinearLayoutManager(requireContext())
         thingsAdapter = ThingsAdapter(ThingsDiffCallBack(), requireContext(), viewModel)
-        rv_thing_list.layoutManager = mLayoutManager
-        rv_thing_list.adapter = thingsAdapter
+        mLayoutManager.reverseLayout = true
+        mLayoutManager.stackFromEnd = true
+        binding.rvThingList.apply {
+            layoutManager = mLayoutManager
+            adapter = thingsAdapter
+        }
+
     }
 
     private fun createMenuForRecyclerView(view: View, things: Things) {
@@ -316,7 +327,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
                 things.place = dialogView.placeText.text.toString()
                 things.thing = dialogView.nameText.text.toString()
                 viewModel.insertThingAdded(things)
-                rv_thing_list.smoothScrollToPosition(thingsAdapter.itemCount);
+                binding.rvThingList.smoothScrollToPosition(thingsAdapter.itemCount);
             }
         }
     }

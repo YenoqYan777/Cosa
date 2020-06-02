@@ -18,8 +18,8 @@ import io.reactivex.rxkotlin.addTo
 
 class ThingsViewModel(application: Application) : BaseViewModel(application) {
 
-    private val mDotClicked = MutableLiveData<Pair<View, Things>>()
-    val dotClicked: LiveData<Pair<View, Things>> get() = mDotClicked
+    private val mDotClicked = MutableLiveData<Event<Pair<View, Things>>>()
+    val dotClicked: LiveData<Event<Pair<View, Things>>> get() = mDotClicked
 
     private val mWholeClicked = MutableLiveData<Event<Things>>()
     val wholeClicked: LiveData<Event<Things>> get() = mWholeClicked
@@ -31,7 +31,7 @@ class ThingsViewModel(application: Application) : BaseViewModel(application) {
 
 
     fun onDotsClicked(view: View, things: Things) {
-        mDotClicked.value = Pair(view, things)
+        mDotClicked.value = Event(Pair(view, things))
     }
 
     fun onWholeItemClicked(things: Things) {

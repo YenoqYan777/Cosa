@@ -16,7 +16,6 @@
     <color name="lightGrayLight">#212624</color>
     <color name="mainLightBckg">#f8f9fc</color>
     <color name="lighterBckg">#dee4e7</color>
-    <!--        <color name="lightItemBckg">#9bd4e4</color>-->
     <color name="lightItemBckg">#dee4e7</color>
     <color name="lighterItemBckg">#0784b5</color>
     <color name="notSelectedItem">#99aab5</color>

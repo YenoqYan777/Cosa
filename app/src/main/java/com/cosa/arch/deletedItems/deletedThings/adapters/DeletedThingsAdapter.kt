@@ -26,7 +26,6 @@ class DeletedThingsAdapter(
 
     private var originalItems: MutableList<DeletedThings> = ArrayList()
     private var filteredItems: MutableList<DeletedThings> = ArrayList()
-    private var lastPosition = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return DeletedThingsViewHolder(
@@ -38,7 +37,7 @@ class DeletedThingsAdapter(
         when (holder) {
             is DeletedThingsViewHolder -> {
                 holder.bind(filteredItems[position], viewModel)
-                setAnimation(holder.itemView, position)
+                setAnimation(holder.itemView)
             }
         }
     }
@@ -93,12 +92,9 @@ class DeletedThingsAdapter(
         result.dispatchUpdatesTo(this)
     }
 
-    private fun setAnimation(viewToAnimate: View, position: Int) {
-        if (position > lastPosition) {
-            val animation: Animation =
-                AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left)
-            viewToAnimate.startAnimation(animation)
-            lastPosition = position
-        }
+    private fun setAnimation(viewToAnimate: View) {
+        val animation: Animation =
+            AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down)
+        viewToAnimate.startAnimation(animation)
     }
 }

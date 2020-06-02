@@ -25,7 +25,6 @@ class ThingsAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
     private var originalItems: MutableList<Things> = ArrayList()
     private var filteredItems: MutableList<Things> = ArrayList()
-    private var lastPosition = -1
 
     fun getData(): MutableList<Things> = originalItems
 
@@ -39,7 +38,7 @@ class ThingsAdapter(
         when (holder) {
             is ThingsViewHolder -> {
                 holder.bind(filteredItems[position], viewModel)
-                setAnimation(holder.itemView, position)
+                setAnimation(holder.itemView)
             }
         }
     }
@@ -82,7 +81,7 @@ class ThingsAdapter(
         originalItems.clear()
         originalItems.addAll(originalList)
         originalItems.sortWith(Comparator { o1, o2 -> o1.id.compareTo(o2.id) })
-        submitList(originalList)
+         submitList(originalList)
     }
 
     private fun submitList(thingList: MutableList<Things>) {
@@ -92,13 +91,10 @@ class ThingsAdapter(
         filteredItems.addAll(thingList)
         result.dispatchUpdatesTo(this)
     }
-
-    private fun setAnimation(viewToAnimate: View, position: Int) {
-        if (position > lastPosition) {
-            val animation: Animation =
-                AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left)
-            viewToAnimate.startAnimation(animation)
-            lastPosition = position
-        }
+    private fun setAnimation(viewToAnimate: View) {
+        val animation: Animation =
+            AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down)
+        viewToAnimate.startAnimation(animation)
     }
+
 }

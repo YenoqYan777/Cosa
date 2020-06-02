@@ -11,11 +11,14 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
 import com.cosa.R
 import com.cosa.arch.base.BaseFragment
 import com.cosa.arch.base.BaseViewModel
@@ -80,6 +83,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         viewModel.getNotes().observe(viewLifecycleOwner, Observer {
             activity?.runOnUiThread {
                 notesAdapter.setOriginalItems(it)
+                binding.rvNoteList.smoothScrollToPosition(notesAdapter.itemCount)
             }
             if (it.isEmpty()) {
                 txtNoNotes.visibility = VISIBLE
@@ -115,6 +119,8 @@ class NotesFragment : BaseFragment(), SwipeHandler {
     private fun initRecyclerView() {
         val mLayoutManager = WrapContentLinearLayoutManager(requireContext())
         notesAdapter = NotesAdapter(NotesDiffCallback(), requireContext(), viewModel)
+        mLayoutManager.reverseLayout = true
+        mLayoutManager.stackFromEnd = true
         rvNoteList.apply {
             adapter = notesAdapter
             layoutManager = mLayoutManager

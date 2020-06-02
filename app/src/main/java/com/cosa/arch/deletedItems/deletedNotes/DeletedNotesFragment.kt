@@ -53,6 +53,7 @@ class DeletedNotesFragment : Fragment() {
         viewModel.getDeletedData().observe(viewLifecycleOwner, Observer {
             activity?.runOnUiThread {
                 adapter.setOriginalItems(it)
+                binding.rvDeletedNotes.smoothScrollToPosition(adapter.itemCount)
             }
             if (it.isEmpty()) {
                 noNotesDeleted.visibility = View.VISIBLE
@@ -72,7 +73,9 @@ class DeletedNotesFragment : Fragment() {
                 requireContext(),
                 viewModel
             )
-        rvDeletedNotes.apply {
+        mLayoutManager.reverseLayout = true
+        mLayoutManager.stackFromEnd = true
+        binding.rvDeletedNotes.apply {
             adapter = this@DeletedNotesFragment.adapter
             layoutManager = mLayoutManager
         }

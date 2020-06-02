@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.cosa.arch.thingsDetails.ThingsDetailViewModel" />
@@ -25,8 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:padding="5dp"
             android:foreground="?attr/selectableItemBackground"
+            android:padding="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="?attr/backIcon"
@@ -80,43 +81,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cardView2">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/backgroundColorMore">
+                android:background="?attr/backgroundColorMore"
+                android:scrollbars="none">
 
-                <TextView
-                    android:id="@+id/thingNameDetail"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="48dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/bottom_line"
-                    android:paddingBottom="8dp"
-                    android:text="@{thingToShow.thing}"
-                    android:textAlignment="center"
-                    android:textColor="?attr/textColorLight"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:background="?attr/backgroundColorMore">
 
-                <TextView
-                    android:id="@+id/placeNameDetail"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="@{thingToShow.place}"
-                    android:textColor="?attr/textColor"
-                    android:textSize="25sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/thingNameDetail"
-                    app:layout_constraintTop_toBottomOf="@+id/thingNameDetail" />
+                    <TextView
+                        android:id="@+id/thingNameDetail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="48dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/bottom_line"
+                        android:paddingBottom="8dp"
+                        android:text="@{thingToShow.thing}"
+                        android:textAlignment="center"
+                        android:textColor="?attr/textColorLight"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/placeNameDetail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="@{thingToShow.place}"
+                        android:textColor="?attr/textColor"
+                        android:textSize="25sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/thingNameDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/thingNameDetail" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

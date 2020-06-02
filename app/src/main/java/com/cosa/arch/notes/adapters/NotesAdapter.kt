@@ -24,7 +24,6 @@ class NotesAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
     private var originalItems: MutableList<Notes> = ArrayList()
     private var filteredItems: MutableList<Notes> = ArrayList()
-    private var lastPosition = -1
 
     fun getData(): MutableList<Notes> = originalItems
 
@@ -38,7 +37,7 @@ class NotesAdapter(
         when (holder) {
             is NotesViewHolder -> {
                 holder.bind(filteredItems[position], viewModel)
-                setAnimation(holder.itemView, position)
+                setAnimation(holder.itemView)
             }
         }
     }
@@ -86,12 +85,9 @@ class NotesAdapter(
         result.dispatchUpdatesTo(this)
     }
 
-    private fun setAnimation(viewToAnimate: View, position: Int) {
-        if (position > lastPosition) {
+    private fun setAnimation(viewToAnimate: View) {
             val animation: Animation =
-                AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left)
+                AnimationUtils.loadAnimation(context, R.anim.item_animation_bottom_slide)
             viewToAnimate.startAnimation(animation)
-            lastPosition = position
-        }
     }
 }
