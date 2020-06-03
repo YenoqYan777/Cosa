@@ -12,17 +12,16 @@
         android:layout_height="match_parent"
         tools:context=".arch.MainActivity">
 
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/backgroundColorMore"
+            android:elevation="8dp"
             android:theme="@style/BottomNavView"
             app:itemBackground="@null"
-            app:labelVisibilityMode="unlabeled"
-            android:elevation="8dp"
             app:itemIconTint="@color/bottom_nav_colors"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -12,8 +12,10 @@
         <action
             android:id="@+id/action_thingsFragment_to_thingsDetailFragment"
             app:destination="@id/thingsDetailsFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:enterAnim="@transition/slide_up"
+            app:exitAnim="@transition/stationary"
+            app:popEnterAnim="@transition/stationary"
+            app:popExitAnim="@transition/slide_down" />
     </fragment>
 
     <fragment
@@ -65,6 +67,7 @@
             android:id="@+id/action_thingsDetailsFragment_to_thingsFragment"
             app:destination="@id/thingsFragment"
             app:popUpTo="@id/thingsFragment"
+            app:enterAnim="@transition/slide_down"
             app:popUpToInclusive="true" />
     </fragment>
 
