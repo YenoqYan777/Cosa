@@ -25,13 +25,15 @@
         <action
             android:id="@+id/action_notesFragment_to_editNoteFragment"
             app:destination="@id/editNoteFragment"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@transition/slide_up"
+            app:exitAnim="@transition/stationary"
+            app:popEnterAnim="@transition/stationary"
+            app:popExitAnim="@transition/slide_down" />
         <action
             android:id="@+id/action_notesFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit" />
     </fragment>
 
     <fragment
