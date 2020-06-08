@@ -181,6 +181,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
 
     override fun onItemSwipedRight(position: Int) {
         itemDelete(notesAdapter.getData()[position])
+        notesAdapter.notifyItemChanged(position)
     }
 
     override fun onItemSwipedLeft(position: Int) {

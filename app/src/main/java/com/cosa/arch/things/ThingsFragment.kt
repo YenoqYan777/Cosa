@@ -199,9 +199,11 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         dialogViewEditItem.imgEditItem.setOnClickListener {
             takePhotoBtnClick()
         }
+
         dialogViewEditItem.btnSaveChanges.setOnClickListener {
             saveChangesBtnClick(dialogViewEditItem, myAlarmDialog, mThings)
         }
+
         dialogViewEditItem.imgCloseEditDialog.setOnClickListener {
             myAlarmDialog.dismiss()
         }
@@ -376,7 +378,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         val myAlarmDialog = mBuilder.show()
 
         myAlarmDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
+        myAlarmDialog.setCanceledOnTouchOutside(true)
         dialogViewDelItem.choice_yes.setOnClickListener {
             val pref: SharedPreferences =
                 requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
@@ -391,10 +393,12 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
             myAlarmDialog.dismiss()
             thingsAdapter.notifyDataSetChanged()
         }
+
     }
 
     override fun onItemSwipedRight(position: Int) {
         itemDelete(thingsAdapter.getData()[position])
+        thingsAdapter.notifyItemChanged(position)
     }
 
     override fun onItemSwipedLeft(position: Int) {
