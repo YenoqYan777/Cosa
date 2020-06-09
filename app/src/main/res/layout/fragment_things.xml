@@ -37,8 +37,6 @@
                 app:layout_behavior=".helper.OverScrollBehavior"
                 bind:bgColorSwipeLeft="@{@color/app_red}"
                 bind:bgColorSwipeRight="@{@color/app_red}"
-                bind:drawableSwipeLeft="@{@drawable/ic_close_white_24dp}"
-                bind:drawableSwipeRight="@{@drawable/ic_close_white_24dp}"
                 bind:onItemSwipeLeft="@{(position) -> swipeHandler.onItemSwipedLeft(position)}"
                 bind:onItemSwipeRight="@{(position) -> swipeHandler.onItemSwipedRight(position)}"
                 bind:swipeEnabled="@{true}" />
@@ -48,7 +46,7 @@
             android:id="@+id/btnAddNote"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="?attr/textColorLight"
             android:clickable="true"

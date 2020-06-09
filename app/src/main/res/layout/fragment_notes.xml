@@ -41,8 +41,6 @@
                 app:layout_behavior=".helper.OverScrollBehavior"
                 bind:bgColorSwipeLeft="@{@color/app_red}"
                 bind:bgColorSwipeRight="@{@color/app_red}"
-                bind:drawableSwipeLeft="@{@drawable/ic_close_white_24dp}"
-                bind:drawableSwipeRight="@{@drawable/ic_close_white_24dp}"
                 bind:onItemSwipeLeft="@{(position) -> swipeHandler.onItemSwipedLeft(position)}"
                 bind:onItemSwipeRight="@{(position) -> swipeHandler.onItemSwipedRight(position)}"
                 bind:swipeEnabled="@{true}" />

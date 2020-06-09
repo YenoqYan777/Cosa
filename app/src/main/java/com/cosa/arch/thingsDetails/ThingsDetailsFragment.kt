@@ -1,12 +1,9 @@
 package com.cosa.arch.thingsDetails
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -31,7 +28,11 @@ class ThingsDetailsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+        requireActivity().setToolBarColor(
+            requireActivity(),
+            requireActivity(),
+            R.color.mainDarkBckg
+        )
         requireActivity().bottomNavigationView.visibility = View.GONE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_things_details, container, false

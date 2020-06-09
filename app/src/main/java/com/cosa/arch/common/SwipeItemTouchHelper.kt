@@ -1,15 +1,11 @@
 package com.cosa.arch.common
 
-import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.drawable.Drawable
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 class SwipeItemTouchHelper(dragDir: Int, swipeDir: Int) :
     ItemTouchHelper.SimpleCallback(dragDir, swipeDir) {
-    private lateinit var drawableRight: Drawable
-    private lateinit var drawableLeft: Drawable
     private lateinit var onItemSwipeRightListener: OnItemSwipeListener
     private lateinit var onItemSwipeLeftListener: OnItemSwipeListener
     private var paintRight: Paint? = null
@@ -21,8 +17,6 @@ class SwipeItemTouchHelper(dragDir: Int, swipeDir: Int) :
         paintLeft = Paint(Paint.ANTI_ALIAS_FLAG)
         setPaintColor(paintRight!!, builder.bgColorSwipeRight)
         setPaintColor(paintLeft!!, builder.bgColorSwipeLeft)
-        drawableRight = builder.drawableSwipeRight!!
-        drawableLeft = builder.drawableSwipeLeft!!
         swipeEnabled = builder.swipeEnabled
         onItemSwipeRightListener = builder.onItemSwipeRightListener!!
         onItemSwipeLeftListener = builder.onItemSwipeLeftListener!!
@@ -57,46 +51,16 @@ class SwipeItemTouchHelper(dragDir: Int, swipeDir: Int) :
         }
     }
 
-    override fun onChildDraw(
-        c: Canvas,
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder,
-        dX: Float,
-        dY: Float,
-        actionState: Int,
-        isCurrentlyActive: Boolean
-    ) {
-
-        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-            val itemView = viewHolder.itemView
-            val height = itemView.bottom.toFloat() - itemView.top.toFloat()
-            val width = height / 3
-        }
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-    }
-
     interface OnItemSwipeListener {
         fun onItemSwiped(position: Int)
     }
 
     class Builder(val dragDirs: Int, val swipeDirs: Int) {
-        var drawableSwipeRight: Drawable? = null
-        var drawableSwipeLeft: Drawable? = null
         var bgColorSwipeRight: Int = 0
         var bgColorSwipeLeft: Int = 0
         var onItemSwipeRightListener: OnItemSwipeListener? = null
         var onItemSwipeLeftListener: OnItemSwipeListener? = null
         var swipeEnabled: Boolean = false
-
-        fun drawableSwipeRight(value: Drawable): Builder {
-            drawableSwipeRight = value
-            return this
-        }
-
-        fun drawableSwipeLeft(value: Drawable): Builder {
-            drawableSwipeLeft = value
-            return this
-        }
 
         fun bgColorSwipeRight(value: Int): Builder {
             bgColorSwipeRight = value
