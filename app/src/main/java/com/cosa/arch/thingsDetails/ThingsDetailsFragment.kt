@@ -50,7 +50,7 @@ class ThingsDetailsFragment : BaseFragment() {
 
     private fun initAd() {
         mInterstitialAd = InterstitialAd(requireActivity())
-        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd.adUnitId = getString(R.string.thing_added_add_key)
         mInterstitialAd.loadAd(AdRequest.Builder().build())
         backPressed()
         mInterstitialAd.adListener = object : AdListener() {
