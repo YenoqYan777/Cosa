@@ -1,11 +1,11 @@
 package com.cosa.helper
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.os.LocaleList
+import com.cosa.repository.SettingsStore
 import java.util.*
 
 
@@ -13,7 +13,7 @@ object LocalManager {
     const val SHARED = "sharedPref"
     const val LANGUAGE_KEY = "Language"
     const val THEME_KEY = "Theme"
-    const val SAVE_TRASH_KEY:String = "SAVETRASH"
+    const val SAVE_TRASH_KEY: String = "SAVETRASH"
     const val SAVE_TRASH_KEY_NOTES: String = "savetrashfornotes"
 
     fun setLocale(context: Context): Context {
@@ -24,21 +24,18 @@ object LocalManager {
     }
 
     fun setNewLocale(context: Context, language: String): Context {
-        persistLanguage(context, language)
+        SettingsStore(context).persistLanguage(language)
         return updateResources(
             context,
             language
         )
     }
 
-    fun getLanguage(context: Context): String {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-        return sharedPreferences.getString(
+    private fun getLanguage(context: Context): String =
+        SettingsStore(context).sharedPreferences.getString(
             LANGUAGE_KEY,
             defaultLanguage()
         )!!
-    }
 
     private fun defaultLanguage(): String {
         val locale: Locale = Locale.getDefault()
@@ -48,14 +45,6 @@ object LocalManager {
         return "en"
     }
 
-    private fun persistLanguage(
-        context: Context,
-        language: String
-    ) {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-        sharedPreferences.edit().putString(LANGUAGE_KEY, language).apply()
-    }
 
     private fun updateResources(
         context: Context,

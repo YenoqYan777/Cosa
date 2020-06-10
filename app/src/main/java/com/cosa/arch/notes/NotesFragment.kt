@@ -45,8 +45,6 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().setToolBarColor(
-            requireActivity(),
-            requireActivity(),
             R.color.mainDarkBckg
         )
         requireActivity().bottomNavigationView.visibility = VISIBLE

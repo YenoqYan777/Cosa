@@ -1,17 +1,12 @@
 package com.cosa.arch.settings
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.cosa.R
@@ -22,26 +17,28 @@ import com.cosa.helper.LocalManager
 import com.cosa.helper.LocalManager.LANGUAGE_KEY
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
-import com.cosa.helper.LocalManager.SHARED
 import com.cosa.helper.LocalManager.THEME_KEY
+import com.cosa.repository.SettingsStore
 import kotlinx.android.synthetic.main.activity_main.*
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
-    private lateinit var pref: SharedPreferences
+    private lateinit var settingsStore: SettingsStore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.mainDarkBckg)
+        requireActivity().setToolBarColor(R.color.mainDarkBckg)
         requireActivity().bottomNavigationView.visibility = View.VISIBLE
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_settings, container, false
         )
-        pref = requireActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE)
-        binding.backUpThings.isChecked = pref.getBoolean(SAVE_TRASH_KEY, true)
-        binding.backUpNotes.isChecked = pref.getBoolean(SAVE_TRASH_KEY_NOTES, true)
+        settingsStore = SettingsStore(requireActivity())
+        binding.backUpThings.isChecked =
+            settingsStore.sharedPreferences.getBoolean(SAVE_TRASH_KEY, true)
+        binding.backUpNotes.isChecked =
+            settingsStore.sharedPreferences.getBoolean(SAVE_TRASH_KEY_NOTES, true)
         return binding.root
     }
 
@@ -54,16 +51,10 @@ class SettingsFragment : Fragment() {
 
     private fun setSwitcherListener() {
         binding.backUpThings.setOnCheckedChangeListener { buttonView, isChecked ->
-            pref.edit().run {
-                putBoolean(SAVE_TRASH_KEY, isChecked)
-                apply()
-            }
+            settingsStore.setIsCheckedThings(isChecked)
         }
         binding.backUpNotes.setOnCheckedChangeListener { buttonView, isChecked ->
-            pref.edit().run {
-                putBoolean(SAVE_TRASH_KEY_NOTES, isChecked)
-                apply()
-            }
+            settingsStore.setIsCheckedNotes(isChecked)
         }
     }
 
@@ -75,7 +66,7 @@ class SettingsFragment : Fragment() {
 
         binding.langListSettings.adapter = adapter
         binding.langListSettings.choiceMode = ListView.CHOICE_MODE_SINGLE
-        when (pref.getString(LANGUAGE_KEY, "en")) {
+        when (settingsStore.sharedPreferences.getString(LANGUAGE_KEY, "en")) {
             "am" -> {
                 binding.langListSettings.setItemChecked(0, true)
             }
@@ -112,7 +103,7 @@ class SettingsFragment : Fragment() {
 
         binding.themeListSettings.adapter = adapter
         binding.themeListSettings.choiceMode = ListView.CHOICE_MODE_SINGLE
-        when (pref.getString(THEME_KEY, "dark")) {
+        when (settingsStore.sharedPreferences.getString(THEME_KEY, "dark")) {
             "dark" -> {
                 binding.themeListSettings.setItemChecked(0, true)
             }
@@ -124,20 +115,14 @@ class SettingsFragment : Fragment() {
         binding.themeListSettings.setOnItemClickListener { parent, view, position, id ->
             when (position) {
                 0 -> {
-                    pref.edit().run {
-                        putString(THEME_KEY, "dark")
-                        apply()
-                        requireActivity().finish()
-                        restartApp()
-                    }
+                    settingsStore.setThemeKey("dark")
+                    requireActivity().finish()
+                    restartApp()
                 }
                 1 -> {
-                    pref.edit().run {
-                        putString(THEME_KEY, "light")
-                        apply()
-                        requireActivity().finish()
-                        restartApp()
-                    }
+                    settingsStore.setThemeKey("light")
+                    requireActivity().finish()
+                    restartApp()
                 }
             }
         }
@@ -161,6 +146,4 @@ class SettingsFragment : Fragment() {
         requireActivity().overridePendingTransition(0, 0)
         startActivity(intent)
     }
-
-
 }

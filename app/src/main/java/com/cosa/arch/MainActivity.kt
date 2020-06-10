@@ -26,15 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setToolBarColor(this, this, R.color.mainDarkBckg)
-        val pref: SharedPreferences =
-            this.getSharedPreferences(LocalManager.SHARED, Context.MODE_PRIVATE)
+        setToolBarColor(R.color.mainDarkBckg)
 
-        if (pref.getString(LocalManager.THEME_KEY, "dark") == "light") {
-            setTheme(R.style.AppTheme_NoActionBar_Light)
-        } else {
-            setTheme(R.style.AppTheme_NoActionBar)
-        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.bottomNavigationView.visibility = View.VISIBLE
         isStoragePermissionGranted()
@@ -47,7 +40,6 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView,
             navController
         )
-
     }
 
     override fun attachBaseContext(newBase: Context) {

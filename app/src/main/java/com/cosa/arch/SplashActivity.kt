@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
     private val SPLASH_TIME_OUT: Long = 1000 // 1 sec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setToolBarColor(this, this, R.color.mainDarkBckg)
+        setToolBarColor(R.color.mainDarkBckg)
 
         val pref: SharedPreferences =
             this.getSharedPreferences(LocalManager.SHARED, Context.MODE_PRIVATE)

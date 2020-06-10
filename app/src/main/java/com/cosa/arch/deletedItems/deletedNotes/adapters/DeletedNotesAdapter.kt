@@ -25,8 +25,6 @@ class DeletedNotesAdapter(
     private var originalItems: MutableList<DeletedNotes> = ArrayList()
     private var filteredItems: MutableList<DeletedNotes> = ArrayList()
 
-    fun getData(): MutableList<DeletedNotes> = originalItems
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return DeletedNotesViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_deleted_notes, parent, false)

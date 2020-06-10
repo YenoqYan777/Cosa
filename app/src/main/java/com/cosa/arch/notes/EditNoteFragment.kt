@@ -26,8 +26,6 @@ class EditNoteFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().setToolBarColor(
-            requireActivity(),
-            requireActivity(),
             R.color.mainDarkBckg
         )
         requireActivity().bottomNavigationView.visibility = View.GONE
@@ -37,6 +35,7 @@ class EditNoteFragment : BaseFragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarEditNote)
         initToolbar()
         initViewModel()
+        //TODO do with data binding
         binding.etEditNoteContent.setText(viewModel.getEditTextMessage())
         setHasOptionsMenu(true)
         return binding.root
@@ -66,7 +65,7 @@ class EditNoteFragment : BaseFragment() {
         val drawable = resources.getDrawable(attributeResourceId)
         binding.toolbarEditNote.navigationIcon = drawable
         binding.toolbarEditNote.setNavigationOnClickListener {
-            hideKeyboard(requireActivity())
+            requireActivity().hideKeyboard()
             viewModel.navigateBack()
         }
     }
@@ -94,7 +93,7 @@ class EditNoteFragment : BaseFragment() {
                 viewModel.getItemId()
             )
         }
-        hideKeyboard(requireActivity())
+        requireActivity().hideKeyboard()
         viewModel.navigateBack()
     }
 }

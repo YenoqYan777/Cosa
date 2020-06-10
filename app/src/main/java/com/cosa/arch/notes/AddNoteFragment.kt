@@ -24,8 +24,6 @@ class AddNoteFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().setToolBarColor(
-            requireActivity(),
-            requireActivity(),
             R.color.mainDarkBckg
         )
         requireActivity().bottomNavigationView.visibility = View.GONE
@@ -33,7 +31,6 @@ class AddNoteFragment : BaseFragment() {
             inflater, R.layout.fragment_add_note, container, false
         )
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.etNoteContent.setText("")
         initToolbar()
         setHasOptionsMenu(true)
         return binding.root
@@ -52,7 +49,7 @@ class AddNoteFragment : BaseFragment() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         binding.toolbar.setNavigationOnClickListener {
-            hideKeyboard(requireActivity())
+            requireActivity().hideKeyboard()
             viewModel.navigateBack()
         }
     }
@@ -76,10 +73,10 @@ class AddNoteFragment : BaseFragment() {
                 .trim().isNotEmpty()
         ) {
             viewModel.insertNote(Notes(text = binding.etNoteContent.text.toString()))
-            hideKeyboard(requireActivity())
+            requireActivity().hideKeyboard()
             viewModel.navigateBack()
         } else {
-            hideKeyboard(requireActivity())
+            requireActivity().hideKeyboard()
             viewModel.navigateBack()
         }
     }

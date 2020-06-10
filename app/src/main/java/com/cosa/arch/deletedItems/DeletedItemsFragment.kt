@@ -25,7 +25,7 @@ class DeletedItemsFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().setToolBarColor(requireActivity(), requireActivity(), R.color.darkerBckg)
+        requireActivity().setToolBarColor(R.color.darkerBckg)
         requireActivity().bottomNavigationView.visibility = View.VISIBLE
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_deleted_items, container, false)
