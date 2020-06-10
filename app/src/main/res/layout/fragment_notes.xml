@@ -10,7 +10,6 @@
             name="swipeHandler"
             type="com.cosa.arch.common.SwipeHandler" />
 
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

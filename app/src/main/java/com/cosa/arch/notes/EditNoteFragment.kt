@@ -33,10 +33,10 @@ class EditNoteFragment : BaseFragment() {
             inflater, R.layout.fragment_edit_note, container, false
         )
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarEditNote)
-        initToolbar()
         initViewModel()
-        //TODO do with data binding
-        binding.etEditNoteContent.setText(viewModel.getEditTextMessage())
+        initToolbar()
+
+
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -50,6 +50,7 @@ class EditNoteFragment : BaseFragment() {
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
+        binding.viewModel = viewModel
     }
 
     private fun initToolbar() {
