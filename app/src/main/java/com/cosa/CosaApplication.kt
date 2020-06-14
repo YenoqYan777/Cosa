@@ -1,5 +1,4 @@
 package com.cosa
-import com.cosa.R
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
@@ -36,12 +35,6 @@ class CosaApplication : Application() {
         )
             .fallbackToDestructiveMigration()
             .build()
-
-        if(SettingsStore(this).sharedPreferences.getString(LocalManager.THEME_KEY, "dark") == "light"){
-            this.setTheme(R.style.AppTheme_NoActionBar_Light)
-        }else{
-            setTheme(R.style.AppTheme_NoActionBar)
-        }
     }
 
     override fun attachBaseContext(base: Context) {

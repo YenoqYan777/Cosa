@@ -18,6 +18,7 @@ import com.cosa.databinding.ActivityMainBinding
 import com.cosa.extension.isStoragePermissionGranted
 import com.cosa.extension.setToolBarColor
 import com.cosa.helper.LocalManager
+import com.cosa.repository.SettingsStore
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -27,7 +28,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setToolBarColor(R.color.mainDarkBckg)
-
+        if (SettingsStore(this).sharedPreferences.getString(
+                LocalManager.THEME_KEY,
+                "dark"
+            ) == "light"
+        ) {
+            setTheme(R.style.AppTheme_NoActionBar_Light)
+        } else {
+            setTheme(R.style.AppTheme_NoActionBar)
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.bottomNavigationView.visibility = View.VISIBLE
         isStoragePermissionGranted()
