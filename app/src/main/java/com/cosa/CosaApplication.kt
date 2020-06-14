@@ -1,15 +1,16 @@
 package com.cosa
-
+import com.cosa.R
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.multidex.MultiDex
 import androidx.room.Room
 import com.cosa.helper.LocalManager
+import com.cosa.repository.SettingsStore
 import com.cosa.repository.db.DB
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
+
 
 class CosaApplication : Application() {
 
@@ -35,10 +36,9 @@ class CosaApplication : Application() {
         )
             .fallbackToDestructiveMigration()
             .build()
-        val pref: SharedPreferences = this.getSharedPreferences(LocalManager.SHARED, Context.MODE_PRIVATE)
 
-        if(pref.getString(LocalManager.THEME_KEY, "dark") == "light"){
-            setTheme(R.style.AppTheme_NoActionBar_Light)
+        if(SettingsStore(this).sharedPreferences.getString(LocalManager.THEME_KEY, "dark") == "light"){
+            this.setTheme(R.style.AppTheme_NoActionBar_Light)
         }else{
             setTheme(R.style.AppTheme_NoActionBar)
         }
