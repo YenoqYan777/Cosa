@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "553767410218",
+    "firebase_url": "https://cosa---find-your-things.firebaseio.com",
+    "project_id": "cosa---find-your-things",
+    "storage_bucket": "cosa---find-your-things.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553767410218:android:223395405398620dc38153",
+        "android_client_info": {
+          "package_name": "com.cosa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553767410218-nl85lt5oquvr4dnsrobvm7n58ki6uhrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjVATmifkAWiUvsJHykz-tpyMHzHvm9Ms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553767410218-nl85lt5oquvr4dnsrobvm7n58ki6uhrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
