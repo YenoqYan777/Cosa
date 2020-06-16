@@ -37,6 +37,9 @@ import com.cosa.databinding.FragmentThingsBinding
 import com.cosa.extension.setToolBarColor
 import com.cosa.models.Things
 import com.cosa.repository.CacheStore
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_item_dialog.view.*
@@ -56,6 +59,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
     private lateinit var thingsAdapter: ThingsAdapter
     private lateinit var imgThingUploaded: ImageView
     private lateinit var imgEditThing: ImageView
+    private lateinit var mInterstitialAd: InterstitialAd
     private var things: Things = Things()
 
     private var isImageUploaded: Boolean = false
@@ -72,9 +76,11 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
             R.color.mainDarkBckg
         )
         requireActivity().bottomNavigationView.visibility = VISIBLE
+        requireActivity().bottomNavigationView.transform(true)
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_things, container, false
         )
+
         return binding.root
     }
 
@@ -106,6 +112,20 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
                 )
             }
         })
+    }
+    private fun initAd() {
+        mInterstitialAd = InterstitialAd(requireActivity())
+        mInterstitialAd.adUnitId = getString(R.string.thing_add_ad_key)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                if (mInterstitialAd.isLoaded) {
+                    mInterstitialAd.show()
+                }
+
+            }
+        }
     }
 
     private fun initViewModel() {
@@ -249,6 +269,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
 
     private fun onAddBtnClick() {
         btnAddNote.setOnClickListener {
+            initAd()
             isImageUploaded = false
             things.cacheUri = ""
             val dialogView = LayoutInflater.from(activity).inflate(R.layout.add_item_dialog, null)

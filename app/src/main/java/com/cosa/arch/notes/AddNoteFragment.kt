@@ -12,12 +12,16 @@ import com.cosa.databinding.FragmentAddNoteBinding
 import com.cosa.extension.hideKeyboard
 import com.cosa.extension.setToolBarColor
 import com.cosa.models.Notes
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class AddNoteFragment : BaseFragment() {
     private lateinit var binding: FragmentAddNoteBinding
     private lateinit var viewModel: NotesViewModel
+    private lateinit var mInterstitialAd: InterstitialAd
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +36,7 @@ class AddNoteFragment : BaseFragment() {
         )
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         initToolbar()
+        initAd()
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -66,6 +71,21 @@ class AddNoteFragment : BaseFragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initAd() {
+        mInterstitialAd = InterstitialAd(requireActivity())
+        mInterstitialAd.adUnitId = getString(R.string.note_add_key)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                if (mInterstitialAd.isLoaded) {
+                    mInterstitialAd.show()
+                }
+
+            }
+        }
     }
 
     private fun onAcceptBtnClicked() {

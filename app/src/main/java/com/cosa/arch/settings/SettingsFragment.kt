@@ -31,6 +31,7 @@ class SettingsFragment : Fragment() {
     ): View? {
         requireActivity().setToolBarColor(R.color.mainDarkBckg)
         requireActivity().bottomNavigationView.visibility = View.VISIBLE
+        requireActivity().bottomNavigationView.transform(false)
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_settings, container, false
         )

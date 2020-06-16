@@ -48,6 +48,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
             R.color.mainDarkBckg
         )
         requireActivity().bottomNavigationView.visibility = VISIBLE
+        requireActivity().bottomNavigationView.transform(true)
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_notes, container, false
         )

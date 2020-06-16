@@ -1,12 +1,12 @@
 package com.cosa.helper
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import com.cosa.R
 import com.google.android.material.bottomappbar.BottomAppBarTopEdgeTreatment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -59,7 +59,25 @@ class FabBottomNavigationView @JvmOverloads constructor(
             elevation = 10F
             paintStyle = Paint.Style.FILL_AND_STROKE
         }
-
         background = materialShapeDrawable
+    }
+
+    fun transform(showHole: Boolean) {
+        if (!showHole) {
+            ValueAnimator.ofFloat(materialShapeDrawable.interpolation, 0F).setDuration(700).apply {
+                addUpdateListener {
+                    materialShapeDrawable.interpolation = it.animatedValue as Float
+                }
+                start()
+            }
+        } else {
+            ValueAnimator.ofFloat(materialShapeDrawable.interpolation, 1F).apply {
+                addUpdateListener {
+                    materialShapeDrawable.interpolation = it.animatedValue as Float
+                }
+                start()
+            }
+        }
+
     }
 }

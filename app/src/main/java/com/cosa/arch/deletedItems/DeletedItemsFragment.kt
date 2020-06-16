@@ -27,6 +27,7 @@ class DeletedItemsFragment : Fragment(){
     ): View? {
         requireActivity().setToolBarColor(R.color.darkerBckg)
         requireActivity().bottomNavigationView.visibility = View.VISIBLE
+        requireActivity().bottomNavigationView.transform(false)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_deleted_items, container, false)
         adapter = PagerAdapter(this.childFragmentManager, requireActivity())

@@ -44,5 +44,7 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="thing_added_add_key" translatable="false">ca-app-pub-2901193013289479/6056145149</string>
+    <string name="thing_add_ad_key" translatable="false">ca-app-pub-2901193013289479/7764889583</string>
+    <string name="note_add_key" translatable="false">ca-app-pub-2901193013289479/7065766020</string>
 
 </resources>

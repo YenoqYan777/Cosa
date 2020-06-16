@@ -16,6 +16,7 @@ import com.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingsAdapter
 import com.cosa.arch.deletedItems.deletedThings.adapters.DeletedThingsDiffCallBack
 import com.cosa.databinding.FragmentDeletedThingsBinding
 import com.cosa.models.DeletedThings
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_deleted_things.*
 
 class DeletedThingsFragment : Fragment() {
