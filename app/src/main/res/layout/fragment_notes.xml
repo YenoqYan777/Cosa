@@ -25,9 +25,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtIntroductionNotes"
             app:layout_constraintVertical_bias="0.0">
@@ -82,16 +83,17 @@
             android:id="@+id/btnAddNote"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="?attr/textColorLight"
             android:clickable="true"
             android:focusable="true"
             android:scaleType="center"
             android:src="?attr/addIcon"
             app:fabSize="normal"
+            android:elevation="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/clNotesFragment"
+            app:layout_constraintStart_toStartOf="parent"
             bind:targetApi="lollipop" />
 
         <TextView
