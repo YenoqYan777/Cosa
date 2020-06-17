@@ -1,14 +1,10 @@
 package com.cosa.arch
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -19,7 +15,6 @@ import com.cosa.extension.isStoragePermissionGranted
 import com.cosa.extension.setToolBarColor
 import com.cosa.helper.LocalManager
 import com.cosa.repository.SettingsStore
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {

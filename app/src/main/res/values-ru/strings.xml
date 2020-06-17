@@ -43,5 +43,6 @@
     <string name="theme">Тема</string>
     <string name="dark">Тeмная</string>
     <string name="light">Светлая</string>
+    <string name="title">Название</string>
 
 </resources>

@@ -72,9 +72,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().setToolBarColor(
-            R.color.mainDarkBckg
-        )
+        requireActivity().setToolBarColor(R.color.mainDarkBckg)
         requireActivity().bottomNavigationView.visibility = VISIBLE
         requireActivity().bottomNavigationView.transform(true)
         binding = DataBindingUtil.inflate(

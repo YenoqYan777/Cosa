@@ -145,6 +145,11 @@ class NotesFragment : BaseFragment(), SwipeHandler {
 
     private fun onEditBtnClick(notes: Notes) {
         viewModel.setEditTextMessage(notes.text)
+        if (!notes.title.isNullOrEmpty() && notes.title.trim().isNotEmpty()) {
+            viewModel.setEditTextTitle(notes.title)
+        }else{
+            viewModel.setEditTextTitle(notes.text)
+        }
         viewModel.setItemId(notes.id)
         viewModel.navigate(NotesFragmentDirections.actionNotesFragmentToEditNoteFragment())
     }

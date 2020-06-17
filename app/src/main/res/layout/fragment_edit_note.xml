@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.cosa.arch.notes.NotesViewModel" />
@@ -14,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/backgroundColor"
-        tools:context=".arch.notes.EditNoteFragment"
+        android:clickable="true"
         android:focusable="true"
-        android:clickable="true">
+        tools:context=".arch.notes.EditNoteFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarEditNote"
@@ -50,18 +51,44 @@
                 app:cardUseCompatPadding="true">
 
                 <EditText
+                    android:id="@+id/etEditNoteTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top|left"
+                    android:hint="@string/title"
+                    android:text="@{viewModel.getEditTextTitle()}"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+                    android:textCursorDrawable="@null"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlHardcoded"
+                    android:autofillHints="username" />
+
+
+                <EditText
                     android:id="@+id/etEditNoteContent"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="8dp"
-                    android:autofillHints=""
+                    android:autofillHints="username"
                     android:background="@android:color/transparent"
                     android:ems="10"
                     android:fontFamily="sans-serif"
                     android:gravity="top|left"
                     android:hint="@string/your_notes_here"
-                    android:text="@{viewModel.getEditTextMessage()}"
                     android:inputType="textMultiLine|textCapSentences"
+                    android:text="@{viewModel.getEditTextMessage()}"
                     android:textColor="?attr/textColor"
                     android:textColorHint="?attr/textColor"
                     android:textCursorDrawable="@null"
@@ -70,7 +97,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etEditNoteTitle"
                     tools:ignore="RtlHardcoded" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

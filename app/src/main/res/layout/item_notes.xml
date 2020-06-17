@@ -49,7 +49,7 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@{notes.text}"
+                android:text="@{viewModel.setTextForAnItem(notes)}"
                 android:textColor="?attr/textColor"
                 android:textSize="23sp"
                 android:textStyle="bold"

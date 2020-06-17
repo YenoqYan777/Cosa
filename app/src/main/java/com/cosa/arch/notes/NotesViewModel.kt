@@ -18,6 +18,7 @@ import io.reactivex.rxkotlin.addTo
 class NotesViewModel(application: Application) : BaseViewModel(application) {
 
     companion object {
+        private var editTextTitel: String = ""
         private var editTextMessage: String = ""
         private var itemId: Long = 0
     }
@@ -58,6 +59,14 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
+    fun setTextForAnItem(notes: Notes): String {
+        return if (!notes.title.isNullOrEmpty() && notes.title.trim().isNotEmpty()){
+            notes.title
+        }else{
+            notes.text
+        }
+    }
+
     fun setItemId(id: Long) {
         itemId = id
     }
@@ -70,11 +79,28 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
 
     fun getEditTextMessage(): String = editTextMessage
 
+    fun setEditTextTitle(titel: String) {
+        editTextTitel = titel
+    }
+
+    fun getEditTextTitle(): String = editTextTitel
+
     fun updateNoteInfo(text: String, id: Long) {
         Single.just(text)
             .backgroundWork()
             .doOnSuccess {
                 notesDao.updateNote(id, text)
+            }
+            .subscribe()
+            .addTo(compositeDisposable)
+    }
+
+    fun updateNoteInfo(titel: String, text: String, id: Long) {
+        Single.just(text)
+            .backgroundWork()
+            .doOnSuccess {
+                notesDao.updateNote(id, text)
+                notesDao.updateTitle(id, titel)
             }
             .subscribe()
             .addTo(compositeDisposable)

@@ -15,6 +15,9 @@ interface NotesDao {
     @Query("UPDATE notes SET text = :text WHERE id = :id")
     fun updateNote(id: Long, text: String?): Int
 
+    @Query("UPDATE notes SET title = :title WHERE id = :id")
+    fun updateTitle(id: Long, title: String?): Int
+
     @Insert
     fun insert(notes: Notes)
 

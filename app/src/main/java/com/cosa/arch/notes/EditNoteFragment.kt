@@ -35,8 +35,6 @@ class EditNoteFragment : BaseFragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarEditNote)
         initViewModel()
         initToolbar()
-
-
         setHasOptionsMenu(true)
         return binding.root
     }

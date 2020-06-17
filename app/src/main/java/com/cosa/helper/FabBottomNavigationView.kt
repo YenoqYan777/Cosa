@@ -71,7 +71,7 @@ class FabBottomNavigationView @JvmOverloads constructor(
                 start()
             }
         } else {
-            ValueAnimator.ofFloat(materialShapeDrawable.interpolation, 1F).apply {
+            ValueAnimator.ofFloat(materialShapeDrawable.interpolation, 1F).setDuration(200).apply {
                 addUpdateListener {
                     materialShapeDrawable.interpolation = it.animatedValue as Float
                 }
