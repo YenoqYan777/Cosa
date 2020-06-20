@@ -10,7 +10,7 @@
         <attr name="activeColor" format="color"/>
         <attr name="separatorLineColor" format="color"/>
 
-<!--        Icons-->
+<!--Icons-->
         <attr name="backIcon" format="reference" />
         <attr name="confirmIcon" format="reference" />
         <attr name="searchIcon" format="reference" />

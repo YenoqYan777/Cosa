@@ -20,4 +20,6 @@ abstract class DB : RoomDatabase() {
     abstract fun settingsDao(): SettingsDao
     abstract fun deletedThingAddedDao(): DeletedThingsDao
     abstract fun deletedNotes(): DeletedNotesDao
+
+
 }

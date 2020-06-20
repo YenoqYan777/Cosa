@@ -61,9 +61,9 @@
 
         <ImageView
             android:id="@+id/imgNoThings"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="128dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="100dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/clThingsFragment"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
             android:fontFamily="@font/montserrat"
             android:text="@string/no_things_added"
             android:textColor="?attr/textColor"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/imgNoThings"
             app:layout_constraintStart_toStartOf="@+id/imgNoThings"
