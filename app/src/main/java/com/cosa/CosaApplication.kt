@@ -21,9 +21,10 @@ class CosaApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val migration = object : Migration(7, 8){
+        val migration = object : Migration(8, 9){
             override fun migrate(database: SupportSQLiteDatabase) {
-                 database.execSQL("ALTER TABLE 'notes' ADD COLUMN 'title' TEXT NOT NULL DEFAULT ''")
+//                database.execSQL("ALTER TABLE 'notes' ADD COLUMN 'title' TEXT NOT NULL DEFAULT ''")
+                database.execSQL("ALTER TABLE 'deleted_notes' ADD COLUMN 'title' TEXT NOT NULL DEFAULT ''")
             }
 
         }

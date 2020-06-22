@@ -11,7 +11,7 @@ import com.cosa.repository.db.dao.*
         (Settings::class),
         (DeletedThings::class),
         (DeletedNotes::class)],
-    version = 8,
+    version = 9,
     exportSchema = false
 )
 abstract class DB : RoomDatabase() {

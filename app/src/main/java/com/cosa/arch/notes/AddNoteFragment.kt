@@ -101,12 +101,9 @@ class AddNoteFragment : BaseFragment() {
                         title = binding.etNoteTitle.text.toString()
                     )
                 )
-                requireActivity().hideKeyboard()
-                viewModel.navigateBack()
             } else {
-                val arr: List<String> = binding.etNoteContent.text.toString().split("\\s+")
-                var title: String = ""
-                title = if (arr.size > 1) {
+                val arr: List<String> = binding.etNoteContent.text.toString().split(" ")
+                val title = if (arr.size > 1) {
                     "${arr[0]} ${arr[1]}"
                 } else {
                     arr[0]
@@ -117,13 +114,9 @@ class AddNoteFragment : BaseFragment() {
                         title = title
                     )
                 )
-                requireActivity().hideKeyboard()
-                viewModel.navigateBack()
             }
-
-        } else {
-            requireActivity().hideKeyboard()
-            viewModel.navigateBack()
         }
+        requireActivity().hideKeyboard()
+        viewModel.navigateBack()
     }
 }

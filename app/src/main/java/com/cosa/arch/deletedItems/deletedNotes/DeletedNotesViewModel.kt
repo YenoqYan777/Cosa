@@ -15,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
 class DeletedNotesViewModel(application: Application) : AndroidViewModel(application) {
-    private val mItemClickedDelNotes= MutableLiveData<Pair<View, DeletedNotes>>()
+    private val mItemClickedDelNotes = MutableLiveData<Pair<View, DeletedNotes>>()
     val itemClickedDelNotes: LiveData<Pair<View, DeletedNotes>> get() = mItemClickedDelNotes
 
     private val compositeDisposable = CompositeDisposable()
@@ -26,6 +26,14 @@ class DeletedNotesViewModel(application: Application) : AndroidViewModel(applica
 
     fun onItemClickedDelNotes(view: View, notes: DeletedNotes) {
         mItemClickedDelNotes.value = Pair(view, notes)
+    }
+
+    fun setTextForAnItem(notes: DeletedNotes): String {
+        return if (!notes.title.isNullOrEmpty() && notes.title.trim().isNotEmpty()) {
+            notes.title
+        } else {
+            notes.text
+        }
     }
 
     fun completelyDeleteNote(notes: DeletedNotes) {

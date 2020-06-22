@@ -39,6 +39,7 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
     fun deleteItem(notes: Notes, boolean: Boolean) {
         if (boolean) {
             val delNote = DeletedNotes()
+            delNote.title = notes.title
             delNote.text = notes.text
             Single.just(notes)
                 .backgroundWork()

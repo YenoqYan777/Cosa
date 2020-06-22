@@ -87,10 +87,27 @@ class EditNoteFragment : BaseFragment() {
         if (!binding.etEditNoteContent.text.isNullOrEmpty() && binding.etEditNoteContent.text.toString()
                 .trim().isNotEmpty()
         ) {
-            viewModel.updateNoteInfo(
-                binding.etEditNoteContent.text.toString(),
-                viewModel.getItemId()
-            )
+            if (!binding.etEditNoteTitle.text.isNullOrEmpty() && binding.etEditNoteTitle.text.toString()
+                    .trim().isNotEmpty()
+            ) {
+                viewModel.updateNoteInfo(
+                    titel = binding.etEditNoteTitle.text.toString(),
+                    text = binding.etEditNoteContent.text.toString(),
+                    id = viewModel.getItemId()
+                )
+            } else {
+                val arr: List<String> = binding.etEditNoteContent.text.toString().split(" ")
+                val title = if (arr.size > 1) {
+                    "${arr[0]} ${arr[1]}"
+                } else {
+                    arr[0]
+                }
+                viewModel.updateNoteInfo(
+                    title,
+                    binding.etEditNoteContent.text.toString(),
+                    viewModel.getItemId()
+                )
+            }
         }
         requireActivity().hideKeyboard()
         viewModel.navigateBack()
