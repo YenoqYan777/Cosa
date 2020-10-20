@@ -16,8 +16,6 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.SearchView
@@ -25,7 +23,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import com.cosa.R
 import com.cosa.arch.base.BaseFragment
 import com.cosa.arch.base.BaseViewModel
@@ -37,9 +34,6 @@ import com.cosa.databinding.FragmentThingsBinding
 import com.cosa.extension.setToolBarColor
 import com.cosa.models.Things
 import com.cosa.repository.CacheStore
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_item_dialog.view.*
@@ -59,7 +53,6 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
     private lateinit var thingsAdapter: ThingsAdapter
     private lateinit var imgThingUploaded: ImageView
     private lateinit var imgEditThing: ImageView
-    private lateinit var mInterstitialAd: InterstitialAd
     private var things: Things = Things()
 
     private var isImageUploaded: Boolean = false
@@ -71,7 +64,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         requireActivity().setToolBarColor(R.color.mainDarkBckg)
         requireActivity().bottomNavigationView.visibility = VISIBLE
         requireActivity().bottomNavigationView.transform(true)
@@ -89,6 +82,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
         binding.swipeHandler = this
         initViewModel()
         initRecyclerView()
+
         onAddBtnClick()
         performSearch()
         observe()
@@ -111,20 +105,6 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
             }
         })
     }
-    private fun initAd() {
-        mInterstitialAd = InterstitialAd(requireActivity())
-        mInterstitialAd.adUnitId = getString(R.string.thing_add_ad_key)
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-        mInterstitialAd.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                if (mInterstitialAd.isLoaded) {
-                    mInterstitialAd.show()
-                }
-
-            }
-        }
-    }
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(ThingsViewModel::class.java)
@@ -137,10 +117,15 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
                 noItemYetText.visibility = VISIBLE
                 imgNoThings.visibility = VISIBLE
                 txtIntroductionThingAdded.visibility = GONE
+                txtOverallThings.visibility = GONE
             } else {
                 noItemYetText.visibility = GONE
                 imgNoThings.visibility = GONE
                 txtIntroductionThingAdded.visibility = VISIBLE
+                txtOverallThings.text =
+                    "${resources.getString(R.string.overall)} ${it.size.toString()}"
+                txtOverallThings.visibility = VISIBLE
+
             }
         })
     }
@@ -266,8 +251,9 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
     }
 
     private fun onAddBtnClick() {
+
         btnAddNote.setOnClickListener {
-            initAd()
+
             isImageUploaded = false
             things.cacheUri = ""
             val dialogView = LayoutInflater.from(activity).inflate(R.layout.add_item_dialog, null)
@@ -346,6 +332,7 @@ class ThingsFragment : BaseFragment(), SwipeHandler {
                 things.place = dialogView.placeText.text.toString()
                 things.thing = dialogView.nameText.text.toString()
                 viewModel.insertThingAdded(things)
+
                 binding.rvThingList.smoothScrollToPosition(thingsAdapter.itemCount)
             }
         }

@@ -26,6 +26,9 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
     private val mItemClicked = MutableLiveData<Event<Pair<View, Notes>>>()
     val itemClicked: LiveData<Event<Pair<View, Notes>>> get() = mItemClicked
 
+    private val _noteItemCount = MutableLiveData(1)
+    val noteItemCount get() = _noteItemCount
+
     private val compositeDisposable = CompositeDisposable()
     private val notesDao: NotesDao = CosaApplication.dataBase.notesDao()
     private val deletedNotesDao = CosaApplication.dataBase.deletedNotes()
@@ -34,6 +37,10 @@ class NotesViewModel(application: Application) : BaseViewModel(application) {
 
     fun onItemClicked(view: View, notes: Notes) {
         mItemClicked.value = Event(Pair(view, notes))
+    }
+
+    fun onNoteAdded(){
+        _noteItemCount.value?.plus(1)
     }
 
     fun deleteItem(notes: Notes, boolean: Boolean) {

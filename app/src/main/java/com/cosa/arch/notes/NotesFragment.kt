@@ -11,14 +11,11 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
 import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import com.cosa.R
 import com.cosa.arch.base.BaseFragment
 import com.cosa.arch.base.BaseViewModel
@@ -31,6 +28,9 @@ import com.cosa.extension.setToolBarColor
 import com.cosa.helper.LocalManager.SAVE_TRASH_KEY_NOTES
 import com.cosa.helper.LocalManager.SHARED
 import com.cosa.models.Notes
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_are_you_sure.view.*
 import kotlinx.android.synthetic.main.fragment_notes.*
@@ -40,10 +40,11 @@ class NotesFragment : BaseFragment(), SwipeHandler {
     private lateinit var viewModel: NotesViewModel
     private lateinit var notesAdapter: NotesAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         requireActivity().setToolBarColor(
             R.color.mainDarkBckg
         )
@@ -88,10 +89,14 @@ class NotesFragment : BaseFragment(), SwipeHandler {
                 txtNoNotes.visibility = VISIBLE
                 imgNoNotes.visibility = VISIBLE
                 txtIntroductionNotes.visibility = GONE
+                txtOverallNotes.visibility = GONE
             } else {
                 txtNoNotes.visibility = GONE
                 imgNoNotes.visibility = GONE
                 txtIntroductionNotes.visibility = VISIBLE
+                txtOverallNotes.text =
+                    "${resources.getString(R.string.overall)} ${it.size.toString()}"
+                txtOverallNotes.visibility = VISIBLE
             }
         })
     }
@@ -111,7 +116,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
 
     private fun onAddBtnClick() {
         binding.btnAddNote.setOnClickListener {
-            viewModel.navigate(NotesFragmentDirections.actionNotesFragmentToAddNoteFragment())
+              viewModel.navigate(NotesFragmentDirections.actionNotesFragmentToAddNoteFragment())
         }
     }
 
@@ -147,13 +152,12 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         viewModel.setEditTextMessage(notes.text)
         if (!notes.title.isNullOrEmpty() && notes.title.trim().isNotEmpty()) {
             viewModel.setEditTextTitle(notes.title)
-        }else{
+        } else {
             viewModel.setEditTextTitle(notes.text)
         }
         viewModel.setItemId(notes.id)
         viewModel.navigate(NotesFragmentDirections.actionNotesFragmentToEditNoteFragment())
     }
-
 
     private fun itemDelete(notes: Notes) {
         val dialogViewDelItem =
@@ -183,6 +187,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
 
     }
 
+
     override fun onItemSwipedRight(position: Int) {
         itemDelete(notesAdapter.getData()[position])
         notesAdapter.notifyItemChanged(position)
@@ -192,5 +197,7 @@ class NotesFragment : BaseFragment(), SwipeHandler {
         onEditBtnClick(notesAdapter.getData()[position])
         notesAdapter.notifyItemChanged(position)
     }
+
+
 }
 

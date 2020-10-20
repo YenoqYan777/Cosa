@@ -81,7 +81,7 @@ class ThingsAdapter(
         originalItems.clear()
         originalItems.addAll(originalList)
         originalItems.sortWith(Comparator { o1, o2 -> o1.id.compareTo(o2.id) })
-         submitList(originalList)
+        submitList(originalList)
     }
 
     private fun submitList(thingList: MutableList<Things>) {

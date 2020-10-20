@@ -47,5 +47,6 @@
     <string name="thing_add_ad_key" translatable="false">ca-app-pub-2901193013289479/7764889583</string>
     <string name="note_add_key" translatable="false">ca-app-pub-2901193013289479/7065766020</string>
     <string name="title">Title</string>
+    <string name="overall">Overall:</string>
 
 </resources>

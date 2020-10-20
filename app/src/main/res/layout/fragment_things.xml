@@ -112,12 +112,27 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/things"
+            tools:visibility="visible"
             android:textColor="?attr/textColorLight"
             android:textSize="28sp"
             android:textStyle="bold"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+        <TextView
+            android:id="@+id/txtOverallThings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/overall"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/clThingsFragment"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

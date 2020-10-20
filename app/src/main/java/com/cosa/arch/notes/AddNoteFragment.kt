@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.cosa.R
 import com.cosa.arch.base.BaseFragment
@@ -26,7 +27,7 @@ class AddNoteFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         requireActivity().setToolBarColor(
             R.color.mainDarkBckg
         )
@@ -36,7 +37,6 @@ class AddNoteFragment : BaseFragment() {
         )
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         initToolbar()
-        initAd()
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -46,6 +46,27 @@ class AddNoteFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
+//        viewModel.noteItemCount.observe(viewLifecycleOwner, Observer {
+//            if (it % 2 == 0) {
+//                initAd()
+//            }
+//        })
+//        viewModel.onNoteAdded()
+    }
+
+    private fun initAd() {
+        mInterstitialAd = InterstitialAd(requireActivity())
+        mInterstitialAd.adUnitId = getString(R.string.note_add_key)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                if (mInterstitialAd.isLoaded) {
+                    mInterstitialAd.show()
+                }
+
+            }
+        }
     }
 
     private fun initToolbar() {
@@ -73,20 +94,6 @@ class AddNoteFragment : BaseFragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun initAd() {
-        mInterstitialAd = InterstitialAd(requireActivity())
-        mInterstitialAd.adUnitId = getString(R.string.note_add_key)
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-        mInterstitialAd.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                if (mInterstitialAd.isLoaded) {
-                    mInterstitialAd.show()
-                }
-
-            }
-        }
-    }
 
     private fun onAcceptBtnClicked() {
         if (!binding.etNoteContent.text.isNullOrEmpty() && binding.etNoteContent.text.toString()

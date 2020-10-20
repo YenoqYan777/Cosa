@@ -34,7 +34,7 @@ class OverScrollBehavior(context: Context, attrs: AttributeSet): CoordinatorLayo
         type: Int,
         consumed: IntArray
     ) {
-        if (dyUnconsumed === 0) {
+        if (dyUnconsumed == 0) {
             return
         }
 

@@ -86,11 +86,11 @@
             android:layout_marginBottom="8dp"
             android:backgroundTint="?attr/textColorLight"
             android:clickable="true"
+            android:elevation="16dp"
             android:focusable="true"
             android:scaleType="center"
             android:src="?attr/addIcon"
             app:fabSize="normal"
-            android:elevation="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/clNotesFragment"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,5 +125,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchViewNotes" />
 
+        <TextView
+            android:id="@+id/txtOverallNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/overall"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/clNotesFragment"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
